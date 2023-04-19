@@ -23574,23 +23574,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AdminLogin = function AdminLogin() {
-  return __webpack_require__.e(/*! import() | resource/js/components/category/list */ "resource/js/components/category/list").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/Login.vue */ "./resources/js/components/admin/auth/Login.vue"));
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/Login.vue */ "./resources/js/components/admin/auth/Login.vue"));
 };
-
-var BrandList = function BrandList() {
-  return __webpack_require__.e(/*! import() | resource/js/components/category/list */ "resource/js/components/category/list").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/brand/List.vue */ "./resources/js/components/admin/brand/List.vue"));
+// const AdminRegister = () => import('./components/admin/auth/Register.vue')
+var AdminDashboard = function AdminDashboard() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_Dashboard_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/Dashboard.vue */ "./resources/js/components/admin/Dashboard.vue"));
 };
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.createRouter({
   mode: "history",
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.createWebHistory)(),
   routes: [{
-    name: 'BrandList',
-    path: '/admin/brand',
-    component: BrandList
-  }, {
     name: 'AdminLogin',
     path: '/admin/login',
     component: AdminLogin
+  },
+  // {
+  //     name: 'AdminRegister',
+  //     path:'/admin/register', 
+  //     component:AdminRegister
+  // },
+  {
+    name: 'AdminDashboard',
+    path: '/admin/dashboard',
+    component: AdminDashboard
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -29085,13 +29091,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Footer_vue_vue_type_template_id_293c538d__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Footer.vue?vue&type=template&id=293c538d */ "./resources/js/components/admin/include/Footer.vue?vue&type=template&id=293c538d");
 /* harmony import */ var _Footer_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Footer.vue?vue&type=script&lang=js */ "./resources/js/components/admin/include/Footer.vue?vue&type=script&lang=js");
-/* harmony import */ var C_project_grownotics17_04_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_Shivendra_OneDrive_Desktop_grownotics2_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_project_grownotics17_04_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Footer_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Footer_vue_vue_type_template_id_293c538d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/admin/include/Footer.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_Shivendra_OneDrive_Desktop_grownotics2_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Footer_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Footer_vue_vue_type_template_id_293c538d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/admin/include/Footer.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -29113,13 +29119,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Header_vue_vue_type_template_id_4a6eb77f__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Header.vue?vue&type=template&id=4a6eb77f */ "./resources/js/components/admin/include/Header.vue?vue&type=template&id=4a6eb77f");
 /* harmony import */ var _Header_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header.vue?vue&type=script&lang=js */ "./resources/js/components/admin/include/Header.vue?vue&type=script&lang=js");
-/* harmony import */ var C_project_grownotics17_04_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_Shivendra_OneDrive_Desktop_grownotics2_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_project_grownotics17_04_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Header_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Header_vue_vue_type_template_id_4a6eb77f__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/admin/include/Header.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_Shivendra_OneDrive_Desktop_grownotics2_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Header_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Header_vue_vue_type_template_id_4a6eb77f__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/admin/include/Header.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -29141,13 +29147,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Main_vue_vue_type_template_id_12ab1390__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Main.vue?vue&type=template&id=12ab1390 */ "./resources/js/layout/Main.vue?vue&type=template&id=12ab1390");
 /* harmony import */ var _Main_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Main.vue?vue&type=script&lang=js */ "./resources/js/layout/Main.vue?vue&type=script&lang=js");
-/* harmony import */ var C_project_grownotics17_04_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_Shivendra_OneDrive_Desktop_grownotics2_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_project_grownotics17_04_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Main_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Main_vue_vue_type_template_id_12ab1390__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/layout/Main.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_Shivendra_OneDrive_Desktop_grownotics2_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Main_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Main_vue_vue_type_template_id_12ab1390__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/layout/Main.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -33148,7 +33154,7 @@ function useRoute() {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
@@ -33240,7 +33246,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "resource/js/components/category/list") return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_Dashboard_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

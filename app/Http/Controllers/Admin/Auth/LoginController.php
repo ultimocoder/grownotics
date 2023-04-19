@@ -9,26 +9,33 @@ use App\Models\User;
 class LoginController extends Controller
 {
     public function login(Request $request){ 
-        $input = $request->all();
-      $validator =  $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        if ($validator->fails()) {    
-            return response()->json($validator->messages(), 400);
-        }
+      $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+      ]);
+      try
+      {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
           $user = Auth::user(); 
-          $success['name'] =  $user->name;
+          $success['name'] =  $user;
           return response()->json([
             'status' => 'success',
             'data' => $success
           ]); 
-        } else { 
-          return response()->json([
-            'status' => 'error',
-            'data' => 'Unauthorized Access'
-          ]); 
+        }else{
+          $error = 'Email Password Not Valid';
+        return response()->json([
+          'status' => 'error',
+          'data' => $error
+        ]);
+
+        }
+      } catch (\Exception $e) {
+        $error = 'Email Password Not Valid';
+        return response()->json([
+          'status' => 'error',
+          'data' => $error
+        ]);
         } 
-      }
+    }
 }

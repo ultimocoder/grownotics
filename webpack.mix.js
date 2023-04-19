@@ -16,3 +16,9 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+    mix.styles([
+        'public/admin/assets/css/style.css',
+        
+        ], 'public/css');
+
+    
