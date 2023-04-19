@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BrandController;  
-use App\Http\Controllers\Admin\Auth\LoginController;                                                                                  
+use App\Http\Controllers\Admin\Auth\AuthController;                                                                                  
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,9 +15,8 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
+Route::post('login', [App\Http\Controllers\API\AuthController::class, 'login'])->name('login');
+Route::post('registration', [App\Http\Controllers\API\AuthController::class, 'customRegistration'])->name('register'); 
 Route::resource('brand',BrandController::class);
 Route::post('postLogin',[LoginController::class,'login'])->name('admin.login');
