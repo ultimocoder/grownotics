@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 import { createRouter,createWebHistory} from 'vue-router'
 import App from './layout/Main.vue'
 const AdminLogin = () => import('./components/admin/auth/Login.vue')
-// const AdminRegister = () => import('./components/admin/auth/Register.vue')
+const AdminRegister = () => import('./components/admin/auth/Register.vue')
 const AdminDashboard = () => import('./components/admin/Dashboard.vue')
 
 
@@ -18,11 +18,11 @@ const router = new createRouter({
         path:'/admin/login', 
         component:AdminLogin
     },
-    // {
-    //     name: 'AdminRegister',
-    //     path:'/admin/register', 
-    //     component:AdminRegister
-    // },
+    {
+        name: 'AdminRegister',
+        path:'/admin/register', 
+        component:AdminRegister
+     },
     {
         name: 'AdminDashboard',
         path:'/admin/dashboard', 
