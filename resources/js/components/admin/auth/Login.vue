@@ -25,19 +25,7 @@
                     <img class="w-100 posi_rela" src="/img/PngItem_464176 1.png" alt="sign in image" />
                  </div>
                  <div class="col-lg-5 before_img_cut">
-                    <h2>Welcome back to Gronotics.</h2>
-                    
-                    <div v-for="(errorArray, idx) in errors" :key="idx">
-                   
-                     <div v-for="(allErrors, idx) in errorArray" :key="idx">
-                        <span class="text-danger">{{ allErrors}} </span>
-                     </div>
-                    </div>
-
-
-
-
-
+                  <h2>Welcome back to Gronotics.</h2>
                    <p> {{output.data}}</p>
                     <form v-on:submit.prevent="login_user">
                        <div class="form-group">
@@ -51,7 +39,7 @@
                              <input type="email" class="form-control" v-model="form.email">
                             
                           </div>
-                          <!-- {{ errors.email }} -->
+                          <p v-if="errors.password">{{ String(errors.email)  }}</p>
                           <small class="form-text float_right">Login with phone?</small>
                        </div>
                        <div class="form-group">
@@ -64,7 +52,7 @@
                              </div>
                              <input type="password" class="form-control" v-model="form.password">
                           </div>
-                          <!-- {{ errors.password }} -->
+                          <p v-if="errors.password">{{ String(errors.password) }}</p>
                           <div class="d-flex forgot_password_flex">
                              <div class="remender">
                                 <div class="form-check custom-control custom-checkbox">
@@ -83,7 +71,7 @@
                           <li><a href="#"><img src="/img/Facebooklogo.png" alt="" /></a></li>
                        </ul>
                     </div>
-                    <div class="sign_up_account">Don't have an Account? <span>Sign Up</span></div>
+                    <div class="sign_up_account">Don't have an Account?<span>Sign Up</span></div>
                  </div>
               </div>
            </div>
@@ -119,7 +107,6 @@
             }
           }).catch((e)=>{
               this.errors = e.response.data.errors;
-             
           })
         }
       }
