@@ -13,12 +13,7 @@ class LoginController extends Controller
         'email' => 'required|email',
         'password' => 'required',
       ]);
-
-       
-
-
-
-
+ 
       try
       {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 

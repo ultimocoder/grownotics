@@ -33,12 +33,7 @@
                         <span class="text-danger">{{ allErrors}} </span>
                      </div>
                     </div>
-
-
-
-
-
-                   <p> {{output.data}}</p>
+                       <p> {{output.data}}</p>
                     <form v-on:submit.prevent="login_user">
                        <div class="form-group">
                           <label>Email</label>
