@@ -1,1 +1,270 @@
 
+/* *************** Sign In ********************** */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.sign_in_wrapper h2{
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 42px;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  margin-bottom: 20px;
+}
+body{
+  font-family: 'Inter', sans-serif;
+}
+.padd-100{
+  padding: 71.5px 0;
+}
+.sign_in_wrapper{
+  background: linear-gradient(90deg, #F5F3ED 50%, #6DB356 50%);
+  color: #fff;
+  position: relative;
+}
+.sign_in_wrapper .float_right{
+  float: right;
+  font-size: 14px;
+}
+.sign_in_wrapper .form-group label{
+  font-size: 18px;
+  font-weight: 600;
+}
+.sign_in_wrapper .input-group-text{
+  background: #FF6000;
+  padding: 15px;
+  box-shadow: inset 2px 5px 8px 2px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+.sign_in_wrapper input[type='email'], input[type='password']{
+  padding: 27.7px !important;
+  box-shadow: inset 2px 5px 8px 2px rgba(0, 0, 0, 0.1);
+  border-bottom-width: 0px !important;
+  border-left-width: 0px !important;
+}
+.sign_in_wrapper .form-control{
+  height: 60px;
+}
+.sign_in_wrapper .form-group{
+  margin-bottom: 30px;
+}
+.sign_in_wrapper .form-check .form-check-label{
+  font-weight: 600;
+  font-size: 14px;
+}
+.sign_in_wrapper .forgot_password_flex{
+  justify-content: space-between;
+}
+.sign_in_wrapper .forgot_password{
+  font-weight: 600;
+  font-size: 14px;
+}
+.sign_in_wrapper .sign_btn{
+  background: #FF6000;
+  padding: 15px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 20px;
+  border: none;
+}
+.sign_in_wrapper .social_media ul{
+  justify-content: center;
+    padding-left: 0;
+}
+
+.sign_in_wrapper .social_media ul li{
+list-style: none;
+list-style: none;
+margin: 10px;
+}
+.sign_in_wrapper .social_media{
+  position: relative;
+ top: 45px;
+}
+.sign_in_wrapper .social_media::before{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -15px;
+  height: 1px;
+  width: 100px;
+  background: #F5F3ED;
+  transform: translate(-50%,-50%);
+}
+.sign_in_wrapper .sign_up_account{
+  text-align: center;
+  margin-top: 50px;
+  font-size: 16px;
+  font-weight: 400;
+}
+.sign_in_wrapper .sign_up_account span{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.sign_in_wrapper .form-control:focus{
+  box-shadow:none;
+}
+.sign_in_wrapper .posi_abslt{
+  position: absolute;
+}
+.sign_in_wrapper .animate_down{
+  left: 0px;
+  top: 23px;
+    -webkit-animation: 6s animat_up_down infinite;
+    animation: 6s animat_up_down infinite;
+}
+
+.sign_in_wrapper .custom-control-label{
+    font-size: 14px !important;
+}
+
+.sign_in_wrapper .before_img_cut::before{
+    content:url('../img/before_cut.png'); 
+    position: absolute;
+    left: -42%;
+    top: -19%;
+  }
+  .sign_in_wrapper .posi_rela{
+    z-index: 9;
+    position: relative;
+  }
+
+
+@keyframes animat_up_down{
+  0% {transform: translateY(0);}
+  25% {transform: translateY(-25px);}
+  50% {transform: translateY(0);}
+  75% {transform: translateY(25px);}
+  100% {transform: translateY(0);}
+}
+.animate_2{
+  bottom: 50px;
+    left: 50px;
+    -webkit-animation: 6s animate_2 linear infinite;
+    animation: 6s animate_2 linear infinite;
+}
+@keyframes animate_2{
+  0% {-webkit-transform: translateX(0);
+  transform: translateX(0);}
+  25% {-webkit-transform: translateX(30px);
+    transform: translateX(30px);}
+    50% {-webkit-transform: translateX(0);
+      transform: translateX(0);}
+      75% {-webkit-transform: translateX(-30px);
+        transform: translateX(-30px);}
+        100% {-webkit-transform: translateX(0);
+          transform: translateX(0);}
+}
+.animate_3{
+  left: 39%;
+  top: 17%;
+    -webkit-animation: 8s animate_3 infinite linear;
+    animation: 8s animate_3 infinite linear;
+}
+@keyframes animate_3{
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.animate_4{
+  left: 50%;
+  top: 6%;
+  z-index: 1;
+    -webkit-animation: 8s animat_up_down infinite linear;
+    animation: 8s animat_up_down infinite linear;
+}
+.animate_5{
+  left: 50%;
+  bottom: 15%;
+  z-index: 1;
+  -webkit-animation: 8s animate_3 infinite linear;
+  animation: 8s animate_3 infinite linear;
+}
+.animate_6{
+  right: 5%;
+  bottom: 7%;
+  -webkit-animation: 6s animate_2 linear infinite;
+  animation: 6s animate_2 linear infinite;
+}
+.grapes22{
+  right: 4%;
+  top: 8%;
+}
+
+.sign_in_wrapper .custom-control-label::before{
+  background-color: #6db457;
+  border: 1px solid #ffffff;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #FAF9F6;
+}
+.sign_in_wrapper .custom-control-label::after{
+  width: 15px;
+  height: 15px;
+}
+.sign_in_wrapper .custom-checkbox .custom-control-label::before{
+    border-radius: 0.1rem;
+}
+
+
+
+
+
+
+@media only screen and (max-width: 991px) {
+  .sign_in_wrapper{
+    color: #000;
+  }
+  .sign_in_wrapper h2{
+    color: #000;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .sign_in_wrapper h2{
+    font-size: 25px;
+  }
+  .sign_in_wrapper .form-group{
+    margin-bottom: 15px;
+  }
+  .sign_in_wrapper input[type='email'], input[type='password'] {
+    padding: 8.7px !important;
+  }
+  .sign_in_wrapper .form-control{
+    height: 45px;
+  }
+  .sign_in_wrapper .input-group-text{
+    padding: 7px;
+  }
+  .animate_6{
+    right: 9%;
+    bottom: 1%;
+  }
+  .animate_2{
+    bottom: -4px;
+    left: 20px;
+  }
+  .animate_5{
+    left: 68%;
+  }
+  .sign_in_wrapper .sign_btn{
+    padding: 8.7px !important;
+  }
+  .sign_in_wrapper .input-group-text img{
+    width:25px;
+  }
+}
+
+
+
+/* ************************** End Sign In ************************* */
+
+
+
+

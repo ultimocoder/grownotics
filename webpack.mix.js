@@ -17,8 +17,8 @@ mix.js('resources/js/app.js', 'public/js')
         //
     ]);
     mix.styles([
-        'public/admin/assets/css/style.css',
+        'public/admin/assets/css/style.css'
         
-        ], 'public/css');
+        ], 'public/css/app.css');
 
     
