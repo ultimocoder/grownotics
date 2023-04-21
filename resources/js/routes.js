@@ -5,7 +5,8 @@ import App from './layout/Main.vue'
 const AdminLogin = () => import('./components/admin/auth/Login.vue')
 const AdminRegister = () => import('./components/admin/auth/Register.vue')
 const AdminDashboard = () => import('./components/admin/Dashboard.vue')
-
+const ForgotPassword = () => import('./components/admin/auth/ForgotPassword.vue')
+const ResetPassword = () => import('./components/admin/auth/ResetPasswordForm.vue')
 
 const router = new createRouter({
     mode: "history",
@@ -27,6 +28,16 @@ const router = new createRouter({
         name: 'AdminDashboard',
         path:'/admin/dashboard', 
         component:AdminDashboard
+    },
+    {
+        name: 'ForgotPassword',
+        path:'/forget-password', 
+        component:ForgotPassword
+    },
+    {
+        name: 'ResetPassword',
+        path:'/reset-password', 
+        component:ResetPassword
     }
 
 ]
