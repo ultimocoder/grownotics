@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('brand',BrandController::class);
 Route::post('postLogin',[LoginController::class,'login'])->name('admin.login');
 Route::post('registration', [LoginController::class, 'registration'])->name('register'); 
+Route::post('submitforgetPassword', [LoginController::class, 'submitForgetPasswordForm'])->name('submitForgetPassword'); 
