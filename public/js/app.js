@@ -23576,9 +23576,14 @@ __webpack_require__.r(__webpack_exports__);
 var AdminLogin = function AdminLogin() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/Login.vue */ "./resources/js/components/admin/auth/Login.vue"));
 };
-// const AdminRegister = () => import('./components/admin/auth/Register.vue')
+var AdminRegister = function AdminRegister() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_Register_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/Register.vue */ "./resources/js/components/admin/auth/Register.vue"));
+};
 var AdminDashboard = function AdminDashboard() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_Dashboard_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/Dashboard.vue */ "./resources/js/components/admin/Dashboard.vue"));
+};
+var AdminMedia = function AdminMedia() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_Media_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/Media.vue */ "./resources/js/components/admin/Media.vue"));
 };
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.createRouter({
   mode: "history",
@@ -23587,16 +23592,18 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.createRouter({
     name: 'AdminLogin',
     path: '/admin/login',
     component: AdminLogin
-  },
-  // {
-  //     name: 'AdminRegister',
-  //     path:'/admin/register', 
-  //     component:AdminRegister
-  // },
-  {
+  }, {
+    name: 'AdminRegister',
+    path: '/admin/register',
+    component: AdminRegister
+  }, {
     name: 'AdminDashboard',
     path: '/admin/dashboard',
     component: AdminDashboard
+  }, {
+    name: 'AdminMedia',
+    path: '/admin/media',
+    component: AdminMedia
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -33246,7 +33253,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_Dashboard_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_auth_Register_vue":1,"resources_js_components_admin_Dashboard_vue":1,"resources_js_components_admin_Media_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
