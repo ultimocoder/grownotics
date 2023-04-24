@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Str;
+use DB;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 use App\Models\User;
 class LoginController extends Controller
 {
@@ -69,12 +74,13 @@ class LoginController extends Controller
 
      public function submitForgetPasswordForm(Request $request)
       {
+
           $request->validate([
               'email' => 'required|email|exists:users',
           ]);
   
           $token = Str::random(64);
-  
+   
           DB::table('password_resets')->insert([
               'email' => $request->email, 
               'token' => $token, 
@@ -91,6 +97,23 @@ class LoginController extends Controller
                 'data' => 'We have e-mailed your password reset link!'
             ]
         );
-        =
+        
       }
+      public function updatePassword(Request $request) {
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $user['is_verified'] = 0;
+            $user['token'] = '';
+            $user['password'] = Hash::make($request->password);
+            $user->save();
+            return redirect()->route('login')->with('success', 'Success! password has been changed');
+        }
+        return redirect()->route('forgot-password')->with('failed', 'Failed! something went wrong');
+    }
 }
