@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use Illuminate\Support\Str;
+
 class BrandController extends Controller
 {
     /**
@@ -15,7 +17,13 @@ class BrandController extends Controller
     public function index()
     {
         //
-        $brands = Brand::all(['id','title','description']);
+        $brands = Brand::all();
+        return response()->json($brands);
+    }
+    public function getsubcategory()
+    {
+        //
+        $brands = Brand::select('*')->get();
         return response()->json($brands);
     }
 
@@ -37,13 +45,27 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $brand = Brand::create($request->post());
-        return response()->json([
-            'message'=>'Brand Created Successfully!!',
-            'brand'=>$brand
-        ]);
+        $request->validate([
+            'name' => 'required|unique:brands,name,' .$request->id,
+            
+             ]);
+        if(!empty($request->id)){
+           $request['slug'] = Str::slug($request->name);
+            Brand::where('id', $request->id)->update(['name' => $request->name, 'slug' => $request->slug]);
+            return response()->json([
+                'message'=>'Brand Update Successfully!!'
+            ]);
+        }else{
+
+
+            $request['slug'] = Str::slug($request->name);
+            Brand::create($request->post());
+            return response()->json([
+                'message'=>'Brand Created Successfully!!'
+            ]);
+        }
     }
+    
 
     /**
      * Display the specified resource.
@@ -64,8 +86,10 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brand = Brand::where('id', $id)->first();
+        return response()->json($brand);
     }
+   
 
     /**
      * Update the specified resource in storage.
@@ -87,6 +111,10 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {    
-        //
+        Brand::where('id', $id)->delete();
+        return response()->json([
+            'message'=>'Brand Deleted Successfully!!'
+        ]);
     }
+  
 }

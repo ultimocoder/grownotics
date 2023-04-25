@@ -23567,8 +23567,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
 /* harmony import */ var _layout_Main_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layout/Main.vue */ "./resources/js/layout/Main.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -23576,27 +23579,74 @@ __webpack_require__.r(__webpack_exports__);
 var AdminLogin = function AdminLogin() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/Login.vue */ "./resources/js/components/admin/auth/Login.vue"));
 };
-// const AdminRegister = () => import('./components/admin/auth/Register.vue')
+var AdminRegister = function AdminRegister() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_Register_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/Register.vue */ "./resources/js/components/admin/auth/Register.vue"));
+};
 var AdminDashboard = function AdminDashboard() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_Dashboard_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/Dashboard.vue */ "./resources/js/components/admin/Dashboard.vue"));
 };
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.createRouter({
+var AdminCategory = function AdminCategory() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_categories_Category_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/categories/Category.vue */ "./resources/js/components/admin/categories/Category.vue"));
+};
+var AdminSubcategory = function AdminSubcategory() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_subcategories_Subcategory_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/subcategories/Subcategory.vue */ "./resources/js/components/admin/subcategories/Subcategory.vue"));
+};
+var AdminBrand = function AdminBrand() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_brands_Brand_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/brands/Brand.vue */ "./resources/js/components/admin/brands/Brand.vue"));
+};
+var ForgotPassword = function ForgotPassword() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_ForgotPassword_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/ForgotPassword.vue */ "./resources/js/components/admin/auth/ForgotPassword.vue"));
+};
+var ResetPassword = function ResetPassword() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_ResetPasswordForm_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/ResetPasswordForm.vue */ "./resources/js/components/admin/auth/ResetPasswordForm.vue"));
+};
+var Home = function Home() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_Home_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home.vue */ "./resources/js/components/Home.vue"));
+};
+
+// const getToken = async() => {
+//     await axios.get('/sanctum/csrf-cookie')
+// }
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter({
   mode: "history",
-  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.createWebHistory)(),
+  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHistory)(),
+  // await: getToken(),
   routes: [{
+    name: 'home',
+    path: '/',
+    component: Home
+  }, {
     name: 'AdminLogin',
     path: '/admin/login',
     component: AdminLogin
-  },
-  // {
-  //     name: 'AdminRegister',
-  //     path:'/admin/register', 
-  //     component:AdminRegister
-  // },
-  {
+  }, {
+    name: 'AdminRegister',
+    path: '/admin/register',
+    component: AdminRegister
+  }, {
     name: 'AdminDashboard',
     path: '/admin/dashboard',
     component: AdminDashboard
+  }, {
+    name: 'AdminCategory',
+    path: '/admin/category',
+    component: AdminCategory
+  }, {
+    name: 'AdminSubcategory',
+    path: '/admin/subcategory',
+    component: AdminSubcategory
+  }, {
+    name: 'AdminBrand',
+    path: '/admin/brand',
+    component: AdminBrand
+  }, {
+    name: 'ForgotPassword',
+    path: '/forget-password',
+    component: ForgotPassword
+  }, {
+    name: 'ResetPassword',
+    path: '/reset-password',
+    component: ResetPassword
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -33246,7 +33296,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_Dashboard_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_auth_Register_vue":1,"resources_js_components_admin_Dashboard_vue":1,"resources_js_components_admin_categories_Category_vue":1,"resources_js_components_admin_subcategories_Subcategory_vue":1,"resources_js_components_admin_brands_Brand_vue":1,"resources_js_components_admin_auth_ForgotPassword_vue":1,"resources_js_components_admin_auth_ResetPasswordForm_vue":1,"resources_js_components_Home_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

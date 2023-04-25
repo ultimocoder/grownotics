@@ -8,15 +8,33 @@ const AdminRegister = () => import('./components/admin/auth/Register.vue')
 const AdminDashboard = () => import('./components/admin/Dashboard.vue')
 const AdminCategory = () => import('./components/admin/categories/Category.vue')
 const AdminSubcategory = () => import('./components/admin/subcategories/Subcategory.vue')
-const AdminBrand = () => import('./components/admin/brand/Brands.vue')
+
+ const AdminBrand = () => import('./components/admin/brands/Brand.vue')
+
+
+
 const ForgotPassword = () => import('./components/admin/auth/ForgotPassword.vue')
 const ResetPasswordForm = () => import('./components/admin/auth/ResetPasswordForm.vue')
 
+
+const Home = () => import('./components/Home.vue')
+
+// const getToken = async() => {
+//     await axios.get('/sanctum/csrf-cookie')
+// }
 const router = new createRouter({
     mode: "history",
     history: createWebHistory(),
     // await: getToken(),
     routes: [
+
+        {
+            name: 'home',
+            path:'/', 
+            component:Home
+        },
+
+
     {
         name: 'AdminLogin',
         path:'/admin/login', 
@@ -41,11 +59,17 @@ const router = new createRouter({
         name: 'AdminSubcategory',
         path:'/admin/subcategory', 
         component:AdminSubcategory
-    },
+
+    }, 
+
+    
+
     {
         name: 'AdminBrand',
         path:'/admin/brand', 
         component:AdminBrand
+
+
      },
      {
         path: '/reset-password', 
@@ -56,12 +80,14 @@ const router = new createRouter({
         } 
     },
     {
+
         path: '/update-password/:token', 
         name: 'reset-password-form', 
         component: ResetPasswordForm, 
         meta: { 
             auth:false 
         } 
+
     }
 
 ]
