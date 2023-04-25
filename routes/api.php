@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BrandController;  
 use App\Http\Controllers\Admin\Auth\LoginController;                                                                                  
+
 use App\Http\Controllers\Admin\CategoryController;                                                                              
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,8 +36,13 @@ Route::get('editcategory/{id}',[CategoryController::class,'edit']);
 Route::get('editsubcategory/{id}',[CategoryController::class,'sub_edit']);
 
 
+
 Route::post('addbrand',[BrandController::class,'store'])->name('brand.add');
 
 Route::get('getbrand',[BrandController::class,'index']);
 Route::post('deletebrand/{id}',[BrandController::class,'destroy']);
 Route::get('editbrand/{id}',[BrandController::class,'edit']);
+
+Route::post('registration', [LoginController::class, 'registration'])->name('register'); 
+Route::post('submitforgetPassword', [LoginController::class, 'submitForgetPasswordForm'])->name('submitForgetPassword'); 
+

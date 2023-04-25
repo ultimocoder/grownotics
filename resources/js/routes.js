@@ -4,11 +4,17 @@ import { createRouter,createWebHistory} from 'vue-router'
 import App from './layout/Main.vue'
 import axios from 'axios'
 const AdminLogin = () => import('./components/admin/auth/Login.vue')
-// const AdminRegister = () => import('./components/admin/auth/Register.vue')
+const AdminRegister = () => import('./components/admin/auth/Register.vue')
 const AdminDashboard = () => import('./components/admin/Dashboard.vue')
 const AdminCategory = () => import('./components/admin/categories/Category.vue')
 const AdminSubcategory = () => import('./components/admin/subcategories/Subcategory.vue')
+
  const AdminBrand = () => import('./components/admin/brands/Brand.vue')
+
+
+
+const ForgotPassword = () => import('./components/admin/auth/ForgotPassword.vue')
+const ResetPassword = () => import('./components/admin/auth/ResetPasswordForm.vue')
 
 
 const Home = () => import('./components/Home.vue')
@@ -21,21 +27,24 @@ const router = new createRouter({
     history: createWebHistory(),
     // await: getToken(),
     routes: [
+
         {
             name: 'home',
             path:'/', 
             component:Home
         },
+
+
     {
         name: 'AdminLogin',
         path:'/admin/login', 
         component:AdminLogin
     },
-    // {
-    //     name: 'AdminRegister',
-    //     path:'/admin/register', 
-    //     component:AdminRegister
-    // },
+    {
+        name: 'AdminRegister',
+        path:'/admin/register', 
+        component:AdminRegister
+     },
     {
         name: 'AdminDashboard',
         path:'/admin/dashboard', 
@@ -50,11 +59,28 @@ const router = new createRouter({
         name: 'AdminSubcategory',
         path:'/admin/subcategory', 
         component:AdminSubcategory
+
     }, 
+
+    },
+
     {
         name: 'AdminBrand',
         path:'/admin/brand', 
         component:AdminBrand
+
+
+     },
+     {
+        name: 'ForgotPassword',
+        path:'/forget-password', 
+        component:ForgotPassword
+    },
+    {
+        name: 'ResetPassword',
+        path:'/reset-password',
+        component:ResetPassword
+
     }
 
 ]

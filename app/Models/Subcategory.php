@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Models;
@@ -10,3 +11,4 @@ class Subcategory extends Model
     use HasFactory;
     protected $fillable = ['name', 'sub_cat', 'slug'];                                             
 }
+
