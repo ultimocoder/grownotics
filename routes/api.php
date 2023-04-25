@@ -30,3 +30,5 @@ Route::post('deletecategory/{id}',[CategoryController::class,'destroy']);
 Route::post('deletesubcategory/{id}',[CategoryController::class,'sub_destroy']);
 Route::get('editcategory/{id}',[CategoryController::class,'edit']);
 Route::get('editsubcategory/{id}',[CategoryController::class,'sub_edit']);
+Route::post('registration', [LoginController::class, 'registration'])->name('register'); 
+Route::post('submitforgetPassword', [LoginController::class, 'submitForgetPasswordForm'])->name('submitForgetPassword'); 

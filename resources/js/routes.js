@@ -4,15 +4,14 @@ import { createRouter,createWebHistory} from 'vue-router'
 import App from './layout/Main.vue'
 import axios from 'axios'
 const AdminLogin = () => import('./components/admin/auth/Login.vue')
-// const AdminRegister = () => import('./components/admin/auth/Register.vue')
+const AdminRegister = () => import('./components/admin/auth/Register.vue')
 const AdminDashboard = () => import('./components/admin/Dashboard.vue')
 const AdminCategory = () => import('./components/admin/categories/Category.vue')
 const AdminSubcategory = () => import('./components/admin/subcategories/Subcategory.vue')
 const AdminBrand = () => import('./components/admin/brand/Brands.vue')
+const ForgotPassword = () => import('./components/admin/auth/ForgotPassword.vue')
+const ResetPassword = () => import('./components/admin/auth/ResetPasswordForm.vue')
 
-// const getToken = async() => {
-//     await axios.get('/sanctum/csrf-cookie')
-// }
 const router = new createRouter({
     mode: "history",
     history: createWebHistory(),
@@ -23,11 +22,11 @@ const router = new createRouter({
         path:'/admin/login', 
         component:AdminLogin
     },
-    // {
-    //     name: 'AdminRegister',
-    //     path:'/admin/register', 
-    //     component:AdminRegister
-    // },
+    {
+        name: 'AdminRegister',
+        path:'/admin/register', 
+        component:AdminRegister
+     },
     {
         name: 'AdminDashboard',
         path:'/admin/dashboard', 
@@ -47,6 +46,16 @@ const router = new createRouter({
         name: 'AdminBrand',
         path:'/admin/brand', 
         component:AdminBrand
+     },
+     {
+        name: 'ForgotPassword',
+        path:'/forget-password', 
+        component:ForgotPassword
+    },
+    {
+        name: 'ResetPassword',
+        path:'/reset-password',
+        component:ResetPassword
     }
 
 ]

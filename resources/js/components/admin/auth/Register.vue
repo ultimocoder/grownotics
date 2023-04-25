@@ -25,9 +25,35 @@
                     <img class="w-100 posi_rela" src="/img/PngItem_464176 1.png" alt="sign in image" />
                  </div>
                  <div class="col-lg-5 before_img_cut">
-                  <h2>Welcome back to Gronotics.</h2>
+                    <h2>Welcome to Gronotics</h2>
+                    
+                    <div v-for="(errorArray, idx) in errors" :key="idx">
+                   
+                     <div v-for="(allErrors, idx) in errorArray" :key="idx">
+                        <span class="text-danger">{{ allErrors}} </span>
+                     </div>
+                    </div>
+
+
+
+
+
                    <p> {{output.data}}</p>
-                    <form v-on:submit.prevent="login_user">
+                    <form v-on:submit.prevent="register_user">
+                    <div class="form-group">
+                          <label>Name</label>
+                          <div class="input-group mb-2">
+                             <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                   <img src="/img/email.png" alt="" />
+                                </div>
+                             </div>
+                             <input type="text" class="form-control" v-model="form.name">
+                            
+                          </div>
+                          <!-- {{ errors.name }} -->
+                         
+                       </div>
                        <div class="form-group">
                           <label>Email</label>
                           <div class="input-group mb-2">
@@ -39,8 +65,8 @@
                              <input type="email" class="form-control" v-model="form.email">
                             
                           </div>
-                          <p v-if="errors.password">{{ String(errors.email)  }}</p>
-                          <small class="form-text float_right">Login with phone?</small>
+                          <!-- {{ errors.email }} -->
+                         
                        </div>
                        <div class="form-group">
                           <label>Password</label>
@@ -52,7 +78,7 @@
                              </div>
                              <input type="password" class="form-control" v-model="form.password">
                           </div>
-                          <p v-if="errors.password">{{ String(errors.password) }}</p>
+                          <!-- {{ errors.password }} -->
                           <div class="d-flex forgot_password_flex">
                              <div class="remender">
                                 <div class="form-check custom-control custom-checkbox">
@@ -60,10 +86,10 @@
                                    <label class="custom-control-label" for="exampleCheck1">Remember me</label>
                                 </div>
                              </div>
-                             <div class="forgot_password">Forgot Password</div>
+                             <div class="forgot_password">Login</div>
                           </div>
                        </div>
-                       <button type="submit" class="btn btn-primary sign_btn">Sign In</button>
+                       <button type="submit" class="btn btn-primary sign_btn">Register</button>
                     </form>
                     <div class="social_media">
                        <ul class="d-flex">
@@ -71,7 +97,7 @@
                           <li><a href="#"><img src="/img/Facebooklogo.png" alt="" /></a></li>
                        </ul>
                     </div>
-                    <div class="sign_up_account">Don't have an Account?<span>Sign Up</span></div>
+                    <div class="sign_up_account">Already have an Account? <span>Sign In</span></div>
                  </div>
               </div>
            </div>
@@ -86,7 +112,7 @@
         output: '',
         errors: '',
         form:{
-  
+         name: '',
           email: '',
           password: ''
           
@@ -96,17 +122,19 @@
       methods:{
   
         //user login function and api call
-         login_user(){
+         register_user(){
           let currentObj = this;  
-          axios.post('http://127.0.0.1:8000/api/postLogin',this.form)
+          axios.post('http://127.0.0.1:8000/api/registration',this.form)
           .then((response) =>{
             currentObj.output = response.data;
         
             if(response.data.status == 'success'){
-              this.$router.push('dashboard')
+              this.$router.push('login')
+               this.success = e.response.data.success;
             }
           }).catch((e)=>{
               this.errors = e.response.data.errors;
+             
           })
         }
       }
