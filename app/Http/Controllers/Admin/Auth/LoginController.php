@@ -101,22 +101,42 @@ class LoginController extends Controller
         );
         
       }
-      public function updatePassword(Request $request) {
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required|min:6',
-            'confirm_password' => 'required|same:password'
-        ]);
 
-        $user = User::where('email', $request->email)->first();
-        if ($user) {
-            $user['is_verified'] = 0;
-            $user['token'] = '';
-            $user['password'] = Hash::make($request->password);
-            $user->save();
-            return redirect()->route('login')->with('success', 'Success! password has been changed');
-        }
-        return redirect()->route('forgot-password')->with('failed', 'Failed! something went wrong');
-    }
+       public function submitResetPasswordForm(Request $request)
+      {
+          $request->validate([
+              'email' => 'required|email|exists:users',
+              'password' => 'required|string|min:6|confirmed',
+              'password_confirmation' => 'required'
+          ]);
+  
+          $updatePassword = DB::table('password_resets')
+                              ->where([
+                                'email' => $request->email, 
+                                'token' => $request->token
+                              ])
+                              ->first();
+  
+          if(!$updatePassword){
+            return response()->json(
+            [
+                'status' => 'error',
+                'data' => 'Invalid token!'
+            ]);
+             
+          }
+  
+          $user = User::where('email', $request->email)
+                      ->update(['password' => Hash::make($request->password)]);
+ 
+          DB::table('password_resets')->where(['email'=> $request->email])->delete();
+          return response()->json(
+            [
+                'status' => 'success',
+                'data' => 'Your password has been changed!'
+            ]
+        );
+         
+      }
 
 }

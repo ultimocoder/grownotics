@@ -26,9 +26,9 @@
                      <img class="w-100 posi_rela" src="/img/PngItem_464176 1.png" alt="sign in image" />
                   </div>
                   <div class="col-lg-5 before_img_cut">
-                   <h2>Forget your Passwo.</h2>
+                   <h2>Forget your Password</h2>
                     <p> {{output.data}}</p>
-                     <form v-on:submit.prevent="login_user">
+                     <form v-on:submit.prevent="requestResetPassword">
                         <div class="form-group">
                            <label>Email</label>
                            <div class="input-group mb-2">
@@ -52,7 +52,7 @@
                            <li><a href="#"><img src="/img/Facebooklogo.png" alt="" /></a></li>
                         </ul>
                      </div>
-                     <div class="sign_up_account">Don't have an Account?<span> <router-link to="admin/register"> Sign Up</router-link>
+                     <div class="sign_up_account">Already have an Account?<span> <router-link to="admin/login"> Sign In</router-link>
                          <router-view /></span></div>
                   </div>
                </div>
@@ -68,30 +68,22 @@
          output: '',
          errors: '',
          form:{
-   
            email: '',
            
          }
        }
      },
-       methods:{
+     methods: {
+        requestResetPassword() {
+          axios.post("api/forget-password",this.form).then(result => {
+                this.response = result.data;
+                console.log(result.data);
+            }, error => {
+                console.error(error);
+            });
+        }
+    }
+}
    
-         //user login function and api call
-          login_user(){
-           let currentObj = this;  
-           axios.post('http://127.0.0.1:8000/api/submitforgetPassword',this.form)
-           .then((response) =>{
-             currentObj.output = response.data;
-         
-             if(response.data.status == 'success'){
-               this.$router.push('dashboard')
-             }
-           }).catch((e)=>{
-               this.errors = e.response.data.errors;
-           })
-         }
-       }
-       
-     }
  </script>
 

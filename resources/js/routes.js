@@ -14,7 +14,7 @@ const AdminSubcategory = () => import('./components/admin/subcategories/Subcateg
 
 
 const ForgotPassword = () => import('./components/admin/auth/ForgotPassword.vue')
-const ResetPassword = () => import('./components/admin/auth/ResetPasswordForm.vue')
+const ResetPasswordForm = () => import('./components/admin/auth/ResetPasswordForm.vue')
 
 
 const Home = () => import('./components/Home.vue')
@@ -72,14 +72,21 @@ const router = new createRouter({
 
      },
      {
-        name: 'ForgotPassword',
-        path:'/forget-password', 
-        component:ForgotPassword
+        path: '/reset-password', 
+        name: 'reset-password', 
+        component: ForgotPassword, 
+        meta: { 
+        auth:false 
+        } 
     },
     {
-        name: 'ResetPassword',
-        path:'/reset-password',
-        component:ResetPassword
+
+        path: '/update-password/:token', 
+        name: 'reset-password-form', 
+        component: ResetPasswordForm, 
+        meta: { 
+            auth:false 
+        } 
 
     }
 
