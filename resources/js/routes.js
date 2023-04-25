@@ -62,7 +62,7 @@ const router = new createRouter({
 
     }, 
 
-    },
+    
 
     {
         name: 'AdminBrand',
