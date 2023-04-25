@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Str;
 use DB;
@@ -72,6 +72,8 @@ class LoginController extends Controller
       ]);
     }  
 
+
+
      public function submitForgetPasswordForm(Request $request)
       {
 
@@ -116,4 +118,5 @@ class LoginController extends Controller
         }
         return redirect()->route('forgot-password')->with('failed', 'Failed! something went wrong');
     }
+
 }
