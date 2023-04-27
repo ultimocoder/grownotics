@@ -50,8 +50,9 @@
                                     <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr v-for="(brand, index) in brands">
+                                <!-- <tbody>
+                                    <tr v-for="(brand, index) in brands.data">
+                                        <th scope="row">{{brands.length}}</th>
                                     <th scope="row">{{index+1}}</th>
                                     <td>{{brand.name}}</td>
                                     <td>{{brand.slug}}</td>
@@ -60,8 +61,36 @@
                                         <a @click.prevent="deleteBrand(brand.id)" class="btn btn-danger" href="#" ><i class="fa fa-trash" title="Delete"></i></a>
                                     </td>
                                     </tr>
+                                </tbody> -->
+                                <tbody v-if="brands">
+                                    <tr v-for="(brand,index) in brands.data" :key="index">
+                                        <td>{{ index+1 }}</td>
+                                        <td>{{ brand.name }}</td>
+                                        <td>{{ brand.slug }}</td>
+                                        <td>
+                                        <a @click.prevent="editBrand(brand.id)" type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit" title="Edit"></i></a> 
+                                        <a @click.prevent="deleteBrand(brand.id)" class="btn btn-danger" href="#" ><i class="fa fa-trash" title="Delete"></i></a>
+                                    </td>
+                                    </tr>
                                 </tbody>
+                                <tbody v-else>
+                                    <tr>
+                                        <td align="center" colspan="3">No record found.</td>
+                                    </tr>
+                                </tbody>
+
+
+
+
+
+
+
+
+
+
                             </table>
+                            <Bootstrap4Pagination :data="brands" @pagination-change-page="getBrand"/>
+                           
                         </div>
                     </div>
                 </div>
@@ -72,13 +101,15 @@
 </template>
 
 <script>
+import { Bootstrap4Pagination } from 'laravel-vue-pagination';
 import AdminHeader  from '../include/Header.vue';
 import AdminFooter  from '../include/Footer.vue';
 export default {
     name:"brand",
     components: {
         AdminHeader,
-        AdminFooter
+        AdminFooter,
+        Bootstrap4Pagination
   },
     data(){
         return {
@@ -113,10 +144,10 @@ export default {
          this.errors = e.response.data.errors;
      })
    },
-   getBrand(){
-    
+   getBrand(page=1){
+   
      let currentObj = this;  
-     axios.get('http://127.0.0.1:8000/api/getbrand')
+     axios.get(`http://127.0.0.1:8000/api/getbrand?page=${page}`)
      .then((response) =>{
        currentObj.brands = response.data;
      
@@ -145,3 +176,8 @@ export default {
 
 }
 </script>
+<style scoped>
+    .pagination{
+        margin-bottom: 0;
+    }
+</style>
