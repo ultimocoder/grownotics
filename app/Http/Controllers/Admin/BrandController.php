@@ -17,15 +17,10 @@ class BrandController extends Controller
     public function index()
     {
         //
-        $brands = Brand::all();
+        $brands = Brand::paginate(2);
         return response()->json($brands);
     }
-    public function getsubcategory()
-    {
-        //
-        $brands = Brand::select('*')->get();
-        return response()->json($brands);
-    }
+   
 
     /**
      * Show the form for creating a new resource.
