@@ -41,4 +41,16 @@ class FileUploaderController extends Controller
           }
 
     }
+    public function delete($id){
+       $name= Media::where('id', $id)->first()->name;
+       $image_path = public_path('media/'.$name);
+       if(file_exists($image_path)){
+        unlink($image_path);
+      }
+        Media::where('id', $id)->delete();
+
+        return response()->json([
+            'message'=>'Media Deleted Successfully!!'
+        ]);
+    }
 }

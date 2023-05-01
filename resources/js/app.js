@@ -9,6 +9,8 @@ import { createRouter,createWebHistory} from 'vue-router'
 import router from './routes'
 //import store from './store'
 import App from './layout/Main'
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 
 

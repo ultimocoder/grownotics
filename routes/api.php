@@ -49,3 +49,4 @@ Route::post('submitforgetPassword', [LoginController::class, 'submitForgetPasswo
 
 Route::post('filestore',[FileUploaderController::class,'store'])->name('file.store');
 Route::get('getfile',[FileUploaderController::class,'index'])->name('file.get');
+Route::get('deletefile/{id}',[FileUploaderController::class,'delete'])->name('file.delete');
