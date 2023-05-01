@@ -23594,10 +23594,13 @@ var AdminSubcategory = function AdminSubcategory() {
 var AdminBrand = function AdminBrand() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_brands_Brand_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/brands/Brand.vue */ "./resources/js/components/admin/brands/Brand.vue"));
 };
+var AdminFileUpload = function AdminFileUpload() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_media_FileUpload_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/media/FileUpload.vue */ "./resources/js/components/admin/media/FileUpload.vue"));
+};
 var ForgotPassword = function ForgotPassword() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_ForgotPassword_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/ForgotPassword.vue */ "./resources/js/components/admin/auth/ForgotPassword.vue"));
 };
-var ResetPassword = function ResetPassword() {
+var ResetPasswordForm = function ResetPasswordForm() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_ResetPasswordForm_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/ResetPasswordForm.vue */ "./resources/js/components/admin/auth/ResetPasswordForm.vue"));
 };
 var Home = function Home() {
@@ -23615,6 +23618,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter({
     name: 'home',
     path: '/',
     component: Home
+  }, {
+    name: 'AdminFileUpload',
+    path: '/admin/media-manager',
+    component: AdminFileUpload
   }, {
     name: 'AdminLogin',
     path: '/admin/login',
@@ -23640,13 +23647,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter({
     path: '/admin/brand',
     component: AdminBrand
   }, {
-    name: 'ForgotPassword',
-    path: '/forget-password',
-    component: ForgotPassword
-  }, {
-    name: 'ResetPassword',
     path: '/reset-password',
-    component: ResetPassword
+    name: 'reset-password',
+    component: ForgotPassword,
+    meta: {
+      auth: false
+    }
+  }, {
+    path: '/update-password/:token',
+    name: 'reset-password-form',
+    component: ResetPasswordForm,
+    meta: {
+      auth: false
+    }
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -33296,7 +33309,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_auth_Register_vue":1,"resources_js_components_admin_Dashboard_vue":1,"resources_js_components_admin_categories_Category_vue":1,"resources_js_components_admin_subcategories_Subcategory_vue":1,"resources_js_components_admin_brands_Brand_vue":1,"resources_js_components_admin_auth_ForgotPassword_vue":1,"resources_js_components_admin_auth_ResetPasswordForm_vue":1,"resources_js_components_Home_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_auth_Register_vue":1,"resources_js_components_admin_Dashboard_vue":1,"resources_js_components_admin_categories_Category_vue":1,"resources_js_components_admin_subcategories_Subcategory_vue":1,"resources_js_components_admin_brands_Brand_vue":1,"resources_js_components_admin_media_FileUpload_vue":1,"resources_js_components_admin_auth_ForgotPassword_vue":1,"resources_js_components_admin_auth_ResetPasswordForm_vue":1,"resources_js_components_Home_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

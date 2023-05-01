@@ -64,7 +64,7 @@
                                 </tbody> -->
                                 <tbody v-if="brands">
                                     <tr v-for="(brand,index) in brands.data" :key="index">
-                                        <td>{{ index+1 }}</td>
+                                         <td>{{ index+1 }}</td>
                                         <td>{{ brand.name }}</td>
                                         <td>{{ brand.slug }}</td>
                                         <td>

@@ -11,7 +11,7 @@ const AdminSubcategory = () => import('./components/admin/subcategories/Subcateg
 
  const AdminBrand = () => import('./components/admin/brands/Brand.vue')
 
-
+const AdminFileUpload=()=>import('./components/admin/media/FileUpload.vue');
 
 const ForgotPassword = () => import('./components/admin/auth/ForgotPassword.vue')
 const ResetPasswordForm = () => import('./components/admin/auth/ResetPasswordForm.vue')
@@ -33,7 +33,11 @@ const router = new createRouter({
             path:'/', 
             component:Home
         },
-
+        {
+            name: 'AdminFileUpload',
+            path:'/admin/media-manager', 
+            component:AdminFileUpload
+        },
 
     {
         name: 'AdminLogin',

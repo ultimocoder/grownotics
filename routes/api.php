@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\Auth\LoginController;                                                                                  
 
 use App\Http\Controllers\Admin\CategoryController;                                                                              
-
+use App\Http\Controllers\Admin\FileUploaderController;  
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,3 +46,6 @@ Route::get('editbrand/{id}',[BrandController::class,'edit']);
 Route::post('registration', [LoginController::class, 'registration'])->name('register'); 
 Route::post('submitforgetPassword', [LoginController::class, 'submitForgetPasswordForm'])->name('submitForgetPassword'); 
 
+
+Route::post('filestore',[FileUploaderController::class,'store'])->name('file.store');
+Route::get('getfile',[FileUploaderController::class,'index'])->name('file.get');
