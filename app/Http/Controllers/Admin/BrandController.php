@@ -26,6 +26,15 @@ class BrandController extends Controller
         $brands = Brand::all();
         return response()->json($brands);
     }
+    public function active_deactive_brand($id)
+    {
+        //
+        $data = explode(',', $id);
+        Brand::where('id', $data[0])->update(['status' => $data[1]]);
+        return response()->json([
+            'message'=>'Brand Status Updated Successfully!!'
+        ]);
+    }
     public function getsubcategory()
     {
         //

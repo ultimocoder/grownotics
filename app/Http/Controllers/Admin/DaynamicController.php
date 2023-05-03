@@ -63,9 +63,13 @@ class DaynamicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function active_deactive_dynamic($id)
     {
-        //
+        $data = explode(',', $id);
+        Dynamic::where('id', $data[0])->update(['status' => $data[1]]);
+        return response()->json([
+            'message'=>'Page Status Updated Successfully!!'
+        ]);
     }
 
     /**

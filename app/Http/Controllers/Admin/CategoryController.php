@@ -27,10 +27,26 @@ class CategoryController extends Controller
         $cat = Category::all();
         return response()->json($cat);
     }
+    public function active_deactive_cat($id)
+    {
+        $data = explode(',', $id);
+        Category::where('id', $data[0])->update(['status' => $data[1]]);
+        return response()->json([
+            'message'=>'Category Status Updated Successfully!!'
+        ]);
+    }
+    public function active_deactive_subcat($id)
+    {
+        $data = explode(',', $id);
+        Subcategory::where('id', $data[0])->update(['status' => $data[1]]);
+        return response()->json([
+            'message'=>'Sub Category Status Updated Successfully!!'
+        ]);
+    }
     public function getsubcategory()
     {
         //
-        $sub_cat = Subcategory::select('subcategories.id', 'subcategories.name', 'subcategories.slug', 'categories.name as cat_name')->leftJoin('categories', 'subcategories.sub_cat', '=', 'categories.id')->paginate(10);
+        $sub_cat = Subcategory::select('subcategories.id', 'subcategories.status', 'subcategories.name', 'subcategories.slug', 'categories.name as cat_name')->leftJoin('categories', 'subcategories.sub_cat', '=', 'categories.id')->paginate(10);
         return response()->json($sub_cat);
     }
 

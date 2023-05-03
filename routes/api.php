@@ -31,8 +31,11 @@ Route::post('addpage',[DaynamicController::class,'store'])->name('addpage.add');
 Route::get('getdyanmic',[DaynamicController::class,'index']);
 Route::post('deletepage/{id}',[DaynamicController::class,'destroy']);
 Route::get('editpage/{id}',[DaynamicController::class,'edit']);
+Route::post('active_deactive_dynamic/{id}',[DaynamicController::class,'active_deactive_dynamic']);
 // Category Subcategory api
 Route::post('addcategory',[CategoryController::class,'store'])->name('category.add');
+Route::post('active_deactive_category/{id}',[CategoryController::class,'active_deactive_cat']);
+Route::post('active_deactive_subcategory/{id}',[CategoryController::class,'active_deactive_subcat']);
 Route::post('addsubcategory',[CategoryController::class,'sub_store']);
 Route::get('getcategory',[CategoryController::class,'index']);
 Route::get('getoptioncategory',[CategoryController::class,'getoptioncategory']);
@@ -52,6 +55,7 @@ Route::get('product-return-sub-category/{id}',[ProductController::class,'get_sub
 Route::resource('brand',BrandController::class);
 Route::post('addbrand',[BrandController::class,'store'])->name('brand.add');
 Route::get('getbrand',[BrandController::class,'index']);
+Route::post('active_deactive_brand/{id}',[BrandController::class,'active_deactive_brand']);
 Route::get('getoptionbrand',[BrandController::class,'getoptionbrand']);
 Route::post('deletebrand/{id}',[BrandController::class,'destroy']);
 Route::get('editbrand/{id}',[BrandController::class,'edit']);
