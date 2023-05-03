@@ -124,7 +124,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function get_sub_cat($id){
-        $sub_cat = Subcategory::where('sub_cat', $id)->get();
+        $sub_cat = Subcategory::where('sub_cat', $id)->where('status', 1)->get();
         return response()->json($sub_cat);
     }
     public function show($id)

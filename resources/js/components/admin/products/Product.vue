@@ -266,13 +266,12 @@ export default {
             this.errors = e.response.data.errors;
         })
     },
-    onChangesub(id, value){
-        alert(value)
-        // let currentObjedit = this;
-        // axios.get('http://127.0.0.1:8000/api/product-return-sub-category/'+id)
-        // .then(function (response) {
-        //     currentObjedit.sub_cat = response.data;
-        // });
+    onChangesub(id){
+        let currentObjedit = this;
+        axios.get('http://127.0.0.1:8000/api/product-return-sub-category/'+id)
+        .then(function (response) {
+            currentObjedit.sub_cat = response.data;
+        });
     },
     onChange(e) {
         this.file1 = e.target.files[0];

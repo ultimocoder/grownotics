@@ -23,7 +23,7 @@ class BrandController extends Controller
     public function getoptionbrand()
     {
         //
-        $brands = Brand::all();
+        $brands = Brand::where('status', 1)->get();
         return response()->json($brands);
     }
     public function active_deactive_brand($id)

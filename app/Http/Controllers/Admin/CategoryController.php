@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function getoptioncategory()
     {
         //
-        $cat = Category::all();
+        $cat = Category::where('status', 1)->get();
         return response()->json($cat);
     }
     public function active_deactive_cat($id)

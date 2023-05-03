@@ -86,13 +86,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this2.errors = e.response.data.errors;
       });
     },
-    onChangesub: function onChangesub(id, value) {
-      alert(value);
-      // let currentObjedit = this;
-      // axios.get('http://127.0.0.1:8000/api/product-return-sub-category/'+id)
-      // .then(function (response) {
-      //     currentObjedit.sub_cat = response.data;
-      // });
+    onChangesub: function onChangesub(id) {
+      var currentObjedit = this;
+      axios.get('http://127.0.0.1:8000/api/product-return-sub-category/' + id).then(function (response) {
+        currentObjedit.sub_cat = response.data;
+      });
     },
     onChange: function onChange(e) {
       this.file1 = e.target.files[0];
