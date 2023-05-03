@@ -23343,6 +23343,14 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Header',
   data: function data() {
     return {};
+  },
+  methods: {
+    //user login function and api call
+    logout_user: function logout_user() {
+      localStorage.removeItem('token');
+      delete axios.defaults.headers.common['Authorization'];
+      window.location.href = 'login';
+    }
   }
 });
 
@@ -23410,9 +23418,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Testing Header", -1 /* HOISTED */);
-var _hoisted_2 = [_hoisted_1];
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, _hoisted_2);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.logout_user && $options.logout_user.apply($options, arguments);
+    }),
+    onclick: "myFunction()"
+  }, "Logout")]);
 }
 
 /***/ }),

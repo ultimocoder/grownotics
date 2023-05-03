@@ -50,7 +50,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(category, index) in categories">
+                                    <tr v-for="(category, index) in categories.data">
                                     <th scope="row">{{index+1}}</th>
                                     <td>{{category.name}}</td>
                                     <td>{{category.slug}}</td>
@@ -59,7 +59,7 @@
                                         <a @click.prevent="deleteCategory(category.id)" class="btn btn-danger" href="#" ><i class="fa fa-trash" title="Delete"></i></a>
                                     </td>
                                     </tr>
-                                </tbody>
+                                 </tbody>
                             </table>
                         </div>
                     </div>

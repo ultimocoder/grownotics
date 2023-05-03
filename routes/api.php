@@ -29,11 +29,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('postLogin',[AuthController::class,'login'])->name('admin.login');
 Route::post('registration', [AuthController::class, 'registration'])->name('register'); 
 Route::post('submitforgetPassword', [AuthController::class, 'submitForgetPasswordForm'])->name('submitForgetPassword'); 
-Route::group(['middleware'=>'jwt.verify'],function(){
+Route::group(['middleware'=>'auth:api'],function(){
+Route::get('getcategory',[CategoryController::class,'index']);
 
 Route::post('addcategory',[CategoryController::class,'store'])->name('category.add');
 Route::post('addsubcategory',[CategoryController::class,'sub_store']);
-Route::get('getcategory',[CategoryController::class,'index']);
+
 Route::get('getsubcategory',[CategoryController::class,'getsubcategory']);
 Route::post('deletecategory/{id}',[CategoryController::class,'destroy']);
 
@@ -52,16 +53,6 @@ Route::post('filestore',[FileUploaderController::class,'store'])->name('file.sto
 Route::get('getfile',[FileUploaderController::class,'index'])->name('file.get');
 Route::get('deletefile/{id}',[FileUploaderController::class,'delete'])->name('file.delete');
 
-
-
-
-
-
-
-
-   
-});
-
 Route::post('addproduct',[ProductController::class,'store']);
 Route::get('getproduct',[ProductController::class,'index']);
 Route::post('deleteproduct/{id}',[ProductController::class,'destroy']);
@@ -75,6 +66,10 @@ Route::post('addpage',[DynamicController::class,'store'])->name('addpage.add');
 Route::get('getdyanmic',[DynamicController::class,'index']);
 Route::post('deletepage/{id}',[DynamicController::class,'destroy']);
 Route::get('editpage/{id}',[DynamicController::class,'edit']);
+  
+});
+
+
 
 
 

@@ -99,7 +99,7 @@
   
         //user login function and api call
          login_user(){
-          let currentObj = this;  
+         
           axios.post('http://127.0.0.1:8000/api/postLogin',this.form)
           .then((resp) =>{
            
@@ -107,8 +107,9 @@
             const user = resp.data.user
             localStorage.setItem('token', token)
             axios.defaults.headers.common['Authorization'] = token
-            this.$router.push('dashboard')
-
+           
+           // this.$router.push('dashboard')
+            window.location.href = 'dashboard';
         
            
           }).catch((e)=>{
