@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Testing Header</h1>
+        <button  @click="logout_user"  onclick="myFunction()">Logout</button>
     </div>
 </template>
 
@@ -12,5 +13,15 @@
 
             }
         }
+        ,
+        methods:{
+  
+  //user login function and api call
+   logout_user(){
+    localStorage.removeItem('token')
+    delete axios.defaults.headers.common['Authorization']
+    window.location.href = 'login';
+   }
+}
     }
 </script>

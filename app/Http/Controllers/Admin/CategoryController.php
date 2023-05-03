@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subcategory;
-use Str;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -15,17 +15,24 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         //
-        $brands = Category::all();
-        return response()->json($brands);
+        $cat = Category::paginate(10);
+        return response()->json($cat);
+    }
+    public function getoptioncategory()
+    {
+        //
+        $cat = Category::all();
+        return response()->json($cat);
     }
     public function getsubcategory()
     {
         //
-        $brands = Subcategory::select('subcategories.id', 'subcategories.name', 'subcategories.slug', 'categories.name as cat_name')->leftJoin('categories', 'subcategories.sub_cat', '=', 'categories.id')->get();
-        return response()->json($brands);
+        $sub_cat = Subcategory::select('subcategories.id', 'subcategories.name', 'subcategories.slug', 'categories.name as cat_name')->leftJoin('categories', 'subcategories.sub_cat', '=', 'categories.id')->paginate(10);
+        return response()->json($sub_cat);
     }
 
     /**
@@ -46,6 +53,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',    
+        ]);
         if(!empty($request->id)){
             $request['slug'] = Str::slug($request->name);
             Category::where('id', $request->id)->update(['name' => $request->name, 'slug' => $request->slug]);
@@ -62,6 +72,10 @@ class CategoryController extends Controller
     }
     public function sub_store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',    
+            'sub_cat' => 'required',    
+        ]);
         if(!empty($request->id)){
             $request['slug'] = Str::slug($request->name);
             Subcategory::where('id', $request->id)->update(['name' => $request->name, 'sub_cat' => $request->sub_cat, 'slug' => $request->slug]);
@@ -96,13 +110,13 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $brand = Category::where('id', $id)->first();
-        return response()->json($brand);
+        $cat = Category::where('id', $id)->first();
+        return response()->json($cat);
     }
     public function sub_edit($id)
     {
-        $brand = Subcategory::where('id', $id)->first();
-        return response()->json($brand);
+        $sub_cat = Subcategory::where('id', $id)->first();
+        return response()->json($sub_cat);
     }
 
     /**

@@ -99,15 +99,21 @@
   
         //user login function and api call
          login_user(){
-          let currentObj = this;  
+         
           axios.post('http://127.0.0.1:8000/api/postLogin',this.form)
-          .then((response) =>{
-            currentObj.output = response.data;
+          .then((resp) =>{
+           
+            const token = 'Bearer '+resp.data.access_token
+            const user = resp.data.user
+            localStorage.setItem('token', token)
+            axios.defaults.headers.common['Authorization'] = token
+           
+           // this.$router.push('dashboard')
+            window.location.href = 'dashboard';
         
-            if(response.data.status == 'success'){
-              this.$router.push('dashboard')
-            }
+           
           }).catch((e)=>{
+            localStorage.removeItem('token')
               this.errors = e.response.data.errors;
           })
         }
