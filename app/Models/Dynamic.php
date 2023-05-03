@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subcategory extends Model
+class Dynamic extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'sub_cat', 'slug'];                                             
+    protected $fillable = ['name', 'text', 'slug'];                                             
 }

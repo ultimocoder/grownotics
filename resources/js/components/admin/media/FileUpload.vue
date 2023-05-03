@@ -103,7 +103,11 @@ import { Bootstrap4Pagination } from 'laravel-vue-pagination';
 import 'dropzone-vue/dist/dropzone-vue.common.css';
 import AdminHeader from '../include/Header.vue';
 import AdminFooter from '../include/Footer.vue';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 
 
 import DropZone from 'dropzone-vue';
@@ -114,11 +118,7 @@ export default {
     AdminFooter,
     DropZone,
     Bootstrap4Pagination,
-    
-
-
-
-  },
+   },
   data() {
     return {
       form: {
@@ -164,13 +164,15 @@ export default {
           .then((response) =>{
           this.medias = response.data;
         
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          );
+          // Swal.fire(
+          //   'Deleted!',
+          //   'Your file has been deleted.',
+          //   'success'
+          // );
           this.getMedia();
-          
+          toast.success('Your file has been deleted.!',{
+                autoClose: 3000,
+            });   
           
         
          })

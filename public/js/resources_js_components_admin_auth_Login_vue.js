@@ -27,12 +27,14 @@ __webpack_require__.r(__webpack_exports__);
     login_user: function login_user() {
       var _this = this;
       var currentObj = this;
-      axios.post('http://127.0.0.1:8000/api/postLogin', this.form).then(function (response) {
-        currentObj.output = response.data;
-        if (response.data.status == 'success') {
-          _this.$router.push('dashboard');
-        }
+      axios.post('http://127.0.0.1:8000/api/postLogin', this.form).then(function (resp) {
+        var token = 'Bearer ' + resp.data.access_token;
+        var user = resp.data.user;
+        localStorage.setItem('token', token);
+        axios.defaults.headers.common['Authorization'] = token;
+        _this.$router.push('dashboard');
       })["catch"](function (e) {
+        localStorage.removeItem('token');
         _this.errors = e.response.data.errors;
       });
     }

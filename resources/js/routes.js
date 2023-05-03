@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 import { createRouter,createWebHistory} from 'vue-router'
 import App from './layout/Main.vue'
 import axios from 'axios'
+import store from './store'
 const AdminLogin = () => import('./components/admin/auth/Login.vue')
 const AdminRegister = () => import('./components/admin/auth/Register.vue')
 const AdminDashboard = () => import('./components/admin/Dashboard.vue')
@@ -10,7 +11,8 @@ const AdminCategory = () => import('./components/admin/categories/Category.vue')
 const AdminSubcategory = () => import('./components/admin/subcategories/Subcategory.vue')
 
  const AdminBrand = () => import('./components/admin/brands/Brand.vue')
-
+ const AdminProduct = () => import('./components/admin/product/Product.vue')
+ const Dynamic = () => import('./components/admin/dynamic/Dynamic.vue')
 const AdminFileUpload=()=>import('./components/admin/media/FileUpload.vue');
 
 const ForgotPassword = () => import('./components/admin/auth/ForgotPassword.vue')
@@ -36,13 +38,15 @@ const router = new createRouter({
         {
             name: 'AdminFileUpload',
             path:'/admin/media-manager', 
-            component:AdminFileUpload
+            component:AdminFileUpload,
+            meta : {requireAuth: true}
         },
 
     {
         name: 'AdminLogin',
         path:'/admin/login', 
-        component:AdminLogin
+        component:AdminLogin,
+        meta : {guest: true}
     },
     {
         name: 'AdminRegister',
@@ -52,17 +56,20 @@ const router = new createRouter({
     {
         name: 'AdminDashboard',
         path:'/admin/dashboard', 
-        component:AdminDashboard
+        component:AdminDashboard,
+        meta : {requireAuth: true}
     },
     {
         name: 'AdminCategory',
         path:'/admin/category', 
-        component:AdminCategory
+        component:AdminCategory,
+        meta : {requireAuth: true}
     },
     {
         name: 'AdminSubcategory',
         path:'/admin/subcategory', 
-        component:AdminSubcategory
+        component:AdminSubcategory,
+        meta : {requireAuth: true}
 
     }, 
 
@@ -71,7 +78,8 @@ const router = new createRouter({
     {
         name: 'AdminBrand',
         path:'/admin/brand', 
-        component:AdminBrand
+        component:AdminBrand,
+        meta : {requireAuth: true}
 
 
      },
@@ -79,23 +87,57 @@ const router = new createRouter({
         path: '/reset-password', 
         name: 'reset-password', 
         component: ForgotPassword, 
-        meta: { 
-        auth:false 
-        } 
+        
     },
     {
 
         path: '/update-password/:token', 
         name: 'reset-password-form', 
         component: ResetPasswordForm, 
-        meta: { 
-            auth:false 
-        } 
+        
 
-    }
+    }, 
+    {
+      name: 'AdminProduct',
+      path:'/admin/product', 
+      component:AdminProduct,
+      meta : {requireAuth: true}
+  },
+  {
+      name: 'Dynamic',
+      path:'/admin/dynamic', 
+      component:Dynamic,
+      meta : {requireAuth: true}
+  }
 
 ]
 
 
 })
+// middleware 
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some((record) => record.meta.requireAuth)) {
+      if (store.getters.isLoggedIn) {
+        next();
+        return;
+      }
+      next("/admin/login");
+    } else {
+      next();
+    }
+  });
+  
+  router.beforeEach((to, from, next) => {
+    if (to.matched.some((record) => record.meta.guest)) {
+      if (store.getters.isLoggedIn) {
+        next("admin/dashboard");
+        return;
+      }
+      next();
+    } else {
+      next();
+    }
+  });
 export default router;

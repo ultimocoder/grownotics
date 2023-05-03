@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Brand;
-use Illuminate\Support\Str;
+use App\Models\Dynamic;
+use Str;
 
-class BrandController extends Controller
+class DynamicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,20 +17,8 @@ class BrandController extends Controller
     public function index()
     {
         //
-        $brands = Brand::paginate(10);
-        return response()->json($brands);
-    }
-    public function getoptionbrand()
-    {
-        //
-        $brands = Brand::all();
-        return response()->json($brands);
-    }
-    public function getsubcategory()
-    {
-        //
-        $brands = Brand::select('*')->get();
-        return response()->json($brands);
+        $page = Dynamic::paginate(10);
+        return response()->json($page);
     }
 
     /**
@@ -52,26 +40,22 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:brands,name,' .$request->id,
-            
-             ]);
+            'name' => 'required',    
+        ]);
         if(!empty($request->id)){
-           $request['slug'] = Str::slug($request->name);
-            Brand::where('id', $request->id)->update(['name' => $request->name, 'slug' => $request->slug]);
+            $request['slug'] = Str::slug($request->name);
+            Dynamic::where('id', $request->id)->update(['name' => $request->name, 'text' => $request->text, 'slug' => $request->slug]);
             return response()->json([
-                'message'=>'Brand Update Successfully!!'
+                'message'=>'Daynamic Page Update Successfully!!'
             ]);
         }else{
-
-
             $request['slug'] = Str::slug($request->name);
-            Brand::create($request->post());
+            Dynamic::create($request->post());
             return response()->json([
-                'message'=>'Brand Created Successfully!!'
+                'message'=>'Daynamic Page Created Successfully!!'
             ]);
         }
     }
-    
 
     /**
      * Display the specified resource.
@@ -92,10 +76,9 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brand = Brand::where('id', $id)->first();
-        return response()->json($brand);
+        $cat = Dynamic::where('id', $id)->first();
+        return response()->json($cat);
     }
-   
 
     /**
      * Update the specified resource in storage.
@@ -117,10 +100,9 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {    
-        Brand::where('id', $id)->delete();
+        Dynamic::where('id', $id)->delete();
         return response()->json([
-            'message'=>'Brand Deleted Successfully!!'
+            'message'=>'Daynamic Page Deleted Successfully!!'
         ]);
     }
-  
 }

@@ -17,8 +17,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _include_Footer_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../include/Footer.vue */ "./resources/js/components/admin/include/Footer.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var dropzone_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dropzone-vue */ "./node_modules/dropzone-vue/dist/dropzone-vue.common.js");
-/* harmony import */ var dropzone_vue__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(dropzone_vue__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var vue3_toastify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue3-toastify */ "./node_modules/vue3-toastify/dist/esm/index.js");
+/* harmony import */ var vue3_toastify_dist_index_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue3-toastify/dist/index.css */ "./node_modules/vue3-toastify/dist/index.css");
+/* harmony import */ var dropzone_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dropzone-vue */ "./node_modules/dropzone-vue/dist/dropzone-vue.common.js");
+/* harmony import */ var dropzone_vue__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(dropzone_vue__WEBPACK_IMPORTED_MODULE_7__);
+
+
 
 
 
@@ -30,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AdminHeader: _include_Header_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     AdminFooter: _include_Footer_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    DropZone: (dropzone_vue__WEBPACK_IMPORTED_MODULE_5___default()),
+    DropZone: (dropzone_vue__WEBPACK_IMPORTED_MODULE_7___default()),
     Bootstrap4Pagination: laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_0__.Bootstrap4Pagination
   },
   data: function data() {
@@ -74,8 +78,16 @@ __webpack_require__.r(__webpack_exports__);
         if (result.isConfirmed) {
           axios.get("http://127.0.0.1:8000/api/deletefile/" + id).then(function (response) {
             _this2.medias = response.data;
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire('Deleted!', 'Your file has been deleted.', 'success');
+
+            // Swal.fire(
+            //   'Deleted!',
+            //   'Your file has been deleted.',
+            //   'success'
+            // );
             _this2.getMedia();
+            vue3_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.success('Your file has been deleted.!', {
+              autoClose: 3000
+            });
           });
         }
       });
@@ -176,6 +188,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "@keyframes passing-through {\n  0% {\n    opacity: 0;\n    transform: translateY(40px); }\n  30%, 70% {\n    opacity: 1;\n    transform: translateY(0px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0px); } }\n\n@keyframes slide-in {\n  0% {\n    opacity: 0;\n    transform: translateY(40px); }\n  30% {\n    opacity: 1;\n    transform: translateY(0px); } }\n\n.gg-close {\n  box-sizing: border-box;\n  position: relative;\n  display: block;\n  transform: scale(var(--ggs, 1));\n  width: 22px;\n  height: 22px;\n  border: 2px solid transparent;\n  border-radius: 40px; }\n\n.gg-close::after,\n.gg-close::before {\n  cursor: pointer;\n  content: \"\";\n  display: block;\n  box-sizing: border-box;\n  position: absolute;\n  width: 16px;\n  height: 2px;\n  background: currentColor;\n  transform: rotate(45deg);\n  border-radius: 5px;\n  top: 8px;\n  left: 1px; }\n\n.gg-close::after {\n  transform: rotate(-45deg); }\n\n.gg-check-o {\n  box-sizing: border-box;\n  position: relative;\n  display: block;\n  transform: scale(var(--ggs, 2));\n  width: 22px;\n  height: 22px;\n  border: 2px solid;\n  border-radius: 100px;\n  color: #747474;\n  opacity: 0.98;\n  background-color: #FFFFFF; }\n\n.gg-check-o::after {\n  content: \"\";\n  display: block;\n  box-sizing: border-box;\n  position: absolute;\n  left: 3px;\n  top: -1px;\n  width: 6px;\n  height: 10px;\n  border-color: currentColor;\n  border-width: 0 2px 2px 0;\n  border-style: solid;\n  transform-origin: bottom left;\n  transform: rotate(45deg); }\n\n.gg-check-o {\n  box-sizing: border-box;\n  position: relative;\n  display: block;\n  transform: scale(var(--ggs, 1));\n  width: 22px;\n  height: 22px;\n  border: 2px solid;\n  border-radius: 100px; }\n\n.gg-danger {\n  box-sizing: border-box;\n  position: relative;\n  display: block;\n  transform: scale(var(--ggs, 1));\n  width: 20px;\n  height: 20px;\n  border: 2px solid;\n  border-radius: 40px; }\n\n.gg-danger::after,\n.gg-danger::before {\n  content: \"\";\n  display: block;\n  box-sizing: border-box;\n  position: absolute;\n  border-radius: 3px;\n  width: 2px;\n  background: currentColor;\n  left: 7px; }\n\n.gg-danger::after {\n  top: 2px;\n  height: 8px; }\n\n.gg-danger::before {\n  height: 2px;\n  bottom: 2px; }\n\n.gg-check-o::after {\n  content: \"\";\n  display: block;\n  box-sizing: border-box;\n  position: absolute;\n  left: 3px;\n  top: -1px;\n  width: 6px;\n  height: 10px;\n  border-color: currentColor;\n  border-width: 0 2px 2px 0;\n  border-style: solid;\n  transform-origin: bottom left;\n  transform: rotate(45deg); }\n\n:root {\n  --preview-size: 128px;\n  --dropzone-min-height: 64px; }\n\n.dropzone, .dropzone * {\n  box-sizing: border-box; }\n\n.dropzone__box {\n  position: relative;\n  display: flex;\n  flex-flow: row wrap;\n  min-height: var(--dropzone-min-height);\n  border: 2px dashed #03A062;\n  border-radius: 4px;\n  padding: 4px; }\n\n.dropzone__message--style {\n  flex-grow: 1;\n  text-align: center; }\n\n.dropzone__details--style {\n  padding: 2em 1em;\n  text-align: center;\n  color: rgba(0, 0, 0, 0.9);\n  font-size: 13px;\n  line-height: 150%;\n  width: 64px;\n  min-width: 100%;\n  max-width: 100%; }\n\n.dropzone__item--style:not(.dropzone--has-thumbnail) > .dropzone__item-thumbnail {\n  border-radius: 12px;\n  border: solid 1px black; }\n\n.dropzone__item--style {\n  margin: auto auto;\n  padding: 4px; }\n\n.dropzone__item:hover {\n  z-index: 1000; }\n\n.dropzone__item {\n  position: relative;\n  display: inline-block; }\n\n.dropzone__error-mark, .dropzone__success-mark {\n  pointer-events: none;\n  opacity: 0;\n  z-index: 500;\n  position: absolute;\n  display: block;\n  top: 8px;\n  left: 8px; }\n\n.dropzone--has-error > .dropzone__error-mark > * {\n  display: block; }\n\n.dropzone--has-error .dropzone__progress {\n  opacity: 0;\n  transition: opacity 0.4s ease-in; }\n\n.dropzone--has-error .dropzone__error-mark {\n  opacity: 1;\n  animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1); }\n\n.dropzone--success > .dropzone__success-mark > * {\n  display: block; }\n\n.dropzone--success .dropzone__progress {\n  opacity: 0;\n  transition: opacity 0.4s ease-in; }\n\n.dropzone .dropzone--success > .dropzone__success-mark {\n  opacity: 1;\n  animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1); }\n\n.dropzone__item-thumbnail {\n  border-radius: 24px;\n  overflow: hidden;\n  width: var(--preview-size);\n  height: var(--preview-size);\n  position: relative;\n  display: block; }\n\n.dropzone__item:not(.dropzone--has-thumbnail) > .dropzone__details {\n  opacity: 1; }\n\n.dropzone--has-thumbnail:hover > .dropzone__details {\n  opacity: 1; }\n\n.dropzone--has-thumbnail > .dropzone__item-thumbnail > img {\n  display: block;\n  width: 100%;\n  height: auto; }\n\n.dropzone--has-thumbnail > .dropzone__details {\n  transition: opacity 0.2s linear;\n  transition-property: opacity;\n  transition-duration: 0.2s;\n  transition-timing-function: ease-in;\n  transition-delay: 100ms; }\n\n.dropzone--has-thumbnail:hover > .dropzone__item-thumbnail > img {\n  transform: scale(1.01, 1.01);\n  filter: blur(1px); }\n\n.dropzone__item-controls {\n  display: inline-block;\n  position: absolute;\n  z-index: 10000;\n  border-radius: 4px;\n  top: 8px;\n  right: 8px; }\n  .dropzone__item-controls .dropzone__item-control {\n    cursor: pointer; }\n\n.dropzone-clickable {\n  cursor: pointer; }\n  .dropzone-clickable * {\n    cursor: default; }\n  .dropzone-clickable .dropzone__message * {\n    box-sizing: border-box;\n    cursor: pointer; }\n\n.dropzone__file-size {\n  margin-bottom: 1em;\n  font-size: 16px; }\n\n.dropzone__file-size > span {\n  background-color: rgba(255, 255, 255, 0.4);\n  padding: 0 0.4em;\n  border-radius: 3px; }\n\n.dropzone__filename {\n  white-space: nowrap; }\n\n.dropzone__filename > span {\n  background-color: rgba(255, 255, 255, 0.4);\n  padding: 0 0.4em;\n  border-radius: 3px; }\n\n.dropzone__filename:not(:hover) {\n  overflow: hidden;\n  text-overflow: ellipsis; }\n\n.dropzone__filename:not(:hover) > span {\n  border: 1px solid transparent; }\n\n.dropzone__details {\n  z-index: 20;\n  position: absolute;\n  top: 0;\n  left: 0;\n  opacity: 0; }\n\n.dropzone__progress {\n  opacity: 1;\n  z-index: 1000;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  margin-left: -40px;\n  -webkit-transform: scale(1);\n  border-radius: 8px;\n  overflow: hidden; }\n  .dropzone__progress .dropzone__progress-bar {\n    position: relative;\n    pointer-events: none;\n    background: rgba(255, 255, 255, 0.9);\n    height: 16px;\n    margin-top: -8px;\n    width: 80px;\n    transition: width 300ms ease-in-out; }\n\n.dropzone--added .dropzone__progress {\n  opacity: 0;\n  transition: opacity 0.4s ease-in; }\n\n.dropzone-processing .dropzone__progress {\n  opacity: 1;\n  transition: all 0.2s linear; }\n\n.dropzone__item:not(.dropzone-processing) .dropzone__progress {\n  animation: pulse 6s ease infinite; }\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue3-toastify/dist/index.css":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue3-toastify/dist/index.css ***!
+  \***********************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ":root{--toastify-color-light:#fff;--toastify-color-dark:#121212;--toastify-color-info:#3498db;--toastify-color-success:#07bc0c;--toastify-color-warning:#f1c40f;--toastify-color-error:#e74c3c;--toastify-color-transparent:hsla(0,0%,100%,.7);--toastify-icon-color-info:var(--toastify-color-info);--toastify-icon-color-success:var(--toastify-color-success);--toastify-icon-color-warning:var(--toastify-color-warning);--toastify-icon-color-error:var(--toastify-color-error);--toastify-toast-width:320px;--toastify-toast-background:#fff;--toastify-toast-min-height:64px;--toastify-toast-max-height:800px;--toastify-font-family:sans-serif;--toastify-z-index:9999;--toastify-text-color-light:#757575;--toastify-text-color-dark:#fff;--toastify-text-color-info:#fff;--toastify-text-color-success:#fff;--toastify-text-color-warning:#fff;--toastify-text-color-error:#fff;--toastify-spinner-color:#616161;--toastify-spinner-color-empty-area:#e0e0e0;--toastify-color-progress-light:linear-gradient(90deg,#4cd964,#5ac8fa,#007aff,#34aadc,#5856d6,#ff2d55);--toastify-color-progress-dark:#bb86fc;--toastify-color-progress-info:var(--toastify-color-info);--toastify-color-progress-success:var(--toastify-color-success);--toastify-color-progress-warning:var(--toastify-color-warning);--toastify-color-progress-error:var(--toastify-color-error);--toastify-color-progress-colored:#ddd}.Toastify__toast-container{box-sizing:border-box;color:#fff;padding:4px;position:fixed;transform:translate3d(0,0,var(--toastify-z-index) px);width:var(--toastify-toast-width);z-index:var(--toastify-z-index)}.Toastify__toast-container--top-left{left:1em;top:1em}.Toastify__toast-container--top-center{left:50%;top:1em;transform:translateX(-50%)}.Toastify__toast-container--top-right{right:1em;top:1em}.Toastify__toast-container--bottom-left{bottom:1em;left:1em}.Toastify__toast-container--bottom-center{bottom:1em;left:50%;transform:translateX(-50%)}.Toastify__toast-container--bottom-right{bottom:1em;right:1em}@media only screen and (max-width:480px){.Toastify__toast-container{left:0;margin:0;padding:0;width:100vw}.Toastify__toast-container--top-center,.Toastify__toast-container--top-left,.Toastify__toast-container--top-right{top:0;transform:translateX(0)}.Toastify__toast-container--bottom-center,.Toastify__toast-container--bottom-left,.Toastify__toast-container--bottom-right{bottom:0;transform:translateX(0)}.Toastify__toast-container--rtl{left:auto;right:0}}.Toastify__toast{border-radius:4px;box-shadow:0 1px 10px 0 rgba(0,0,0,.1),0 2px 15px 0 rgba(0,0,0,.05);box-sizing:border-box;cursor:pointer;direction:ltr;display:flex;font-family:var(--toastify-font-family);justify-content:space-between;margin-bottom:1rem;max-height:var(--toastify-toast-max-height);min-height:var(--toastify-toast-min-height);overflow:hidden;padding:8px;position:relative;z-index:0}.Toastify__toast--rtl{direction:rtl}.Toastify__toast-body{align-items:center;display:flex;flex:1 1 auto;margin:auto 0;padding:6px;white-space:pre-wrap}.Toastify__toast-body>div:last-child{flex:1}.Toastify__toast-icon{display:flex;flex-shrink:0;-webkit-margin-end:10px;margin-inline-end:10px;width:20px}.Toastify--animate{animation-duration:.7s;animation-fill-mode:both}.Toastify--animate-icon{animation-duration:.3s;animation-fill-mode:both}@media only screen and (max-width:480px){.Toastify__toast{border-radius:0;margin-bottom:0}}.Toastify__toast-theme--dark{background:var(--toastify-color-dark);color:var(--toastify-text-color-dark)}.Toastify__toast-theme--colored.Toastify__toast--default,.Toastify__toast-theme--light{background:var(--toastify-color-light);color:var(--toastify-text-color-light)}.Toastify__toast-theme--colored.Toastify__toast--info{background:var(--toastify-color-info);color:var(--toastify-text-color-info)}.Toastify__toast-theme--colored.Toastify__toast--success{background:var(--toastify-color-success);color:var(--toastify-text-color-success)}.Toastify__toast-theme--colored.Toastify__toast--warning{background:var(--toastify-color-warning);color:var(--toastify-text-color-warning)}.Toastify__toast-theme--colored.Toastify__toast--error{background:var(--toastify-color-error);color:var(--toastify-text-color-error)}.Toastify__progress-bar-theme--light{background:var(--toastify-color-progress-light)}.Toastify__progress-bar-theme--dark{background:var(--toastify-color-progress-dark)}.Toastify__progress-bar--info{background:var(--toastify-color-progress-info)}.Toastify__progress-bar--success{background:var(--toastify-color-progress-success)}.Toastify__progress-bar--warning{background:var(--toastify-color-progress-warning)}.Toastify__progress-bar--error{background:var(--toastify-color-progress-error)}.Toastify__progress-bar-theme--colored.Toastify__progress-bar--default{background:var(--toastify-color-progress-colored)}.Toastify__progress-bar-theme--colored.Toastify__progress-bar--error,.Toastify__progress-bar-theme--colored.Toastify__progress-bar--info,.Toastify__progress-bar-theme--colored.Toastify__progress-bar--success,.Toastify__progress-bar-theme--colored.Toastify__progress-bar--warning{background:var(--toastify-color-transparent)}.Toastify__close-button{align-self:flex-start;background:transparent;border:none;color:#fff;cursor:pointer;opacity:.7;outline:none;padding:0;transition:.3s ease}.Toastify__close-button--light{color:#000;opacity:.3}.Toastify__close-button>svg{fill:currentcolor;height:16px;width:14px}.Toastify__close-button:focus,.Toastify__close-button:hover{opacity:1}@keyframes Toastify__trackProgress{0%{transform:scaleX(1)}to{transform:scaleX(0)}}.Toastify__progress-bar{bottom:0;height:5px;left:0;opacity:.7;position:absolute;transform-origin:left;width:100%;z-index:var(--toastify-z-index)}.Toastify__progress-bar--animated{animation:Toastify__trackProgress linear 1 forwards}.Toastify__progress-bar--controlled{transition:transform .2s}.Toastify__progress-bar--rtl{left:auto;right:0;transform-origin:right}.Toastify__spinner{animation:Toastify__spin .65s linear infinite;border:2px solid;border-color:var(--toastify-spinner-color-empty-area);border-radius:100%;border-right-color:var(--toastify-spinner-color);box-sizing:border-box;height:20px;width:20px}@keyframes Toastify__bounceInRight{0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(3000px,0,0)}60%{opacity:1;transform:translate3d(-25px,0,0)}75%{transform:translate3d(10px,0,0)}90%{transform:translate3d(-5px,0,0)}to{transform:none}}@keyframes Toastify__bounceOutRight{20%{opacity:1;transform:translate3d(-20px,0,0)}to{opacity:0;transform:translate3d(2000px,0,0)}}@keyframes Toastify__bounceInLeft{0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(-3000px,0,0)}60%{opacity:1;transform:translate3d(25px,0,0)}75%{transform:translate3d(-10px,0,0)}90%{transform:translate3d(5px,0,0)}to{transform:none}}@keyframes Toastify__bounceOutLeft{20%{opacity:1;transform:translate3d(20px,0,0)}to{opacity:0;transform:translate3d(-2000px,0,0)}}@keyframes Toastify__bounceInUp{0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(0,3000px,0)}60%{opacity:1;transform:translate3d(0,-20px,0)}75%{transform:translate3d(0,10px,0)}90%{transform:translate3d(0,-5px,0)}to{transform:translateZ(0)}}@keyframes Toastify__bounceOutUp{20%{transform:translate3d(0,-10px,0)}40%,45%{opacity:1;transform:translate3d(0,20px,0)}to{opacity:0;transform:translate3d(0,-2000px,0)}}@keyframes Toastify__bounceInDown{0%,60%,75%,90%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:translate3d(0,-3000px,0)}60%{opacity:1;transform:translate3d(0,25px,0)}75%{transform:translate3d(0,-10px,0)}90%{transform:translate3d(0,5px,0)}to{transform:none}}@keyframes Toastify__bounceOutDown{20%{transform:translate3d(0,10px,0)}40%,45%{opacity:1;transform:translate3d(0,-20px,0)}to{opacity:0;transform:translate3d(0,2000px,0)}}.Toastify__bounce-enter--bottom-left,.Toastify__bounce-enter--top-left{animation-name:Toastify__bounceInLeft}.Toastify__bounce-enter--bottom-right,.Toastify__bounce-enter--top-right{animation-name:Toastify__bounceInRight}.Toastify__bounce-enter--top-center{animation-name:Toastify__bounceInDown}.Toastify__bounce-enter--bottom-center{animation-name:Toastify__bounceInUp}.Toastify__bounce-exit--bottom-left,.Toastify__bounce-exit--top-left{animation-name:Toastify__bounceOutLeft}.Toastify__bounce-exit--bottom-right,.Toastify__bounce-exit--top-right{animation-name:Toastify__bounceOutRight}.Toastify__bounce-exit--top-center{animation-name:Toastify__bounceOutUp}.Toastify__bounce-exit--bottom-center{animation-name:Toastify__bounceOutDown}@keyframes Toastify__zoomIn{0%{opacity:0;transform:scale3d(.3,.3,.3)}50%{opacity:1}}@keyframes Toastify__zoomOut{0%{opacity:1}50%{opacity:0;transform:scale3d(.3,.3,.3)}to{opacity:0}}.Toastify__zoom-enter{animation-name:Toastify__zoomIn}.Toastify__zoom-exit{animation-name:Toastify__zoomOut}@keyframes Toastify__flipIn{0%{animation-timing-function:ease-in;opacity:0;transform:perspective(400px) rotateX(90deg)}40%{animation-timing-function:ease-in;transform:perspective(400px) rotateX(-20deg)}60%{opacity:1;transform:perspective(400px) rotateX(10deg)}80%{transform:perspective(400px) rotateX(-5deg)}to{transform:perspective(400px)}}@keyframes Toastify__flipOut{0%{transform:perspective(400px)}30%{opacity:1;transform:perspective(400px) rotateX(-20deg)}to{opacity:0;transform:perspective(400px) rotateX(90deg)}}.Toastify__flip-enter{animation-name:Toastify__flipIn}.Toastify__flip-exit{animation-name:Toastify__flipOut}@keyframes Toastify__slideInRight{0%{transform:translate3d(110%,0,0);visibility:visible}to{transform:translateZ(0)}}@keyframes Toastify__slideInLeft{0%{transform:translate3d(-110%,0,0);visibility:visible}to{transform:translateZ(0)}}@keyframes Toastify__slideInUp{0%{transform:translate3d(0,110%,0);visibility:visible}to{transform:translateZ(0)}}@keyframes Toastify__slideInDown{0%{transform:translate3d(0,-110%,0);visibility:visible}to{transform:translateZ(0)}}@keyframes Toastify__slideOutRight{0%{transform:translateZ(0)}to{transform:translate3d(110%,0,0);visibility:hidden}}@keyframes Toastify__slideOutLeft{0%{transform:translateZ(0)}to{transform:translate3d(-110%,0,0);visibility:hidden}}@keyframes Toastify__slideOutDown{0%{transform:translateZ(0)}to{transform:translate3d(0,500px,0);visibility:hidden}}@keyframes Toastify__slideOutUp{0%{transform:translateZ(0)}to{transform:translate3d(0,-500px,0);visibility:hidden}}.Toastify__slide-enter--bottom-left,.Toastify__slide-enter--top-left{animation-name:Toastify__slideInLeft}.Toastify__slide-enter--bottom-right,.Toastify__slide-enter--top-right{animation-name:Toastify__slideInRight}.Toastify__slide-enter--top-center{animation-name:Toastify__slideInDown}.Toastify__slide-enter--bottom-center{animation-name:Toastify__slideInUp}.Toastify__slide-exit--bottom-left,.Toastify__slide-exit--top-left{animation-name:Toastify__slideOutLeft}.Toastify__slide-exit--bottom-right,.Toastify__slide-exit--top-right{animation-name:Toastify__slideOutRight}.Toastify__slide-exit--top-center{animation-name:Toastify__slideOutUp}.Toastify__slide-exit--bottom-center{animation-name:Toastify__slideOutDown}@keyframes Toastify__spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -726,6 +762,36 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_dropzone_vue_common_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/vue3-toastify/dist/index.css":
+/*!***************************************************!*\
+  !*** ./node_modules/vue3-toastify/dist/index.css ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_loader_dist_cjs_js_clonedRuleSet_9_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./index.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue3-toastify/dist/index.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_index_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_index_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -4864,6 +4930,1050 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_FileUpload_vue_vue_type_style_index_0_id_38dcf893_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./FileUpload.vue?vue&type=style&index=0&id=38dcf893&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/admin/media/FileUpload.vue?vue&type=style&index=0&id=38dcf893&lang=css");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue3-toastify/dist/esm/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/vue3-toastify/dist/esm/index.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AnimationStep": () => (/* binding */ H),
+/* harmony export */   "Bounce": () => (/* binding */ Ae),
+/* harmony export */   "Flip": () => (/* binding */ _e),
+/* harmony export */   "Slide": () => (/* binding */ Ne),
+/* harmony export */   "ToastActions": () => (/* binding */ N),
+/* harmony export */   "ToastifyContainer": () => (/* binding */ ot),
+/* harmony export */   "Zoom": () => (/* binding */ Ie),
+/* harmony export */   "addExitAnimateToNode": () => (/* binding */ ue),
+/* harmony export */   "appendFromQueue": () => (/* binding */ we),
+/* harmony export */   "cacheRenderInstance": () => (/* binding */ $e),
+/* harmony export */   "clearContainers": () => (/* binding */ Be),
+/* harmony export */   "containerInstances": () => (/* binding */ R),
+/* harmony export */   "default": () => (/* binding */ it),
+/* harmony export */   "doAppend": () => (/* binding */ X),
+/* harmony export */   "getAllToast": () => (/* binding */ x),
+/* harmony export */   "getToast": () => (/* binding */ xe),
+/* harmony export */   "globalOptions": () => (/* binding */ de),
+/* harmony export */   "queue": () => (/* binding */ p),
+/* harmony export */   "removeContainer": () => (/* binding */ Z),
+/* harmony export */   "toast": () => (/* binding */ i),
+/* harmony export */   "toastContainers": () => (/* binding */ f),
+/* harmony export */   "updateGlobalOptions": () => (/* binding */ lt),
+/* harmony export */   "useCssTransition": () => (/* binding */ tt)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+const w = {
+  TOP_LEFT: "top-left",
+  TOP_RIGHT: "top-right",
+  TOP_CENTER: "top-center",
+  BOTTOM_LEFT: "bottom-left",
+  BOTTOM_RIGHT: "bottom-right",
+  BOTTOM_CENTER: "bottom-center"
+}, $ = {
+  LIGHT: "light",
+  DARK: "dark",
+  COLORED: "colored",
+  AUTO: "auto"
+}, g = {
+  INFO: "info",
+  SUCCESS: "success",
+  WARNING: "warning",
+  ERROR: "error",
+  DEFAULT: "default"
+}, Te = {
+  BOUNCE: "bounce",
+  SLIDE: "slide",
+  FLIP: "flip",
+  ZOOM: "zoom"
+}, re = {
+  dangerouslyHTMLString: !1,
+  multiple: !0,
+  position: w.TOP_RIGHT,
+  autoClose: 5e3,
+  transition: "bounce",
+  hideProgressBar: !1,
+  pauseOnHover: !0,
+  pauseOnFocusLoss: !0,
+  closeOnClick: !0,
+  className: "",
+  bodyClassName: "",
+  style: {},
+  progressClassName: "",
+  progressStyle: {},
+  role: "alert",
+  theme: "light"
+}, pe = {
+  rtl: !1,
+  newestOnTop: !1,
+  toastClassName: ""
+}, ie = {
+  ...re,
+  ...pe
+};
+({
+  ...re,
+  type: g.DEFAULT
+});
+var r = /* @__PURE__ */ ((e) => (e[e.COLLAPSE_DURATION = 300] = "COLLAPSE_DURATION", e[e.DEBOUNCE_DURATION = 50] = "DEBOUNCE_DURATION", e.CSS_NAMESPACE = "Toastify", e))(r || {}), K = /* @__PURE__ */ ((e) => (e.ENTRANCE_ANIMATION_END = "d", e))(K || {});
+const Ae = {
+  enter: "Toastify--animate Toastify__bounce-enter",
+  exit: "Toastify--animate Toastify__bounce-exit",
+  appendPosition: !0
+}, Ne = {
+  enter: "Toastify--animate Toastify__slide-enter",
+  exit: "Toastify--animate Toastify__slide-exit",
+  appendPosition: !0
+}, Ie = {
+  enter: "Toastify--animate Toastify__zoom-enter",
+  exit: "Toastify--animate Toastify__zoom-exit"
+}, _e = {
+  enter: "Toastify--animate Toastify__flip-enter",
+  exit: "Toastify--animate Toastify__flip-exit"
+};
+function le(e) {
+  let t = Ae;
+  if (!e || typeof e == "string")
+    switch (e) {
+      case "flip":
+        t = _e;
+        break;
+      case "zoom":
+        t = Ie;
+        break;
+      case "slide":
+        t = Ne;
+        break;
+    }
+  else
+    t = e;
+  return t;
+}
+function he(e) {
+  return e.containerId || String(e.position);
+}
+const j = "will-unmount";
+function Oe(e = w.TOP_RIGHT) {
+  return !!document.querySelector(`.${r.CSS_NAMESPACE}__toast-container--${e}`);
+}
+function Pe(e = w.TOP_RIGHT) {
+  return `${r.CSS_NAMESPACE}__toast-container--${e}`;
+}
+function be(e, t, n = !1) {
+  const o = [
+    `${r.CSS_NAMESPACE}__toast-container`,
+    `${r.CSS_NAMESPACE}__toast-container--${e}`,
+    n ? `${r.CSS_NAMESPACE}__toast-container--rtl` : null
+  ].filter(Boolean).join(" ");
+  return L(t) ? t({
+    position: e,
+    rtl: n,
+    defaultClassName: o
+  }) : `${o} ${t || ""}`;
+}
+function Le(e) {
+  var y;
+  const { position: t, containerClassName: n, rtl: o = !1, style: a = {} } = e, s = r.CSS_NAMESPACE, d = Pe(t), E = document.querySelector(`.${s}`), u = document.querySelector(`.${d}`), C = !!u && !((y = u.className) != null && y.includes(j)), c = E || document.createElement("div"), v = document.createElement("div");
+  v.className = be(
+    t,
+    n,
+    o
+  ), v.dataset.testid = `${r.CSS_NAMESPACE}__toast-container--${t}`, v.id = he(e);
+  for (const A in a)
+    if (Object.prototype.hasOwnProperty.call(a, A)) {
+      const Q = a[A];
+      v.style[A] = Q;
+    }
+  return E || (c.className = r.CSS_NAMESPACE, document.body.appendChild(c)), C || c.appendChild(v), v;
+}
+function Y(e) {
+  var o, a, s;
+  const t = typeof e == "string" ? e : ((o = e.currentTarget) == null ? void 0 : o.id) || ((a = e.target) == null ? void 0 : a.id), n = document.getElementById(t);
+  n && n.removeEventListener("animationend", Y, !1);
+  try {
+    R[t].unmount(), (s = document.getElementById(t)) == null || s.remove(), delete R[t], delete f[t];
+  } catch {
+  }
+}
+const R = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({});
+function $e(e, t) {
+  const n = document.getElementById(String(t));
+  n && (R[n.id] = e);
+}
+function Z(e, t = !0) {
+  const n = String(e);
+  if (!R[n])
+    return;
+  const o = document.getElementById(n);
+  o && o.classList.add(j), t ? (qe(e), o && o.addEventListener("animationend", Y, !1)) : Y(n), p.items = p.items.filter((a) => a.containerId !== e);
+}
+function Be(e) {
+  for (const t in R)
+    Z(t, e);
+  p.items = [];
+}
+function ue(e, t) {
+  const n = document.getElementById(e.toastId);
+  if (n) {
+    let o = e;
+    o = {
+      ...o,
+      ...le(o.transition)
+    };
+    const a = o.appendPosition ? `${o.exit}--${o.position}` : o.exit;
+    n.className += ` ${a}`, t && t(n);
+  }
+}
+function qe(e) {
+  for (const t in f)
+    if (t === e)
+      for (const n of f[t] || [])
+        ue(n);
+}
+function Me(e) {
+  const n = x().find((o) => o.toastId === e);
+  return n == null ? void 0 : n.containerId;
+}
+function ne(e) {
+  return document.getElementById(e);
+}
+function Re(e) {
+  const t = ne(e.containerId);
+  return t && t.classList.contains(j);
+}
+function oe(e) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.isVNode)(e.content) ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(e.content.props) : null) ?? (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(e.data ?? {});
+}
+function Fe(e) {
+  return e ? p.items.filter((n) => n.containerId === e).length > 0 : p.items.length > 0;
+}
+function we() {
+  if (p.items.length > 0) {
+    const e = p.items.shift();
+    X(e == null ? void 0 : e.toastContent, e == null ? void 0 : e.toastProps);
+  }
+}
+const f = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({}), p = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+  items: []
+});
+function x() {
+  const e = (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(f);
+  return Object.values(e).reduce((t, n) => [...t, ...n], []);
+}
+function xe(e) {
+  return x().find((n) => n.toastId === e);
+}
+function X(e, t = {}) {
+  if (Re(t)) {
+    const n = ne(t.containerId);
+    n && n.addEventListener("animationend", J.bind(null, e, t), !1);
+  } else
+    J(e, t);
+}
+function J(e, t = {}) {
+  const n = ne(t.containerId);
+  n && n.removeEventListener("animationend", J.bind(null, e, t), !1);
+  const o = f[t.containerId] || [], a = o.length > 0;
+  if (!a && !Oe(t.position)) {
+    const s = Le(t), d = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)(ot, t);
+    d.mount(s), $e(d, s.id);
+  }
+  a && (t.position = o[0].position), (0,vue__WEBPACK_IMPORTED_MODULE_0__.nextTick)(() => {
+    t.updateId ? N.update(t) : N.add(e, t);
+  });
+}
+const N = {
+  /**
+   * add a toast
+   * @param _ ..
+   * @param opts toast props
+   */
+  add(e, t) {
+    const { containerId: n = "" } = t;
+    n && (f[n] = f[n] || [], f[n].find((o) => o.toastId === t.toastId) || setTimeout(() => {
+      var o, a;
+      t.newestOnTop ? (o = f[n]) == null || o.unshift(t) : (a = f[n]) == null || a.push(t), t.onOpen && t.onOpen(oe(t));
+    }, t.delay || 0));
+  },
+  /**
+   * remove a toast
+   * @param id toastId
+   */
+  remove(e) {
+    if (e) {
+      const t = Me(e);
+      if (t) {
+        const n = f[t];
+        let o = n.find((a) => a.toastId === e);
+        f[t] = n.filter((a) => a.toastId !== e), !f[t].length && !Fe(t) && Z(t, !1), we(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.nextTick)(() => {
+          o != null && o.onClose && (o.onClose(oe(o)), o = void 0);
+        });
+      }
+    }
+  },
+  /**
+   * update the toast
+   * @param opts toast props
+   */
+  update(e = {}) {
+    const { containerId: t = "" } = e;
+    if (t && e.updateId) {
+      f[t] = f[t] || [];
+      const n = f[t].find((o) => o.toastId === e.toastId);
+      n && setTimeout(() => {
+        for (const o in e)
+          if (Object.prototype.hasOwnProperty.call(e, o)) {
+            const a = e[o];
+            n[o] = a;
+          }
+      }, e.delay || 0);
+    }
+  },
+  /**
+   * clear all toasts in container.
+   * @param containerId container id
+   */
+  clear(e, t = !0) {
+    e ? Z(e, t) : Be(t);
+  },
+  dismissCallback(e) {
+    var o;
+    const t = (o = e.currentTarget) == null ? void 0 : o.id, n = document.getElementById(t);
+    n && (n.removeEventListener("animationend", N.dismissCallback, !1), setTimeout(() => {
+      N.remove(t);
+    }));
+  },
+  dismiss(e) {
+    if (e) {
+      const t = x();
+      for (const n of t)
+        if (n.toastId === e) {
+          ue(n, (o) => {
+            o.addEventListener("animationend", N.dismissCallback, !1);
+          });
+          break;
+        }
+    }
+  }
+}, de = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({});
+function ce() {
+  return Math.random().toString(36).substring(2, 9);
+}
+function De(e) {
+  return typeof e == "number" && !isNaN(e);
+}
+function ee(e) {
+  return typeof e == "string";
+}
+function L(e) {
+  return typeof e == "function";
+}
+function G(...e) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)(...e);
+}
+function k(e) {
+  return typeof e == "object" && (!!(e != null && e.render) || !!(e != null && e.setup) || typeof (e == null ? void 0 : e.type) == "object");
+}
+function Ue(e = {}) {
+  de[`${r.CSS_NAMESPACE}-default-options`] = e;
+}
+function ke() {
+  return de[`${r.CSS_NAMESPACE}-default-options`] || ie;
+}
+function He() {
+  return document.documentElement.classList.contains("dark") ? "dark" : "light";
+}
+var H = /* @__PURE__ */ ((e) => (e[e.Enter = 0] = "Enter", e[e.Exit = 1] = "Exit", e))(H || {});
+const fe = {
+  containerId: {
+    type: [String, Number],
+    required: !1,
+    default: ""
+  },
+  dangerouslyHTMLString: {
+    type: Boolean,
+    required: !1,
+    default: !1
+  },
+  multiple: {
+    type: Boolean,
+    required: !1,
+    default: !0
+  },
+  limit: {
+    type: Number,
+    required: !1,
+    default: void 0
+  },
+  position: {
+    type: String,
+    required: !1,
+    default: w.TOP_LEFT
+  },
+  bodyClassName: {
+    type: String,
+    required: !1,
+    default: ""
+  },
+  autoClose: {
+    type: [Number, Boolean],
+    required: !1,
+    default: !1
+  },
+  closeButton: {
+    type: [Boolean, Function, Object],
+    required: !1,
+    default: void 0
+  },
+  transition: {
+    type: [String, Object],
+    required: !1,
+    default: "bounce"
+  },
+  hideProgressBar: {
+    type: Boolean,
+    required: !1,
+    default: !1
+  },
+  pauseOnHover: {
+    type: Boolean,
+    required: !1,
+    default: !0
+  },
+  pauseOnFocusLoss: {
+    type: Boolean,
+    required: !1,
+    default: !0
+  },
+  closeOnClick: {
+    type: Boolean,
+    required: !1,
+    default: !0
+  },
+  progress: {
+    type: Number,
+    required: !1,
+    default: void 0
+  },
+  progressClassName: {
+    type: String,
+    required: !1,
+    default: ""
+  },
+  toastStyle: {
+    type: Object,
+    required: !1,
+    default() {
+      return {};
+    }
+  },
+  progressStyle: {
+    type: Object,
+    required: !1,
+    default() {
+      return {};
+    }
+  },
+  role: {
+    type: String,
+    required: !1,
+    default: "alert"
+  },
+  theme: {
+    type: String,
+    required: !1,
+    default: $.AUTO
+  },
+  content: {
+    type: [String, Object, Function],
+    required: !1,
+    default: ""
+  },
+  toastId: {
+    type: [String, Number],
+    required: !1,
+    default: ""
+  },
+  data: {
+    type: [Object, String],
+    required: !1,
+    default() {
+      return {};
+    }
+  },
+  type: {
+    type: String,
+    required: !1,
+    default: g.DEFAULT
+  },
+  icon: {
+    type: [Boolean, String, Number, Object, Function],
+    required: !1,
+    default: void 0
+  },
+  delay: {
+    type: Number,
+    required: !1,
+    default: void 0
+  },
+  onOpen: {
+    type: Function,
+    required: !1,
+    default: void 0
+  },
+  onClose: {
+    type: Function,
+    required: !1,
+    default: void 0
+  },
+  onClick: {
+    type: Function,
+    required: !1,
+    default: void 0
+  },
+  isLoading: {
+    type: Boolean,
+    required: !1,
+    default: void 0
+  },
+  rtl: {
+    type: Boolean,
+    required: !1,
+    default: !1
+  },
+  toastClassName: {
+    type: String,
+    required: !1,
+    default: ""
+  },
+  updateId: {
+    type: [String, Number],
+    required: !1,
+    default: ""
+  }
+}, ze = {
+  autoClose: {
+    type: [Number, Boolean],
+    required: !0
+  },
+  isRunning: {
+    type: Boolean,
+    required: !1,
+    default: void 0
+  },
+  type: {
+    type: String,
+    required: !1,
+    default: g.DEFAULT
+  },
+  theme: {
+    type: String,
+    required: !1,
+    default: $.AUTO
+  },
+  hide: {
+    type: Boolean,
+    required: !1,
+    default: void 0
+  },
+  className: {
+    type: [String, Function],
+    required: !1,
+    default: ""
+  },
+  controlledProgress: {
+    type: Boolean,
+    required: !1,
+    default: void 0
+  },
+  rtl: {
+    type: Boolean,
+    required: !1,
+    default: void 0
+  },
+  isIn: {
+    type: Boolean,
+    required: !1,
+    default: void 0
+  },
+  progress: {
+    type: Number,
+    required: !1,
+    default: void 0
+  },
+  closeToast: {
+    type: Function,
+    required: !1,
+    default: void 0
+  }
+}, je = /* @__PURE__ */ (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  name: "ProgressBar",
+  props: ze,
+  // @ts-ignore
+  setup(e, {
+    attrs: t
+  }) {
+    const n = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(), o = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => e.hide ? "true" : "false"), a = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => ({
+      ...t.style || {},
+      animationDuration: `${e.autoClose === !0 ? 5e3 : e.autoClose}ms`,
+      animationPlayState: e.isRunning ? "running" : "paused",
+      opacity: e.hide ? 0 : 1,
+      transform: e.controlledProgress ? `scaleX(${e.progress})` : "none"
+    })), s = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => [`${r.CSS_NAMESPACE}__progress-bar`, e.controlledProgress ? `${r.CSS_NAMESPACE}__progress-bar--controlled` : `${r.CSS_NAMESPACE}__progress-bar--animated`, `${r.CSS_NAMESPACE}__progress-bar-theme--${e.theme}`, `${r.CSS_NAMESPACE}__progress-bar--${e.type}`, e.rtl ? `${r.CSS_NAMESPACE}__progress-bar--rtl` : null].filter(Boolean).join(" ")), d = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => `${s.value} ${(t == null ? void 0 : t.class) || ""}`), E = () => {
+      n.value && (n.value.onanimationend = null, n.value.ontransitionend = null);
+    }, u = () => {
+      e.isIn && e.closeToast && e.autoClose !== !1 && (e.closeToast(), E());
+    }, C = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => e.controlledProgress ? null : u), c = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => e.controlledProgress ? u : null);
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(() => {
+      n.value && (E(), n.value.onanimationend = C.value, n.value.ontransitionend = c.value);
+    }), () => (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+      ref: n,
+      role: "progressbar",
+      "aria-hidden": o.value,
+      "aria-label": "notification timer",
+      class: d.value,
+      style: a.value
+    }, null);
+  }
+}), Ge = /* @__PURE__ */ (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  name: "CloseButton",
+  inheritAttrs: !1,
+  props: {
+    theme: {
+      type: String,
+      required: !1,
+      default: $.AUTO
+    },
+    type: {
+      type: String,
+      required: !1,
+      default: $.LIGHT
+    },
+    ariaLabel: {
+      type: String,
+      required: !1,
+      default: "close"
+    },
+    closeToast: {
+      type: Function,
+      required: !1,
+      default: void 0
+    }
+  },
+  setup(e) {
+    return () => (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      class: `${r.CSS_NAMESPACE}__close-button ${r.CSS_NAMESPACE}__close-button--${e.theme}`,
+      type: "button",
+      onClick: (t) => {
+        t.stopPropagation(), e.closeToast && e.closeToast(t);
+      },
+      "aria-label": e.ariaLabel
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
+      "aria-hidden": "true",
+      viewBox: "0 0 14 16"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+      "fill-rule": "evenodd",
+      d: "M7.71 8.23l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75L1 11.98l3.75-3.75L1 4.48 2.48 3l3.75 3.75L9.98 3l1.48 1.48-3.75 3.75z"
+    }, null)])]);
+  }
+}), V = ({
+  theme: e,
+  type: t,
+  path: n,
+  ...o
+}) => (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+  viewBox: "0 0 24 24",
+  width: "100%",
+  height: "100%",
+  fill: e === "colored" ? "currentColor" : `var(--toastify-icon-color-${t})`
+}, o), [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+  d: n
+}, null)]);
+function Ve(e) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(V, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)(e, {
+    path: "M23.32 17.191L15.438 2.184C14.728.833 13.416 0 11.996 0c-1.42 0-2.733.833-3.443 2.184L.533 17.448a4.744 4.744 0 000 4.368C1.243 23.167 2.555 24 3.975 24h16.05C22.22 24 24 22.044 24 19.632c0-.904-.251-1.746-.68-2.44zm-9.622 1.46c0 1.033-.724 1.823-1.698 1.823s-1.698-.79-1.698-1.822v-.043c0-1.028.724-1.822 1.698-1.822s1.698.79 1.698 1.822v.043zm.039-12.285l-.84 8.06c-.057.581-.408.943-.897.943-.49 0-.84-.367-.896-.942l-.84-8.065c-.057-.624.25-1.095.779-1.095h1.91c.528.005.84.476.784 1.1z"
+  }), null);
+}
+function Qe(e) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(V, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)(e, {
+    path: "M12 0a12 12 0 1012 12A12.013 12.013 0 0012 0zm.25 5a1.5 1.5 0 11-1.5 1.5 1.5 1.5 0 011.5-1.5zm2.25 13.5h-4a1 1 0 010-2h.75a.25.25 0 00.25-.25v-4.5a.25.25 0 00-.25-.25h-.75a1 1 0 010-2h1a2 2 0 012 2v4.75a.25.25 0 00.25.25h.75a1 1 0 110 2z"
+  }), null);
+}
+function We(e) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(V, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)(e, {
+    path: "M12 0a12 12 0 1012 12A12.014 12.014 0 0012 0zm6.927 8.2l-6.845 9.289a1.011 1.011 0 01-1.43.188l-4.888-3.908a1 1 0 111.25-1.562l4.076 3.261 6.227-8.451a1 1 0 111.61 1.183z"
+  }), null);
+}
+function Ke(e) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(V, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)(e, {
+    path: "M11.983 0a12.206 12.206 0 00-8.51 3.653A11.8 11.8 0 000 12.207 11.779 11.779 0 0011.8 24h.214A12.111 12.111 0 0024 11.791 11.766 11.766 0 0011.983 0zM10.5 16.542a1.476 1.476 0 011.449-1.53h.027a1.527 1.527 0 011.523 1.47 1.475 1.475 0 01-1.449 1.53h-.027a1.529 1.529 0 01-1.523-1.47zM11 12.5v-6a1 1 0 012 0v6a1 1 0 11-2 0z"
+  }), null);
+}
+function Ye() {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+    class: `${r.CSS_NAMESPACE}__spinner`
+  }, null);
+}
+const te = {
+  info: Qe,
+  warning: Ve,
+  success: We,
+  error: Ke,
+  spinner: Ye
+}, Ze = (e) => e in te;
+function Xe({
+  theme: e,
+  type: t,
+  isLoading: n,
+  icon: o
+}) {
+  let a;
+  const s = {
+    theme: e,
+    type: t
+  };
+  return n ? a = te.spinner() : o === !1 ? a = void 0 : k(o) ? a = (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(o) : L(o) ? a = o(s) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.isVNode)(o) ? a = (0,vue__WEBPACK_IMPORTED_MODULE_0__.cloneVNode)(o, s) : ee(o) || De(o) ? a = o : Ze(t) && (a = te[t](s)), a;
+}
+const Je = () => {
+};
+function et(e, t, n = r.COLLAPSE_DURATION) {
+  const { scrollHeight: o, style: a } = e, s = n;
+  requestAnimationFrame(() => {
+    a.minHeight = "initial", a.height = o + "px", a.transition = `all ${s}ms`, requestAnimationFrame(() => {
+      a.height = "0", a.padding = "0", a.margin = "0", setTimeout(t, s);
+    });
+  });
+}
+function tt(e) {
+  const t = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(!1), n = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(!1), o = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(!1), a = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(H.Enter), s = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+    ...e,
+    appendPosition: e.appendPosition || !1,
+    collapse: typeof e.collapse > "u" ? !0 : e.collapse,
+    collapseDuration: e.collapseDuration || r.COLLAPSE_DURATION
+  }), d = s.done || Je, E = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => s.appendPosition ? `${s.enter}--${s.position}` : s.enter), u = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => s.appendPosition ? `${s.exit}--${s.position}` : s.exit), C = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => e.pauseOnHover ? {
+    onMouseenter: q,
+    onMouseleave: B
+  } : {});
+  function c() {
+    const S = E.value.split(" ");
+    y().addEventListener(
+      K.ENTRANCE_ANIMATION_END,
+      B,
+      { once: !0 }
+    );
+    const I = (P) => {
+      const M = y();
+      P.target === M && (M.dispatchEvent(new Event(K.ENTRANCE_ANIMATION_END)), M.removeEventListener("animationend", I), M.removeEventListener("animationcancel", I), a.value === H.Enter && P.type !== "animationcancel" && M.classList.remove(...S));
+    }, _ = () => {
+      const P = y();
+      P.classList.add(...S), P.addEventListener("animationend", I), P.addEventListener("animationcancel", I);
+    };
+    e.pauseOnFocusLoss && A(), _();
+  }
+  function v() {
+    if (!y())
+      return;
+    const S = () => {
+      const _ = y();
+      _.removeEventListener("animationend", S), s.collapse ? et(_, d, s.collapseDuration) : d();
+    }, I = () => {
+      const _ = y();
+      a.value = H.Exit, _ && (_.className += ` ${u.value}`, _.addEventListener("animationend", S));
+    };
+    n.value || (o.value ? S() : setTimeout(I));
+  }
+  function y() {
+    return e.toastRef.value;
+  }
+  function A() {
+    document.hasFocus() || q(), window.addEventListener("focus", B), window.addEventListener("blur", q);
+  }
+  function Q() {
+    window.removeEventListener("focus", B), window.removeEventListener("blur", q);
+  }
+  function B() {
+    (!e.loading.value || e.isLoading === void 0) && (t.value = !0);
+  }
+  function q() {
+    t.value = !1;
+  }
+  function ge(S) {
+    S && (S.stopPropagation(), S.preventDefault()), n.value = !1;
+  }
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(v), (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(() => {
+    const S = x();
+    n.value = S.findIndex((I) => I.toastId === s.toastId) > -1;
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(() => {
+    e.isLoading !== void 0 && (e.loading.value ? q() : B());
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(c), (0,vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted)(() => {
+    e.pauseOnFocusLoss && Q();
+  }), {
+    isIn: n,
+    isRunning: t,
+    hideToast: ge,
+    eventHandlers: C
+  };
+}
+const nt = /* @__PURE__ */ (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  name: "ToastItem",
+  inheritAttrs: !1,
+  props: fe,
+  // @ts-ignore
+  setup(e) {
+    const t = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(), n = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => !!e.isLoading), o = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => e.progress !== void 0 && e.progress !== null), a = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => Xe(e)), s = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => [`${r.CSS_NAMESPACE}__toast`, `${r.CSS_NAMESPACE}__toast-theme--${e.theme}`, `${r.CSS_NAMESPACE}__toast--${e.type}`, e.rtl ? `${r.CSS_NAMESPACE}__toast--rtl` : void 0, e.toastClassName || ""].filter(Boolean).join(" ")), {
+      isRunning: d,
+      isIn: E,
+      hideToast: u,
+      eventHandlers: C
+    } = tt({
+      toastRef: t,
+      loading: n,
+      done: () => {
+        N.remove(e.toastId);
+      },
+      ...le(e.transition),
+      ...e
+    });
+    return () => (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+      id: e.toastId,
+      class: s.value,
+      style: e.toastStyle || {},
+      ref: t,
+      "data-testid": `toast-item-${e.toastId}`,
+      onClick: (c) => {
+        e.closeOnClick && u(), e.onClick && e.onClick(c);
+      }
+    }, C.value), [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+      role: e.role,
+      "data-testid": "toast-body",
+      class: `${r.CSS_NAMESPACE}__toast-body ${e.bodyClassName || ""}`
+    }, [a.value != null && (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+      "data-testid": `toast-icon-${e.type}`,
+      class: [`${r.CSS_NAMESPACE}__toast-icon`, e.isLoading ? "" : `${r.CSS_NAMESPACE}--animate-icon ${r.CSS_NAMESPACE}__zoom-enter`].join(" ")
+    }, [k(a.value) ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(a.value), {
+      theme: e.theme,
+      type: e.type
+    }) : L(a.value) ? a.value({
+      theme: e.theme,
+      type: e.type
+    }) : a.value]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+      "data-testid": "toast-content"
+    }, [k(e.content) ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(e.content), {
+      toastProps: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(e),
+      closeToast: u,
+      data: e.data
+    }) : L(e.content) ? e.content({
+      toastProps: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(e),
+      closeToast: u,
+      data: e.data
+    }) : e.dangerouslyHTMLString ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      innerHTML: e.content
+    }) : e.content])]), (e.closeButton === void 0 || e.closeButton === !0) && (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(Ge, {
+      theme: e.theme,
+      closeToast: (c) => {
+        c.stopPropagation(), c.preventDefault(), u();
+      }
+    }, null), k(e.closeButton) ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(e.closeButton), {
+      closeToast: u,
+      type: e.type,
+      theme: e.theme
+    }) : L(e.closeButton) ? e.closeButton({
+      closeToast: u,
+      type: e.type,
+      theme: e.theme
+    }) : null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(je, {
+      className: e.progressClassName,
+      style: e.progressStyle,
+      rtl: e.rtl,
+      theme: e.theme,
+      isIn: E.value,
+      type: e.type,
+      hide: e.hideProgressBar,
+      isRunning: d.value,
+      autoClose: e.autoClose,
+      controlledProgress: o.value,
+      progress: e.progress,
+      closeToast: e.isLoading ? void 0 : u
+    }, null)]);
+  }
+}), ot = /* @__PURE__ */ (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  name: "ToastifyContainer",
+  inheritAttrs: !1,
+  props: fe,
+  // @ts-ignore
+  setup(e) {
+    const t = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => e.containerId), n = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => f[t.value] || []), o = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => n.value.filter((a) => a.position === e.position));
+    return () => (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [o.value.map((a) => {
+      const {
+        toastId: s = ""
+      } = a;
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(nt, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+        key: s
+      }, a), null);
+    })]);
+  }
+});
+let W = !1;
+function me() {
+  const e = [];
+  return x().forEach((n) => {
+    const o = document.getElementById(n.containerId);
+    o && !o.classList.contains(j) && e.push(n);
+  }), e;
+}
+function at(e) {
+  const t = me().length, n = e ?? 0;
+  return n > 0 && t + p.items.length >= n;
+}
+function st(e) {
+  at(e.limit) && !e.updateId && p.items.push({
+    toastId: e.toastId,
+    containerId: e.containerId,
+    toastContent: e.content,
+    toastProps: e
+  });
+}
+function O(e, t, n = {}) {
+  if (W)
+    return;
+  n = G(ke(), t, n), (!n.toastId || typeof n.toastId != "string" && typeof n.toastId != "number") && (n.toastId = ce()), n = {
+    ...n,
+    content: e,
+    containerId: n.containerId || String(n.position)
+  };
+  const o = Number(n == null ? void 0 : n.progress);
+  return o < 0 && (n.progress = 0), o > 1 && (n.progress = 1), n.theme === "auto" && (n.theme = He()), st(n), n.multiple ? p.items.length || X(e, n) : (W = !0, i.clearAll(void 0, !1), setTimeout(() => {
+    X(e, n);
+  }, 0), setTimeout(() => {
+    W = !1;
+  }, 390)), n.toastId;
+}
+const i = (e, t) => O(e, g.DEFAULT, t);
+i.info = (e, t) => O(e, g.DEFAULT, {
+  ...t,
+  type: g.INFO
+});
+i.error = (e, t) => O(e, g.DEFAULT, {
+  ...t,
+  type: g.ERROR
+});
+i.warning = (e, t) => O(e, g.DEFAULT, {
+  ...t,
+  type: g.WARNING
+});
+i.warn = i.warning;
+i.success = (e, t) => O(e, g.DEFAULT, {
+  ...t,
+  type: g.SUCCESS
+});
+i.loading = (e, t) => O(e, g.DEFAULT, G(t, {
+  isLoading: !0,
+  autoClose: !1,
+  closeOnClick: !1,
+  closeButton: !1,
+  draggable: !1
+}));
+i.dark = (e, t) => O(e, g.DEFAULT, G(t, {
+  theme: $.DARK
+}));
+i.remove = (e) => {
+  e ? N.dismiss(e) : N.clear();
+};
+i.clearAll = (e, t) => {
+  N.clear(e, t);
+};
+i.isActive = (e) => {
+  let t = !1;
+  return t = me().findIndex((o) => o.toastId === e) > -1, t;
+};
+i.update = (e, t = {}) => {
+  setTimeout(() => {
+    const n = xe(e);
+    if (n) {
+      const o = (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRaw)(n), {
+        content: a
+      } = o, s = {
+        ...o,
+        ...t,
+        toastId: t.toastId || e,
+        updateId: ce()
+      }, d = s.render || a;
+      delete s.render, O(d, s.type, s);
+    }
+  }, 0);
+};
+i.done = (e) => {
+  i.update(e, {
+    isLoading: !1,
+    progress: 1
+  });
+};
+i.promise = rt;
+function rt(e, {
+  pending: t,
+  error: n,
+  success: o
+}, a) {
+  let s;
+  t && (s = ee(t) ? i.loading(t, a) : i.loading(t.render, {
+    ...a,
+    ...t
+  }));
+  const d = {
+    isLoading: void 0,
+    autoClose: null,
+    closeOnClick: null,
+    closeButton: null,
+    draggable: null,
+    delay: 100
+  }, E = (C, c, v) => {
+    if (c == null) {
+      i.remove(s);
+      return;
+    }
+    const y = {
+      type: C,
+      ...d,
+      ...a,
+      data: v
+    }, A = ee(c) ? {
+      render: c
+    } : c;
+    return s ? i.update(s, {
+      ...y,
+      ...A,
+      isLoading: !1,
+      autoClose: !0
+    }) : i(A.render, {
+      ...y,
+      ...A,
+      isLoading: !1,
+      autoClose: !0
+    }), v;
+  }, u = L(e) ? e() : e;
+  return u.then((C) => E("success", o, C)).catch((C) => E("error", n, C)), u;
+}
+i.POSITION = w;
+i.THEME = $;
+i.TYPE = g;
+i.TRANSITIONS = Te;
+const it = {
+  install(e, t = {}) {
+    lt(t);
+  }
+};
+typeof window < "u" && (window.Vue3Toastify = it);
+function lt(e = {}) {
+  const t = G(ie, e);
+  Ue(t);
+}
+
 
 
 /***/ })
