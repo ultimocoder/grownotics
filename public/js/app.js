@@ -23592,7 +23592,10 @@ var AdminSubcategory = function AdminSubcategory() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_subcategories_Subcategory_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/subcategories/Subcategory.vue */ "./resources/js/components/admin/subcategories/Subcategory.vue"));
 };
 var AdminBrand = function AdminBrand() {
-  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_brands_Brand_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/brands/Brand.vue */ "./resources/js/components/admin/brands/Brand.vue"));
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_brand_Brand_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/brand/Brand.vue */ "./resources/js/components/admin/brand/Brand.vue"));
+};
+var AdminProduct = function AdminProduct() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_products_Product_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/products/Product.vue */ "./resources/js/components/admin/products/Product.vue"));
 };
 var ForgotPassword = function ForgotPassword() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_ForgotPassword_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/ForgotPassword.vue */ "./resources/js/components/admin/auth/ForgotPassword.vue"));
@@ -23600,22 +23603,14 @@ var ForgotPassword = function ForgotPassword() {
 var ResetPassword = function ResetPassword() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_admin_auth_ResetPasswordForm_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/auth/ResetPasswordForm.vue */ "./resources/js/components/admin/auth/ResetPasswordForm.vue"));
 };
-var Home = function Home() {
-  return __webpack_require__.e(/*! import() */ "resources_js_components_Home_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home.vue */ "./resources/js/components/Home.vue"));
+var Dynamic = function Dynamic() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_admin_dynamic_Dynamic_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/admin/dynamic/Dynamic.vue */ "./resources/js/components/admin/dynamic/Dynamic.vue"));
 };
-
-// const getToken = async() => {
-//     await axios.get('/sanctum/csrf-cookie')
-// }
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter({
   mode: "history",
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHistory)(),
   // await: getToken(),
   routes: [{
-    name: 'home',
-    path: '/',
-    component: Home
-  }, {
     name: 'AdminLogin',
     path: '/admin/login',
     component: AdminLogin
@@ -23647,6 +23642,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter({
     name: 'ResetPassword',
     path: '/reset-password',
     component: ResetPassword
+  }, {
+    name: 'AdminProduct',
+    path: '/admin/product',
+    component: AdminProduct
+  }, {
+    name: 'Dynamic',
+    path: '/admin/dynamic',
+    component: Dynamic
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -29141,13 +29144,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Footer_vue_vue_type_template_id_293c538d__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Footer.vue?vue&type=template&id=293c538d */ "./resources/js/components/admin/include/Footer.vue?vue&type=template&id=293c538d");
 /* harmony import */ var _Footer_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Footer.vue?vue&type=script&lang=js */ "./resources/js/components/admin/include/Footer.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Shivendra_OneDrive_Desktop_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_grow_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Shivendra_OneDrive_Desktop_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Footer_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Footer_vue_vue_type_template_id_293c538d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/admin/include/Footer.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_grow_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Footer_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Footer_vue_vue_type_template_id_293c538d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/admin/include/Footer.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -29169,13 +29172,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Header_vue_vue_type_template_id_4a6eb77f__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Header.vue?vue&type=template&id=4a6eb77f */ "./resources/js/components/admin/include/Header.vue?vue&type=template&id=4a6eb77f");
 /* harmony import */ var _Header_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header.vue?vue&type=script&lang=js */ "./resources/js/components/admin/include/Header.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Shivendra_OneDrive_Desktop_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_grow_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Shivendra_OneDrive_Desktop_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Header_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Header_vue_vue_type_template_id_4a6eb77f__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/admin/include/Header.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_grow_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Header_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Header_vue_vue_type_template_id_4a6eb77f__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/admin/include/Header.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -29197,13 +29200,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Main_vue_vue_type_template_id_12ab1390__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Main.vue?vue&type=template&id=12ab1390 */ "./resources/js/layout/Main.vue?vue&type=template&id=12ab1390");
 /* harmony import */ var _Main_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Main.vue?vue&type=script&lang=js */ "./resources/js/layout/Main.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Shivendra_OneDrive_Desktop_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_grow_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Shivendra_OneDrive_Desktop_grownotics_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Main_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Main_vue_vue_type_template_id_12ab1390__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/layout/Main.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_grow_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Main_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Main_vue_vue_type_template_id_12ab1390__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/layout/Main.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -33296,7 +33299,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_auth_Register_vue":1,"resources_js_components_admin_Dashboard_vue":1,"resources_js_components_admin_categories_Category_vue":1,"resources_js_components_admin_subcategories_Subcategory_vue":1,"resources_js_components_admin_brands_Brand_vue":1,"resources_js_components_admin_auth_ForgotPassword_vue":1,"resources_js_components_admin_auth_ResetPasswordForm_vue":1,"resources_js_components_Home_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_auth_Register_vue":1,"resources_js_components_admin_Dashboard_vue":1,"resources_js_components_admin_categories_Category_vue":1,"resources_js_components_admin_subcategories_Subcategory_vue":1,"resources_js_components_admin_brand_Brand_vue":1,"resources_js_components_admin_products_Product_vue":1,"resources_js_components_admin_auth_ForgotPassword_vue":1,"resources_js_components_admin_auth_ResetPasswordForm_vue":1,"resources_js_components_admin_dynamic_Dynamic_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

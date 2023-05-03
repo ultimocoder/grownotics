@@ -97,8 +97,7 @@
                           <li><a href="#"><img src="/img/Facebooklogo.png" alt="" /></a></li>
                        </ul>
                     </div>
-                    <div class="sign_up_account">Already have an Account? <span><router-link to="/admin/login"> Sign In</router-link>
-                         <router-view /></span></div>
+                    <div class="sign_up_account">Already have an Account? <span>Sign In</span></div>
                  </div>
               </div>
            </div>

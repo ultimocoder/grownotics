@@ -26,23 +26,47 @@
                      <img class="w-100 posi_rela" src="/img/PngItem_464176 1.png" alt="sign in image" />
                   </div>
                   <div class="col-lg-5 before_img_cut">
-                   <h2>Update password</h2>
-                    <p></p>
-                      <form autocomplete="off" @submit.prevent="resetPassword" method="post">
-                          <div class="form-group">
-                              <label for="email">E-mail</label>
-                              <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email" required>
-                          </div>
-                          <div class="form-group">
-                              <label for="email">Password</label>
-                              <input type="password" id="password" class="form-control" placeholder="" v-model="password" required>
-                          </div>
-                          <div class="form-group">
-                              <label for="email">Confirm Password</label>
-                              <input type="password" id="password_confirmation" class="form-control" placeholder="" v-model="password_confirmation" required>
-                          </div>
-                          <button type="submit" class="btn btn-primary">Update</button>
-                        </form>
+                   <h2>Welcome back to Gronotics.</h2>
+                    <p> {{output.data}}</p>
+                     <form v-on:submit.prevent="login_user">
+                        <div class="form-group">
+                           <label>Email</label>
+                           <div class="input-group mb-2">
+                              <div class="input-group-prepend">
+                                 <div class="input-group-text">
+                                    <img src="/img/email.png" alt="" />
+                                 </div>
+                              </div>
+                              <input type="email" class="form-control" v-model="form.email">
+                             
+                           </div>
+                           <p v-if="errors.email">{{ String(errors.email)  }}</p>
+                           <small class="form-text float_right">Login with phone?</small>
+                        </div>
+                        <div class="form-group">
+                           <label>Password</label>
+                           <div class="input-group mb-2">
+                              <div class="input-group-prepend">
+                                 <div class="input-group-text">
+                                    <img src="/img/lock.png" alt="" />
+                                 </div>
+                              </div>
+                              <input type="password" class="form-control" v-model="form.password">
+                           </div>
+                           <p v-if="errors.password">{{ String(errors.password) }}</p>
+                           <div class="d-flex forgot_password_flex">
+                              <div class="remender">
+                                 <div class="form-check custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="exampleCheck1">
+                                    <label class="custom-control-label" for="exampleCheck1">Remember me</label>
+                                 </div>
+                              </div>
+                              <div class="forgot_password"><router-link to="forget-password"> Sign Up</router-link>
+                         <router-view />Forgot Password</div>
+                           </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary sign_btn">Sign In</button>
+                     </form>
                      <div class="social_media">
                         <ul class="d-flex">
                            <li><a href="#"><img src="/img/Google.png" alt="" /></a></li>
@@ -62,28 +86,31 @@
    export default {
        data(){
        return {
-        token: null,
-        email: null,
-        password: null,
-        password_confirmation: null,
-        has_error: false
-      }
+         output: '',
+         errors: '',
+         form:{
+   
+           email: '',
+           password: ''
+           
+         }
+       }
      },
        methods:{
-          resetPassword(){
+   
+         //user login function and api call
+          login_user(){
            let currentObj = this;  
-           axios.post('http://127.0.0.1:8000/api/reset-password',{
-                token: this.$route.params.token,
-                email: this.email,
-                password: this.password,
-                password_confirmation: this.password_confirmation
-            })
-            .then(result => {
-                // console.log(result.data);
-                this.$router.push({name: 'AdminLogin'})
-            }, error => {
-                console.error(error);
-            });
+           axios.post('http://127.0.0.1:8000/api/postLogin',this.form)
+           .then((response) =>{
+             currentObj.output = response.data;
+         
+             if(response.data.status == 'success'){
+               this.$router.push('dashboard')
+             }
+           }).catch((e)=>{
+               this.errors = e.response.data.errors;
+           })
          }
        }
        

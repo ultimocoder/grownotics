@@ -61,7 +61,7 @@
                                         </p>
 
                                         <p style="text-align: center;">
-                                            <a href="{{'http://localhost:8000/update-password/'.$token}}" class="btn">Reset your password</a>
+                                            <a href="{{'http://localhost:8000/forgot-password/'.$user['token']}}" class="btn">Reset your password</a>
                                         </p>
 
 
@@ -69,7 +69,7 @@
                                             Thank
                                             you, </p>
                                         <p style="margin:0 0 12px 0;font-size:14px;font-family:Arial,sans-serif;">
-                                            Grownotics</p>
+                                            Programming Fields </p>
                                     </td>
                                 </tr>
                             </table>

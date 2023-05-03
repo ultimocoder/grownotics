@@ -1,4 +1,3 @@
-
 <template>
     <AdminHeader></AdminHeader>
     <div class="container">
@@ -50,7 +49,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(category, index) in categories">
+                                    <tr v-for="(category,index) in categories.data" :key="index">
                                     <th scope="row">{{index+1}}</th>
                                     <td>{{category.name}}</td>
                                     <td>{{category.slug}}</td>
@@ -62,6 +61,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        <Bootstrap4Pagination align="center"
+        :data="categories"
+        @pagination-change-page="getcategory"></Bootstrap4Pagination>
                     </div>
                 </div>
             </div>
@@ -71,13 +73,15 @@
 </template>
 
 <script>
+import { Bootstrap4Pagination } from 'laravel-vue-pagination';
 import AdminHeader  from '../include/Header.vue';
 import AdminFooter  from '../include/Footer.vue';
 export default {
     name:"category",
     components: {
         AdminHeader,
-        AdminFooter
+        AdminFooter,
+        Bootstrap4Pagination,
   },
     data(){
         return {
@@ -110,16 +114,11 @@ export default {
          this.errors = e.response.data.errors;
      })
    },
-   getcategory(){
-    
+   async getcategory(page=1){
      let currentObj = this;  
-     axios.get('http://127.0.0.1:8000/api/getcategory')
-     .then((response) =>{
-      
-
-       currentObj.categories = response.data;
-     
-
+     axios.get('http://127.0.0.1:8000/api/getcategory?page='+page)
+     .then(({data}) =>{
+       currentObj.categories = data;
      }).catch((e)=>{
          this.errors = e.response.data.errors;
      })

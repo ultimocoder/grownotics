@@ -1,4 +1,3 @@
-
 <template>
     <AdminHeader></AdminHeader>
     <div class="container">
@@ -59,7 +58,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(subcategory, index) in subcategories">
+                                    <tr v-for="(subcategory,index) in subcategories.data" :key="index">
                                     <th scope="row">{{index+1}}</th>
                                     <td>{{subcategory.name}}</td>
                                     <td>{{subcategory.cat_name}}</td>
@@ -72,6 +71,10 @@
                                 </tbody>
                             </table>
                         </div>
+                        <Bootstrap4Pagination align="center"
+        :data="subcategories"
+        @pagination-change-page="getsubcategory"
+    />
                     </div>
                 </div>
             </div>
@@ -81,13 +84,15 @@
 </template>
 
 <script>
+import { Bootstrap4Pagination } from 'laravel-vue-pagination';
 import AdminHeader  from '../include/Header.vue';
 import AdminFooter  from '../include/Footer.vue';
 export default {
     name:"subcategory",
     components: {
         AdminHeader,
-        AdminFooter
+        AdminFooter,
+        Bootstrap4Pagination,
   },
     data(){
         return {
@@ -125,7 +130,7 @@ export default {
    },
    getcategory(){
      let currentObj = this;  
-     axios.get('http://127.0.0.1:8000/api/getcategory')
+     axios.get('http://127.0.0.1:8000/api/getoptioncategory')
      .then((response) =>{
        currentObj.categories = response.data;
      }).catch((e)=>{
@@ -135,8 +140,8 @@ export default {
    getsubcategory(){
      let currentObj = this;  
      axios.get('http://127.0.0.1:8000/api/getsubcategory')
-     .then((response) =>{
-       currentObj.subcategories = response.data;
+     .then(({data}) =>{
+       currentObj.subcategories = data;
      }).catch((e)=>{
          this.errors = e.response.data.errors;
      })
@@ -144,7 +149,7 @@ export default {
    deleteCategory(id){
      let currentObj = this;  
      axios.post('http://127.0.0.1:8000/api/deletesubcategory/'+id)
-     .then((response) =>{
+     .then(({response}) =>{
        currentObj.subcategories = response.data;
        this.getsubcategory()
      })
@@ -158,5 +163,4 @@ export default {
    }
  }
 }
-
 </script>

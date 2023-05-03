@@ -40,7 +40,7 @@
                             
                           </div>
                           <p v-if="errors.password">{{ String(errors.email)  }}</p>
-                          
+                          <small class="form-text float_right">Login with phone?</small>
                        </div>
                        <div class="form-group">
                           <label>Password</label>
@@ -60,8 +60,7 @@
                                    <label class="custom-control-label" for="exampleCheck1">Remember me</label>
                                 </div>
                              </div>
-                             <div class="forgot_password"><router-link to="/reset-password"> Forgot Password</router-link>
-                         <router-view /></div>
+                             <div class="forgot_password">Forgot Password</div>
                           </div>
                        </div>
                        <button type="submit" class="btn btn-primary sign_btn">Sign In</button>
@@ -72,8 +71,7 @@
                           <li><a href="#"><img src="/img/Facebooklogo.png" alt="" /></a></li>
                        </ul>
                     </div>
-                    <div class="sign_up_account">Don't have an Account?<span><router-link to="/admin/register"> Sign Up</router-link>
-                         <router-view /></span></div>
+                    <div class="sign_up_account">Don't have an Account?<span>Sign Up</span></div>
                  </div>
               </div>
            </div>
@@ -114,6 +112,4 @@
       }
       
     }
-
 </script>
-

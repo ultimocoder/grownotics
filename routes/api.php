@@ -3,9 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BrandController;  
-use App\Http\Controllers\Admin\Auth\LoginController;                                                                                  
-
-use App\Http\Controllers\Admin\CategoryController;                                                                              
+use App\Http\Controllers\Admin\Auth\LoginController;                                                                                   
+use App\Http\Controllers\Admin\CategoryController;                                                                                  
+use App\Http\Controllers\Admin\ProductController;                                                                                  
+use App\Http\Controllers\Admin\DaynamicController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,27 +24,34 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('brand',BrandController::class);
 
 Route::post('postLogin',[LoginController::class,'login'])->name('admin.login');
+// Dynamic Page api
+Route::post('addpage',[DaynamicController::class,'store'])->name('addpage.add');
+Route::get('getdyanmic',[DaynamicController::class,'index']);
+Route::post('deletepage/{id}',[DaynamicController::class,'destroy']);
+Route::get('editpage/{id}',[DaynamicController::class,'edit']);
+// Category Subcategory api
 Route::post('addcategory',[CategoryController::class,'store'])->name('category.add');
 Route::post('addsubcategory',[CategoryController::class,'sub_store']);
 Route::get('getcategory',[CategoryController::class,'index']);
-
+Route::get('getoptioncategory',[CategoryController::class,'getoptioncategory']);
 Route::get('getsubcategory',[CategoryController::class,'getsubcategory']);
 Route::post('deletecategory/{id}',[CategoryController::class,'destroy']);
 Route::post('deletesubcategory/{id}',[CategoryController::class,'sub_destroy']);
 Route::get('editcategory/{id}',[CategoryController::class,'edit']);
 Route::get('editsubcategory/{id}',[CategoryController::class,'sub_edit']);
-
-
-
+// product api
+Route::post('addproduct',[ProductController::class,'store']);
+Route::get('getproduct',[ProductController::class,'index']);
+Route::post('deleteproduct/{id}',[ProductController::class,'destroy']);
+Route::post('active_deactive_product/{id}',[ProductController::class,'active_deactive']);
+Route::get('editproduct/{id}',[ProductController::class,'edit']);
+Route::get('product-return-sub-category/{id}',[ProductController::class,'get_sub_cat']);
+// brand api
+Route::resource('brand',BrandController::class);
 Route::post('addbrand',[BrandController::class,'store'])->name('brand.add');
-
 Route::get('getbrand',[BrandController::class,'index']);
+Route::get('getoptionbrand',[BrandController::class,'getoptionbrand']);
 Route::post('deletebrand/{id}',[BrandController::class,'destroy']);
 Route::get('editbrand/{id}',[BrandController::class,'edit']);
-
-Route::post('registration', [LoginController::class, 'registration'])->name('register'); 
-Route::post('submitforgetPassword', [LoginController::class, 'submitForgetPasswordForm'])->name('submitForgetPassword'); 
-
