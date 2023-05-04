@@ -28,6 +28,9 @@ const router = new createRouter({
     mode: "history",
     history: createWebHistory(),
     // await: getToken(),
+    meta:{
+      reload:false,
+    },
     routes: [
 
         {
