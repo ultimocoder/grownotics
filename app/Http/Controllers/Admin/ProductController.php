@@ -39,9 +39,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         if(!empty($request->id)){
-            if($request->file1 != 'undefined'){
+            if($request->file1 != ''){
                 $request->validate([
-                    'file1' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                    'feturer_image' => 'required',
                     'name' => 'required',
                     'cat_id' => 'required',
                     'sub_cat_id' => 'required',
@@ -50,14 +50,12 @@ class ProductController extends Controller
                     'dis_price' => 'required',
                     'product_des' => 'required'
                 ]);
-                $imageName = time().'.'.$request->file1->extension();
-                $request->file1->move(public_path('images'), $imageName);
                 Product::where('id', $request->id)->update([
                     'name' => $request->input('name'),
                     'cat_id' => $request->input('cat_id'),
                     'sub_cat_id' => $request->input('sub_cat_id'),
                     'brand_id' => $request->input('brand_id'),
-                    'feturer_image' => $imageName,
+                    'feturer_image' => $request->input('feturer_image'),
                     'slug' => Str::slug($request->input('name')),
                     'price' => $request->input('price'),
                     'dis_price' => $request->input('dis_price'),
@@ -65,7 +63,7 @@ class ProductController extends Controller
                 ]);
             }else{
                 $request->validate([
-                    'file1' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                    'feturer_image' => 'required',
                     'name' => 'required',
                     'cat_id' => 'required',
                     'sub_cat_id' => 'required',
@@ -80,6 +78,7 @@ class ProductController extends Controller
                     'sub_cat_id' => $request->input('sub_cat_id'),
                     'brand_id' => $request->input('brand_id'),
                     'slug' => Str::slug($request->input('name')),
+                    'feturer_image' => $request->input('feturer_image'),
                     'price' => $request->input('price'),
                     'dis_price' => $request->input('dis_price'),
                     'product_des' => $request->input('product_des'),
@@ -89,7 +88,7 @@ class ProductController extends Controller
             return response()->json($success);
         }else{
             $request->validate([
-                'file1' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                'feturer_image' => 'required',
                 'name' => 'required',
                 'cat_id' => 'required',
                 'sub_cat_id' => 'required',
@@ -98,14 +97,12 @@ class ProductController extends Controller
                 'dis_price' => 'required',
                 'product_des' => 'required'
             ]);
-            $imageName = time().'.'.$request->file1->extension();
-            $request->file1->move(public_path('images'), $imageName);
             $product = new Product([
                 'name' => $request->input('name'),
                 'cat_id' => $request->input('cat_id'),
                 'sub_cat_id' => $request->input('sub_cat_id'),
                 'brand_id' => $request->input('brand_id'),
-                'feturer_image' => $imageName,
+                'feturer_image' => $request->input('feturer_image'),
                 'slug' => Str::slug($request->input('name')),
                 'price' => $request->input('price'),
                 'dis_price' => $request->input('dis_price'),

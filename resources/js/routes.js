@@ -17,6 +17,9 @@ const Dynamic = () => import('./components/admin/dynamic/Dynamic.vue')
 const router = new createRouter({
     mode: "history",
     history: createWebHistory(),
+    meta: {
+        reload: false,
+    },
     // await: getToken(),
     routes: [
     {

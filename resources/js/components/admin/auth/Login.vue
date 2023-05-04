@@ -94,7 +94,6 @@
       }
     },
       methods:{
-  
         //user login function and api call
          login_user(){
           let currentObj = this;  

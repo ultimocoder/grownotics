@@ -1,5 +1,4 @@
 import './bootstrap';
-
 import { createApp } from "vue";
 import { createStore } from 'vuex';
 import axios from 'axios'
@@ -10,18 +9,10 @@ import router from './routes'
 //import store from './store'
 import App from './layout/Main'
 
-
-
-
-
-
-
-
-
- 
- const app = createApp({
+const app = createApp({
  	 el: '#app',
 	components: {App},
 	
 }).use(router).mount('#app')
 
+	

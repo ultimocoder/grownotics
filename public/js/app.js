@@ -23609,6 +23609,9 @@ var Dynamic = function Dynamic() {
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter({
   mode: "history",
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHistory)(),
+  meta: {
+    reload: false
+  },
   // await: getToken(),
   routes: [{
     name: 'AdminLogin',

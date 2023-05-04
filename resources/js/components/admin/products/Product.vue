@@ -1,4 +1,91 @@
 <style>
+.images_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+}
+
+.images_wrapper .img_box {
+  list-style: none;
+  position: relative;
+  width: 21%;
+  background: #fff;
+  border: solid 1px #eff0f2;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 5px;
+  box-shadow: 0 1px 2px rgba(33, 43, 54, 0.15);
+}
+
+.images_wrapper .img_box:hover {
+  box-shadow: none;
+}
+
+.images_wrapper .img_box img {
+  width: 100%;
+  max-height: 250px;
+  min-height: 250px;
+}
+
+.images_wrapper .image_name {
+  font-size: 20px;
+}
+
+.images_wrapper .images_ex {
+  font-size: 16px;
+  color: #777777;
+}
+
+.images_wrapper .icon {
+  color: white;
+  font-size: 27px;
+  padding: 5px;
+  height: 30px;
+  background: #e03a1d;
+  width: 30px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.images_wrapper .icon2 {
+  color: white;
+  font-size: 27px;
+  padding: 5px;
+  height: 30px;
+  background: #441de0;
+  width: 30px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+.images_wrapper .img_box:hover .overlay {
+  opacity: 1;
+}
+
+.images_wrapper .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  background: rgba(78, 181, 41, 0.3);
+  border-radius: 18px;
+}
 .switch {
   position: relative;
   display: inline-block;
@@ -69,7 +156,7 @@ input:checked + .slider:before {
                         <h3>Product</h3>
                     </div>
                     <div class="card-body">
-                        <form @submit="addproduct" enctype="multipart/form-data">
+                        <form v-on:submit.prevent="addproduct">
                             <div class="row">
                                 <div class="col-3">
                                     <div class="form-group">
@@ -120,11 +207,60 @@ input:checked + .slider:before {
                                         <textarea v-model="form.product_des" class="form-control" id="exampleFormControlSelect1"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-1" v-if="form.feturer_image">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Product Image</label>
-                                        <input type="file" class="form-control" v-on:change="onChange" :key="fileInputKey">
+                                        <img :src="'/media/'+form.feturer_image" alt="image" width="100" height="100" />
                                     </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <input type="hidden" v-model="form.feturer_image" class="form-control">
+                                        <button style="margin-top: 32px; margin-left: 28px;" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl" @click="getMedia(1)">Upload Image</button>
+                                    </div>
+                                </div>
+                                <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Image Gallery</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <DropZone :maxFiles="Number(10000000000)" url="http://127.0.0.1:8000/api/filestore" :uploadOnDrop="true"
+                                            :multipleUpload="true" :parallelUpload="3" @uploaded="getMedia()" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <ul class="images_wrapper" v-if="medias">
+                                                <li class="img_box" v-for="(media, index) in medias.data" :key="index">
+                                                <img class="collegecardimage rounded " v-bind:src="'/media/' + media.name" />
+                                                <div class="image_name">{{ media.original_name }}</div>
+                                                <div class="images_ex">{{ media.extension }}</div>
+                                                <div class="overlay">
+                                                    <a href="#" @click.prevent="deleteMedia(media.id)" class="icon" title="Delete Image">
+                                                    <i class="fa fa-trash"></i>
+                                                    </a>
+                                                    <a href="#" data-dismiss="modal" @click.prevent="selectMedia(media.name)" class="icon2" title="Select Image">
+                                                    <i class="fa fa-trash"></i>
+                                                    </a>
+
+                                                </div>
+                                                </li>
+                                                </ul>
+                                                <Bootstrap4Pagination :data="medias" @pagination-change-page="getMedia" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
+                                </div>
                                 </div>
                                 <div class="col-2" style="margin-top:22px;">
                                     <div class="form-group">
@@ -175,7 +311,7 @@ input:checked + .slider:before {
                                     <td>{{product.price}}</td>
                                     <td>{{product.dis_price}}</td>
                                     <td>{{product.product_des}}</td>
-                                    <td><img :src="'/images/'+product.feturer_image" alt="image" width="100" height="100" /></td>
+                                    <td><img :src="'/media/'+product.feturer_image" alt="image" width="100" height="100" /></td>
                                     <td><label class="switch">
                                         <input type="checkbox" v-if="product.status == 0" @change="active_deactive([product.id, 1])">
                                         <input type="checkbox" v-else="product.status == 1" @change="active_deactive([product.id, 0])" checked>
@@ -207,11 +343,14 @@ input:checked + .slider:before {
 import { Bootstrap4Pagination } from 'laravel-vue-pagination';
 import AdminHeader  from '../include/Header.vue';
 import AdminFooter  from '../include/Footer.vue';
+import DropZone from 'dropzone-vue';
+import 'dropzone-vue/dist/dropzone-vue.common.css';
 // import Pagination from '@/Components/Pagination'
 export default {
     name:"subcategory",
     components: {
         AdminHeader,
+        DropZone,
         AdminFooter,
         Bootstrap4Pagination,
   },
@@ -233,6 +372,9 @@ export default {
             categories:{
 
             }, 
+            medias:{
+
+            }, 
             subcategories:{
 
             }, 
@@ -246,6 +388,7 @@ export default {
         this.getproduct(); //method1 will execute at pageload
         this.getcategory(); //method1 will execute at pageload
         this.getbrands(); //method1 will execute at pageload
+        this.getMedia(); //method1 will execute at pageload
     },
     methods:{
     async  getproduct(page=1){
@@ -257,6 +400,50 @@ export default {
          this.errors = e.response.data.errors;
      })
    },
+   getMedia(page) {
+      let currentObj = this;
+      axios.get(`http://127.0.0.1:8000/api/getfile?page=${page}`)
+        .then(({ data }) => {
+          currentObj.medias = data;
+
+
+        }).catch((e) => {
+          this.errors = e.response.data.errors;
+        })
+    },
+    selectMedia(name) {
+       let currentObj = this;
+       currentObj.form.feturer_image = name;
+    },
+    deleteMedia(id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to delete this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+       
+        if (result.isConfirmed) {
+          axios.get(`http://127.0.0.1:8000/api/deletefile/`+id)
+          .then((response) =>{
+          this.medias = response.data;
+        
+          // Swal.fire(
+          //   'Deleted!',
+          //   'Your file has been deleted.',
+          //   'success'
+          // );
+          this.getMedia();
+          toast.success('Your file has been deleted.!',{
+                autoClose: 3000,
+            });   
+         })
+        }
+      })
+    },
     getcategory(){
         let currentObj = this;  
         axios.get('http://127.0.0.1:8000/api/getoptioncategory')
@@ -273,9 +460,6 @@ export default {
             currentObjedit.sub_cat = response.data;
         });
     },
-    onChange(e) {
-        this.file1 = e.target.files[0];
-    },
     active_deactive(id, value) {
         let currentObj = this;  
         axios.post('http://127.0.0.1:8000/api/active_deactive_product/'+id)
@@ -284,14 +468,8 @@ export default {
         //     this.getproduct()
         // })
     },
-    addproduct(e){
-    e.preventDefault();
+    addproduct(){
     let existingObj = this;
-    const config = {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-    }
     let data = new FormData();
     data.append('id', this.form.id);
     data.append('name', this.form.name);
@@ -301,8 +479,8 @@ export default {
     data.append('price', this.form.price);
     data.append('dis_price', this.form.dis_price);
     data.append('product_des', this.form.product_des);
-    data.append('file1', this.file1);
-    axios.post('http://127.0.0.1:8000/api/addproduct', data, config)
+    data.append('feturer_image', this.form.feturer_image);
+    axios.post('http://127.0.0.1:8000/api/addproduct', data)
         .then((response) =>{
             existingObj.output = response.data;
             this.getproduct();

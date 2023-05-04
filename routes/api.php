@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoryController;                                                                                  
 use App\Http\Controllers\Admin\ProductController;                                                                                  
 use App\Http\Controllers\Admin\DaynamicController;
+use App\Http\Controllers\Admin\FileUploaderController;
 use App\Models\Category;
 
 /*
@@ -59,3 +60,10 @@ Route::post('active_deactive_brand/{id}',[BrandController::class,'active_deactiv
 Route::get('getoptionbrand',[BrandController::class,'getoptionbrand']);
 Route::post('deletebrand/{id}',[BrandController::class,'destroy']);
 Route::get('editbrand/{id}',[BrandController::class,'edit']);
+
+
+//media uplaod
+
+Route::post('filestore',[FileUploaderController::class,'store'])->name('file.store');
+Route::get('getfile',[FileUploaderController::class,'index'])->name('file.get');
+Route::get('deletefile/{id}',[FileUploaderController::class,'delete'])->name('file.delete');
