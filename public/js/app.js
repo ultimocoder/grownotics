@@ -23661,6 +23661,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__.createRouter({
   mode: "history",
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createWebHistory)(),
   // await: getToken(),
+  meta: {
+    reload: false
+  },
   routes: [{
     name: 'home',
     path: '/',
