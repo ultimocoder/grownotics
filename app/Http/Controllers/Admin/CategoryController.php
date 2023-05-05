@@ -27,6 +27,16 @@ class CategoryController extends Controller
         $cat = Category::where('status', 1)->get();
         return response()->json($cat);
     }
+    public function getcat()
+    {
+        $cat = Category::select('id')->get();
+        return response()->json($cat);
+    }
+    public function deletemultiplecat(Request $request)
+    {
+        $cat = Category::whereIn('id', $request->all())->delete();
+        return response()->json($cat);
+    }
     public function active_deactive_cat($id)
     {
         $data = explode(',', $id);

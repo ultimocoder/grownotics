@@ -45,6 +45,8 @@ Route::post('deletecategory/{id}',[CategoryController::class,'destroy']);
 Route::post('deletesubcategory/{id}',[CategoryController::class,'sub_destroy']);
 Route::get('editcategory/{id}',[CategoryController::class,'edit']);
 Route::get('editsubcategory/{id}',[CategoryController::class,'sub_edit']);
+Route::get('getcat',[CategoryController::class,'getcat']);
+Route::post('deletemultiplecat',[CategoryController::class,'deletemultiplecat']);
 // product api
 Route::post('addproduct',[ProductController::class,'store']);
 Route::get('getproduct',[ProductController::class,'index']);
@@ -52,6 +54,8 @@ Route::post('deleteproduct/{id}',[ProductController::class,'destroy']);
 Route::post('active_deactive_product/{id}',[ProductController::class,'active_deactive']);
 Route::get('editproduct/{id}',[ProductController::class,'edit']);
 Route::get('product-return-sub-category/{id}',[ProductController::class,'get_sub_cat']);
+Route::get('getpro',[ProductController::class,'getpro']);
+Route::post('deletemultipleproduct',[ProductController::class,'deletemultipleproduct']);
 // brand api
 Route::resource('brand',BrandController::class);
 Route::post('addbrand',[BrandController::class,'store'])->name('brand.add');

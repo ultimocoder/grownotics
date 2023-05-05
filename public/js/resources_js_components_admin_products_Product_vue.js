@@ -51,7 +51,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       medias: {},
       subcategories: {},
       brands: {},
-      fileInputKey: 0
+      getprod: {},
+      selected: []
     };
   },
   mounted: function mounted() {
@@ -59,8 +60,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getcategory(); //method1 will execute at pageload
     this.getbrands(); //method1 will execute at pageload
     this.getMedia(); //method1 will execute at pageload
+    this.getpro(); //method1 will execute at pageload
   },
 
+  computed: {
+    selectAll: {
+      get: function get() {
+        return this.getprod ? this.selected.length == this.getprod.length : false;
+      },
+      set: function set(value) {
+        var selected = [];
+        if (value) {
+          this.getprod.forEach(function (pro) {
+            selected.push(pro.id);
+          });
+        }
+        this.selected = selected;
+      }
+    }
+  },
   methods: {
     getproduct: function getproduct() {
       var _arguments = arguments,
@@ -85,14 +103,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    getMedia: function getMedia(page) {
+    multipledelete: function multipledelete() {
       var _this2 = this;
-      var currentObj = this;
-      axios.get("http://127.0.0.1:8000/api/getfile?page=".concat(page)).then(function (_ref2) {
+      var selected = this.selected;
+      axios.post("http://127.0.0.1:8000/api/deletemultipleproduct", selected).then(function (_ref2) {
         var data = _ref2.data;
-        currentObj.medias = data;
+        _this2.getproduct();
+        _this2.getpro();
+        currentObj.output = data;
       })["catch"](function (e) {
         _this2.errors = e.response.data.errors;
+      });
+    },
+    getMedia: function getMedia(page) {
+      var _this3 = this;
+      var currentObj = this;
+      axios.get("http://127.0.0.1:8000/api/getfile?page=".concat(page)).then(function (_ref3) {
+        var data = _ref3.data;
+        currentObj.medias = data;
+      })["catch"](function (e) {
+        _this3.errors = e.response.data.errors;
       });
     },
     selectMedia: function selectMedia(name) {
@@ -100,7 +130,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       currentObj.form.feturer_image = name;
     },
     deleteMedia: function deleteMedia(id) {
-      var _this3 = this;
+      var _this4 = this;
       Swal.fire({
         title: 'Are you sure?',
         text: "You want to delete this!",
@@ -112,14 +142,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }).then(function (result) {
         if (result.isConfirmed) {
           axios.get("http://127.0.0.1:8000/api/deletefile/" + id).then(function (response) {
-            _this3.medias = response.data;
-
-            // Swal.fire(
-            //   'Deleted!',
-            //   'Your file has been deleted.',
-            //   'success'
-            // );
-            _this3.getMedia();
+            _this4.medias = response.data;
+            _this4.getMedia();
             toast.success('Your file has been deleted.!', {
               autoClose: 3000
             });
@@ -128,12 +152,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     getcategory: function getcategory() {
-      var _this4 = this;
+      var _this5 = this;
       var currentObj = this;
       axios.get('http://127.0.0.1:8000/api/getoptioncategory').then(function (response) {
         currentObj.categories = response.data;
       })["catch"](function (e) {
-        _this4.errors = e.response.data.errors;
+        _this5.errors = e.response.data.errors;
+      });
+    },
+    getpro: function getpro() {
+      var _this6 = this;
+      var currentObj = this;
+      axios.get('http://127.0.0.1:8000/api/getpro').then(function (response) {
+        currentObj.getprod = response.data;
+      })["catch"](function (e) {
+        _this6.errors = e.response.data.errors;
       });
     },
     onChangesub: function onChangesub(id) {
@@ -151,7 +184,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // })
     },
     addproduct: function addproduct() {
-      var _this5 = this;
+      var _this7 = this;
       var existingObj = this;
       var data = new FormData();
       data.append('id', this.form.id);
@@ -165,27 +198,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       data.append('feturer_image', this.form.feturer_image);
       axios.post('http://127.0.0.1:8000/api/addproduct', data).then(function (response) {
         existingObj.output = response.data;
-        _this5.getproduct();
-        _this5.form.id = '', _this5.form.name = '', _this5.form.cat_id = '', _this5.form.sub_cat_id = '', _this5.form.brand_id = '', _this5.form.price = '', _this5.form.dis_price = '', _this5.form.product_des = '', _this5.fileInputKey++;
+        _this7.getproduct();
+        _this7.getpro();
+        _this7.form.id = '', _this7.form.name = '', _this7.form.cat_id = '', _this7.form.sub_cat_id = '', _this7.form.brand_id = '', _this7.form.price = '', _this7.form.dis_price = '', _this7.form.product_des = '', _this7.form.feturer_image = '';
       })["catch"](function (err) {
         existingObj.output = err;
       });
     },
     getbrands: function getbrands() {
-      var _this6 = this;
+      var _this8 = this;
       var currentObj = this;
       axios.get('http://127.0.0.1:8000/api/getoptionbrand').then(function (response) {
         currentObj.brands = response.data;
       })["catch"](function (e) {
-        _this6.errors = e.response.data.errors;
+        _this8.errors = e.response.data.errors;
       });
     },
     deleteproduct: function deleteproduct(id) {
-      var _this7 = this;
+      var _this9 = this;
       var currentObj = this;
       axios.post('http://127.0.0.1:8000/api/deleteproduct/' + id).then(function (response) {
         currentObj.subcategories = response.data;
-        _this7.getproduct();
+        _this9.getproduct();
       });
     },
     edit: function edit(id) {
@@ -395,76 +429,100 @@ var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "btn btn-primary"
 }, "Submit")])], -1 /* HOISTED */);
 var _hoisted_59 = {
-  "class": "container"
+  key: 1,
+  "class": "col-2",
+  style: {
+    "margin-top": "22px"
+  }
 };
 var _hoisted_60 = {
-  "class": "row"
+  "class": "form-group"
 };
 var _hoisted_61 = {
-  "class": "col-12"
+  "class": "container"
 };
 var _hoisted_62 = {
-  "class": "card shadow-sm"
-};
-var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "card-header"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Product List")], -1 /* HOISTED */);
-var _hoisted_64 = {
-  "class": "card-body"
-};
-var _hoisted_65 = {
   "class": "row"
 };
+var _hoisted_63 = {
+  "class": "col-12"
+};
+var _hoisted_64 = {
+  "class": "card shadow-sm"
+};
+var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-header"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Product List")], -1 /* HOISTED */);
 var _hoisted_66 = {
+  "class": "card-body"
+};
+var _hoisted_67 = {
+  "class": "row"
+};
+var _hoisted_68 = {
   "class": "table"
 };
-var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+var _hoisted_69 = {
   scope: "col"
-}, "#"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+};
+var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Product Name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Sr No.", -1 /* HOISTED */);
+var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Product Category"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Product Name", -1 /* HOISTED */);
+var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Product Sub Category"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Product Category", -1 /* HOISTED */);
+var _hoisted_73 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Product Brand"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Product Sub Category", -1 /* HOISTED */);
+var _hoisted_74 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Product Price"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Product Brand", -1 /* HOISTED */);
+var _hoisted_75 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Product Discounted Price"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Product Price", -1 /* HOISTED */);
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Product Description"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Product Discounted Price", -1 /* HOISTED */);
+var _hoisted_77 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Product Image"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Product Description", -1 /* HOISTED */);
+var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Active/Deactive"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Product Image", -1 /* HOISTED */);
+var _hoisted_79 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
-}, "Action")])], -1 /* HOISTED */);
-var _hoisted_68 = {
+}, "Active/Deactive", -1 /* HOISTED */);
+var _hoisted_80 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  scope: "col"
+}, "Action", -1 /* HOISTED */);
+var _hoisted_81 = {
   scope: "row"
 };
-var _hoisted_69 = ["src"];
-var _hoisted_70 = {
+var _hoisted_82 = ["value"];
+var _hoisted_83 = ["src"];
+var _hoisted_84 = {
   "class": "switch"
 };
-var _hoisted_71 = ["onChange"];
-var _hoisted_72 = ["onChange"];
-var _hoisted_73 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_85 = ["onChange"];
+var _hoisted_86 = ["onChange"];
+var _hoisted_87 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "slider round"
 }, null, -1 /* HOISTED */);
-var _hoisted_74 = ["onClick"];
-var _hoisted_75 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_88 = ["onClick"];
+var _hoisted_89 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fa fa-edit",
   title: "Edit"
 }, null, -1 /* HOISTED */);
-var _hoisted_76 = [_hoisted_75];
-var _hoisted_77 = ["onClick"];
-var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_90 = [_hoisted_89];
+var _hoisted_91 = ["onClick"];
+var _hoisted_92 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fa fa-trash",
   title: "Delete"
 }, null, -1 /* HOISTED */);
-var _hoisted_79 = [_hoisted_78];
+var _hoisted_93 = [_hoisted_92];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
   var _component_AdminHeader = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AdminHeader");
@@ -472,7 +530,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Bootstrap4Pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Bootstrap4Pagination");
   var _component_AdminFooter = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AdminFooter");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AdminHeader), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[12] || (_cache[12] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[13] || (_cache[13] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.addproduct && $options.addproduct.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -600,28 +658,46 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 128 /* KEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Bootstrap4Pagination, {
     data: $data.medias,
     onPaginationChangePage: $options.getMedia
-  }, null, 8 /* PROPS */, ["data", "onPaginationChangePage"])])])]), _hoisted_57])])]), _hoisted_58])], 32 /* HYDRATE_EVENTS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.output), 1 /* TEXT */)])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [_hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_64, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_66, [_hoisted_67, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products.data, function (product, index) {
+  }, null, 8 /* PROPS */, ["data", "onPaginationChangePage"])])])]), _hoisted_57])])]), _hoisted_58, $data.selected != '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    onClick: _cache[12] || (_cache[12] = function () {
+      return $options.multipledelete && $options.multipledelete.apply($options, arguments);
+    }),
+    "class": "btn btn-danger"
+  }, "Delete Multiple")])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 32 /* HYDRATE_EVENTS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.output), 1 /* TEXT */)])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_64, [_hoisted_65, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", _hoisted_69, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "checkbox",
+    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+      return $options.selectAll = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $options.selectAll]])])]), _hoisted_70, _hoisted_71, _hoisted_72, _hoisted_73, _hoisted_74, _hoisted_75, _hoisted_76, _hoisted_77, _hoisted_78, _hoisted_79, _hoisted_80])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products.data, function (product, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: index
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", _hoisted_68, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(index + 1), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.cat_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.sub_cat_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.brand_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.price), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.dis_price), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.product_des), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "checkbox",
+      "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
+        return $data.selected = $event;
+      }),
+      value: product.id,
+      number: ""
+    }, null, 8 /* PROPS */, _hoisted_82), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.selected]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(index + 1), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.cat_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.sub_cat_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.brand_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.price), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.dis_price), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.product_des), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: '/media/' + product.feturer_image,
       alt: "image",
       width: "100",
       height: "100"
-    }, null, 8 /* PROPS */, _hoisted_69)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_70, [product.status == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+    }, null, 8 /* PROPS */, _hoisted_83)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_84, [product.status == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
       key: 0,
       type: "checkbox",
       onChange: function onChange($event) {
         return $options.active_deactive([product.id, 1]);
       }
-    }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_71)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+    }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_85)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
       key: 1,
       type: "checkbox",
       onChange: function onChange($event) {
         return $options.active_deactive([product.id, 0]);
       },
       checked: ""
-    }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_72)), _hoisted_73])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_86)), _hoisted_87])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
         return $options.edit(product.id);
       }, ["prevent"]),
@@ -630,13 +706,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       href: "#",
       "data-toggle": "modal",
       "data-target": "#exampleModal"
-    }, _hoisted_76, 8 /* PROPS */, _hoisted_74), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    }, _hoisted_90, 8 /* PROPS */, _hoisted_88), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
         return $options.deleteproduct(product.id);
       }, ["prevent"]),
       "class": "btn btn-danger",
       href: "#"
-    }, _hoisted_79, 8 /* PROPS */, _hoisted_77)])]);
+    }, _hoisted_93, 8 /* PROPS */, _hoisted_91)])]);
   }), 128 /* KEYED_FRAGMENT */))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Bootstrap4Pagination, {
     align: "center",
     data: $data.products,

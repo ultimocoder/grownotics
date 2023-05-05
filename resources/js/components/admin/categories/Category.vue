@@ -83,6 +83,11 @@ input:checked + .slider:before {
                                         <button type="submit" class="btn btn-primary">Submit</button>                                
                                     </div>
                                 </div>
+                                <div class="col-2" v-if="selected != ''" style="margin-top:22px;">
+                                    <div class="form-group">
+                                        <button type="button" @click="multipledelete" class="btn btn-danger">Delete Multiple</button>                                
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         {{ output.message }}
@@ -103,7 +108,8 @@ input:checked + .slider:before {
                             <table class="table">
                                 <thead>
                                     <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col"><input type="checkbox" v-model="selectAll"></th>
+                                    <th scope="col">Sr No.</th>
                                     <th scope="col">Category Name</th>
                                     <th scope="col">Category Slug</th>
                                     <th scope="col">Active/Deactive</th>
@@ -112,7 +118,8 @@ input:checked + .slider:before {
                                 </thead>
                                 <tbody>
                                     <tr v-for="(category,index) in categories.data" :key="index">
-                                    <th scope="row">{{index+1}}</th>
+                                    <th scope="row"><input type="checkbox" v-model="selected" :value="category.id" number></th>
+                                    <th>{{index+1}}</th>
                                     <td>{{category.name}}</td>
                                     <td>{{category.slug}}</td>
                                     <td><label class="switch">
@@ -160,14 +167,47 @@ export default {
             output:'',
             categories:{
 
+            },
+            selected: [],
+            procat:{
+
             } 
         }
     },
     mounted:function(){
         this.getcategory() //method1 will execute at pageload
+        this.getcat() //method1 will execute at pageload
+    },
+    computed: {
+        selectAll: {
+            get: function () {
+                return this.procat ? this.selected.length == this.procat.length : false;
+            },
+            set: function (value) {
+                var selected = [];
+
+                if (value) {
+                    this.procat.forEach(function (pro) {
+                        selected.push(pro.id);
+                    });
+                }
+
+                this.selected = selected;
+            }
+        }
     },
     methods:{
-   
+    multipledelete(){
+    let selected = this.selected
+    axios.post(`http://127.0.0.1:8000/api/deletemultiplecat`, selected)
+    .then(({ data }) => {
+        this.getcategory();
+        this.getcat();
+        currentObj.output = data;
+    }).catch((e) => {
+        this.errors = e.response.data.errors;
+    })
+   },
    //user login function and api call
    addcategory(){
      let currentObj = this;  
@@ -175,6 +215,7 @@ export default {
      .then((response) =>{
        currentObj.output = response.data;
        this.getcategory();
+       this.getcat();
        this.form.name='';
        this.form.id='';
        this.form.name.reset();
@@ -191,6 +232,15 @@ export default {
          this.errors = e.response.data.errors;
      })
    },
+   getcat(){
+        let currentObj = this;  
+        axios.get('http://127.0.0.1:8000/api/getcat')
+        .then((response) =>{
+        currentObj.procat = response.data;
+        }).catch((e)=>{
+            this.errors = e.response.data.errors;
+        })
+    },
    active_deactive(id) {
         let currentObj = this;  
         axios.post('http://127.0.0.1:8000/api/active_deactive_category/'+id)

@@ -19,6 +19,11 @@ class ProductController extends Controller
         $product = Product::select('products.id', 'products.status', 'products.name', 'products.price', 'products.dis_price', 'products.product_des', 'products.feturer_image', 'categories.name as cat_name', 'subcategories.name as sub_cat_name', 'brands.name as brand_name')->leftjoin('categories', 'products.cat_id', '=', 'categories.id')->leftjoin('subcategories', 'products.sub_cat_id', '=', 'subcategories.id')->leftjoin('brands', 'products.brand_id', '=', 'brands.id')->paginate(10);
         return response()->json($product);
     }
+    public function getpro()
+    {
+        $product = Product::select('id')->get();
+        return response()->json($product);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -173,6 +178,13 @@ class ProductController extends Controller
         Product::where('id', $data[0])->update(['status' => $data[1]]);
         return response()->json([
             'message'=>'Product Status Updated Successfully!!'
+        ]);
+    }
+    public function deletemultipleproduct(Request $request)
+    {   
+        Product::whereIn('id', $request->all())->delete();
+        return response()->json([
+            'message'=>'All Product Deleted Successfully!!'
         ]);
     }
 }

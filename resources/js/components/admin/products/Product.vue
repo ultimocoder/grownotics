@@ -267,6 +267,11 @@ input:checked + .slider:before {
                                         <button type="submit" class="btn btn-primary">Submit</button>                                
                                     </div>
                                 </div>
+                                <div class="col-2" v-if="selected != ''" style="margin-top:22px;">
+                                    <div class="form-group">
+                                        <button type="button" @click="multipledelete" class="btn btn-danger">Delete Multiple</button>                                
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         {{ output }}
@@ -288,7 +293,8 @@ input:checked + .slider:before {
                             <table class="table">
                                 <thead>
                                     <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col"><th><input type="checkbox" v-model="selectAll"></th></th>
+                                    <th scope="col">Sr No.</th>
                                     <th scope="col">Product Name</th>
                                     <th scope="col">Product Category</th>
                                     <th scope="col">Product Sub Category</th>
@@ -303,7 +309,8 @@ input:checked + .slider:before {
                                 </thead>
                                 <tbody>
                                     <tr v-for="(product,index) in products.data" :key="index">
-                                    <th scope="row">{{index+1}}</th>
+                                    <th scope="row"><input type="checkbox" v-model="selected" :value="product.id" number></th>
+                                    <th>{{index+1}}</th>
                                     <td>{{product.name}}</td>
                                     <td>{{product.cat_name}}</td>
                                     <td>{{product.sub_cat_name}}</td>
@@ -381,7 +388,10 @@ export default {
             brands:{
 
             },
-            fileInputKey: 0 
+            getprod:{
+
+            },
+            selected: []
         }
     },
     mounted:function(){
@@ -389,6 +399,25 @@ export default {
         this.getcategory(); //method1 will execute at pageload
         this.getbrands(); //method1 will execute at pageload
         this.getMedia(); //method1 will execute at pageload
+        this.getpro(); //method1 will execute at pageload
+    },
+    computed: {
+        selectAll: {
+            get: function () {
+                return this.getprod ? this.selected.length == this.getprod.length : false;
+            },
+            set: function (value) {
+                var selected = [];
+
+                if (value) {
+                    this.getprod.forEach(function (pro) {
+                        selected.push(pro.id);
+                    });
+                }
+
+                this.selected = selected;
+            }
+        }
     },
     methods:{
     async  getproduct(page=1){
@@ -400,13 +429,22 @@ export default {
          this.errors = e.response.data.errors;
      })
    },
+   multipledelete(){
+    let selected = this.selected
+    axios.post(`http://127.0.0.1:8000/api/deletemultipleproduct`, selected)
+    .then(({ data }) => {
+        this.getproduct();
+        this.getpro();
+        currentObj.output = data;
+    }).catch((e) => {
+        this.errors = e.response.data.errors;
+    })
+   },
    getMedia(page) {
       let currentObj = this;
       axios.get(`http://127.0.0.1:8000/api/getfile?page=${page}`)
         .then(({ data }) => {
           currentObj.medias = data;
-
-
         }).catch((e) => {
           this.errors = e.response.data.errors;
         })
@@ -430,12 +468,6 @@ export default {
           axios.get(`http://127.0.0.1:8000/api/deletefile/`+id)
           .then((response) =>{
           this.medias = response.data;
-        
-          // Swal.fire(
-          //   'Deleted!',
-          //   'Your file has been deleted.',
-          //   'success'
-          // );
           this.getMedia();
           toast.success('Your file has been deleted.!',{
                 autoClose: 3000,
@@ -449,6 +481,15 @@ export default {
         axios.get('http://127.0.0.1:8000/api/getoptioncategory')
         .then((response) =>{
         currentObj.categories = response.data;
+        }).catch((e)=>{
+            this.errors = e.response.data.errors;
+        })
+    },
+    getpro(){
+        let currentObj = this;  
+        axios.get('http://127.0.0.1:8000/api/getpro')
+        .then((response) =>{
+        currentObj.getprod = response.data;
         }).catch((e)=>{
             this.errors = e.response.data.errors;
         })
@@ -484,6 +525,7 @@ export default {
         .then((response) =>{
             existingObj.output = response.data;
             this.getproduct();
+            this.getpro();
             this.form.id = '',
             this.form.name = '',
             this.form.cat_id = '',
@@ -492,7 +534,7 @@ export default {
             this.form.price = '',
             this.form.dis_price = '',
             this.form.product_des = '',
-            this.fileInputKey++;
+            this.form.feturer_image = ''
         })
         .catch(function (err) {
             existingObj.output = err;
