@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('postLogin',[AuthController::class,'login'])->name('admin.login');
 Route::post('registration', [AuthController::class, 'registration'])->name('register'); 
 Route::post('submitforgetPassword', [AuthController::class, 'submitForgetPasswordForm'])->name('submitForgetPassword'); 
-Route::group(['middleware'=>'auth:api'],function(){
+// Route::group(['middleware' => ['jwt.verify']], function() {
 Route::get('getcategory',[CategoryController::class,'index']);
 
 Route::post('addcategory',[CategoryController::class,'store'])->name('category.add');
@@ -67,7 +67,7 @@ Route::get('getdyanmic',[DynamicController::class,'index']);
 Route::post('deletepage/{id}',[DynamicController::class,'destroy']);
 Route::get('editpage/{id}',[DynamicController::class,'edit']);
   
-});
+// });
 
 
 

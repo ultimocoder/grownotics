@@ -23424,7 +23424,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.logout_user && $options.logout_user.apply($options, arguments);
     }),
-    onclick: "myFunction()"
+    onclick: "logout_user()"
   }, "Logout")]);
 }
 
@@ -23526,18 +23526,21 @@ var token = localStorage.getItem('token');
 if (token) {
   (axios__WEBPACK_IMPORTED_MODULE_2___default().defaults.headers.common.Authorization) = token;
 }
-axios__WEBPACK_IMPORTED_MODULE_2___default().interceptors.response.use(undefined, function (error) {
-  if (error) {
-    var originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      _store__WEBPACK_IMPORTED_MODULE_5__["default"].dispatch('logout');
-      return _routes__WEBPACK_IMPORTED_MODULE_4__["default"].push('/login');
-    } else {
-      _store__WEBPACK_IMPORTED_MODULE_5__["default"].commit('handle_error', JSON.parse(error.response.data.error));
-    }
-  }
-});
+
+// axios.interceptors.response.use(undefined, function (error) {
+// 	if (error) {
+// 	  const originalRequest = error.config;
+// 	  if (error.response.status === 401 && !originalRequest._retry) {
+// 		  originalRequest._retry = true;
+// 		  store.dispatch('logout')
+// 		  return router.push('/admin/login')
+// 	  }
+// 	  else{
+// 		store.commit('handle_error',JSON.parse(error.response.data.error));
+// 	  }
+// 	}
+//   })
+
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({
   store: _store__WEBPACK_IMPORTED_MODULE_5__["default"],
   el: '#app',

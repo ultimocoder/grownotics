@@ -72,7 +72,7 @@
                             </table>
                         </div>
                         <Bootstrap4Pagination align="center"
-        :data="pages"
+:data="pages"
         @pagination-change-page="getdynamic"
     />
                     </div>

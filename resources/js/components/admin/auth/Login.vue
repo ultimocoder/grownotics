@@ -26,7 +26,13 @@
                  </div>
                  <div class="col-lg-5 before_img_cut">
                   <h2>Welcome back to Gronotics.</h2>
-                   <p> {{output.data}}</p>
+                 
+                   <p>{{ error }}</p>
+                   <!-- <div v-for="(errorArray, idx) in errors" :key="idx">
+                     <div v-for="(allErrors, idx) in errorArray" :key="idx">
+                        <span class="text-danger">{{ allErrors}} </span>
+                     </div>
+                           </div> -->
                     <form v-on:submit.prevent="login_user">
                        <div class="form-group">
                           <label>Email</label>
@@ -39,7 +45,8 @@
                              <input type="email" class="form-control" v-model="form.email">
                             
                           </div>
-                          <p v-if="errors.password">{{ String(errors.email)  }}</p>
+                        
+                          <p v-if=errors.email>{{ String(errors.email) }}</p>
                           
                        </div>
                        <div class="form-group">
@@ -52,7 +59,7 @@
                              </div>
                              <input type="password" class="form-control" v-model="form.password">
                           </div>
-                          <p v-if="errors.password">{{ String(errors.password) }}</p>
+                          <p v-if=errors.password>{{ String(errors.password) }}</p>
                           <div class="d-flex forgot_password_flex">
                              <div class="remender">
                                 <div class="form-check custom-control custom-checkbox">
@@ -73,7 +80,8 @@
                        </ul>
                     </div>
                     <div class="sign_up_account">Don't have an Account?<span><router-link to="/admin/register"> Sign Up</router-link>
-                         <router-view /></span></div>
+                         <router-view /></span>
+                     </div>
                  </div>
               </div>
            </div>
@@ -87,8 +95,8 @@
       return {
         output: '',
         errors: '',
+        error:'',
         form:{
-  
           email: '',
           password: ''
           
@@ -99,22 +107,27 @@
   
         //user login function and api call
          login_user(){
-         
           axios.post('http://127.0.0.1:8000/api/postLogin',this.form)
           .then((resp) =>{
-           
-            const token = 'Bearer '+resp.data.access_token
-            const user = resp.data.user
-            localStorage.setItem('token', token)
-            axios.defaults.headers.common['Authorization'] = token
-           
-           // this.$router.push('dashboard')
-            window.location.href = 'dashboard';
-        
-           
+         //  alert(resp.data.status);
+            if(resp.data.status=='success'){
+              
+               const token = 'Bearer '+resp.data.access_token
+               const user = resp.data.user
+               localStorage.setItem('token', token)
+               axios.defaults.headers.common['Authorization'] = token
+               //this.$router.push('dashboard')
+               window.location.href = 'dashboard';
+            }else{
+              
+                localStorage.removeItem('token')
+                this.errors = e.resp.data.errors;
+            }
           }).catch((e)=>{
-            localStorage.removeItem('token')
-              this.errors = e.response.data.errors;
+          
+              this.errors =  e.response.data;
+              this.error =  e.response.data.error;
+              console.log(this.errors);
           })
         }
       }
