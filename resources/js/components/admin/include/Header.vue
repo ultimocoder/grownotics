@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Testing Header</h1>
-        <button  @click="logout_user"  onclick="myFunction()">Logout</button>
+        <button  @click="logout_user"  onclick="logout_user()">Logout</button>
     </div>
 </template>
 

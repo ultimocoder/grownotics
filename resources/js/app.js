@@ -23,19 +23,19 @@ if(token){
   axios.defaults.headers.common['Authorization'] = token
 }
 
-axios.interceptors.response.use(undefined, function (error) {
-	if (error) {
-	  const originalRequest = error.config;
-	  if (error.response.status === 401 && !originalRequest._retry) {
-		  originalRequest._retry = true;
-		  store.dispatch('logout')
-		  return router.push('/login')
-	  }
-	  else{
-		store.commit('handle_error',JSON.parse(error.response.data.error));
-	  }
-	}
-  })
+// axios.interceptors.response.use(undefined, function (error) {
+// 	if (error) {
+// 	  const originalRequest = error.config;
+// 	  if (error.response.status === 401 && !originalRequest._retry) {
+// 		  originalRequest._retry = true;
+// 		  store.dispatch('logout')
+// 		  return router.push('/admin/login')
+// 	  }
+// 	  else{
+// 		store.commit('handle_error',JSON.parse(error.response.data.error));
+// 	  }
+// 	}
+//   })
 
 
  
