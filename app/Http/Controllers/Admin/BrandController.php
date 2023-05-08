@@ -16,6 +16,7 @@ class BrandController extends Controller
      */
     public function index()
     {
+        //
         $brands = Brand::paginate(10);
         return response()->json($brands);
     }
