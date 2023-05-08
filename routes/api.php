@@ -33,6 +33,8 @@ Route::get('getdyanmic',[DaynamicController::class,'index']);
 Route::post('deletepage/{id}',[DaynamicController::class,'destroy']);
 Route::get('editpage/{id}',[DaynamicController::class,'edit']);
 Route::post('active_deactive_dynamic/{id}',[DaynamicController::class,'active_deactive_dynamic']);
+Route::get('getpage',[DaynamicController::class,'getpage']);
+Route::post('deletemultiplepage',[DaynamicController::class,'deletemultiplepage']);
 // Category Subcategory api
 Route::post('addcategory',[CategoryController::class,'store'])->name('category.add');
 Route::post('active_deactive_category/{id}',[CategoryController::class,'active_deactive_cat']);
@@ -47,6 +49,9 @@ Route::get('editcategory/{id}',[CategoryController::class,'edit']);
 Route::get('editsubcategory/{id}',[CategoryController::class,'sub_edit']);
 Route::get('getcat',[CategoryController::class,'getcat']);
 Route::post('deletemultiplecat',[CategoryController::class,'deletemultiplecat']);
+Route::post('deletemultiplesubcat',[CategoryController::class,'deletemultiplesubcat']);
+Route::get('getsubcat',[CategoryController::class,'getsubcat']);
+Route::get('searchcategory/{val}',[CategoryController::class,'searchcategory']);
 // product api
 Route::post('addproduct',[ProductController::class,'store']);
 Route::get('getproduct',[ProductController::class,'index']);
@@ -64,10 +69,7 @@ Route::post('active_deactive_brand/{id}',[BrandController::class,'active_deactiv
 Route::get('getoptionbrand',[BrandController::class,'getoptionbrand']);
 Route::post('deletebrand/{id}',[BrandController::class,'destroy']);
 Route::get('editbrand/{id}',[BrandController::class,'edit']);
-
-
 //media uplaod
-
 Route::post('filestore',[FileUploaderController::class,'store'])->name('file.store');
 Route::get('getfile',[FileUploaderController::class,'index'])->name('file.get');
 Route::get('deletefile/{id}',[FileUploaderController::class,'delete'])->name('file.delete');

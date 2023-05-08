@@ -91,6 +91,11 @@ input:checked + .slider:before {
                                         <button type="submit" class="btn btn-primary">Submit</button>                                
                                     </div>
                                 </div>
+                                <div class="col-2" v-if="selected != ''" style="margin-top:22px;">
+                                    <div class="form-group">
+                                        <button type="button" @click="multipledelete" class="btn btn-danger">Delete Multiple</button>                                
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         {{ output.message }}
@@ -111,7 +116,8 @@ input:checked + .slider:before {
                             <table class="table">
                                 <thead>
                                     <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col"><input type="checkbox" v-model="selectAll"></th>
+                                    <th scope="col">Sr No.</th>
                                     <th scope="col">Sub Category Name</th>
                                     <th scope="col">Category Name</th>
                                     <th scope="col">Sub Category Slug</th>
@@ -121,7 +127,8 @@ input:checked + .slider:before {
                                 </thead>
                                 <tbody>
                                     <tr v-for="(subcategory,index) in subcategories.data" :key="index">
-                                    <th scope="row">{{index+1}}</th>
+                                    <th scope="row"><input type="checkbox" v-model="selected" :value="subcategory.id" number></th>
+                                    <th>{{index+1}}</th>
                                     <td>{{subcategory.name}}</td>
                                     <td>{{subcategory.cat_name}}</td>
                                     <td>{{subcategory.slug}}</td>
@@ -174,20 +181,54 @@ export default {
             }, 
             subcategories:{
 
-            } 
+            },
+            selected: [],
+            prosubcat:{
+
+            },
+        }
+    },
+    computed: {
+        selectAll: {
+            get: function () {
+                return this.prosubcat ? this.selected.length == this.prosubcat.length : false;
+            },
+            set: function (value) {
+                var selected = [];
+
+                if (value) {
+                    this.prosubcat.forEach(function (pro) {
+                        selected.push(pro.id);
+                    });
+                }
+                this.selected = selected;
+            }
         }
     },
     mounted:function(){
         this.getcategory(); //method1 will execute at pageload
         this.getsubcategory(); //method1 will execute at pageload
+        this.getsubcat(); //method1 will execute at pageload
     },
     methods:{
+    multipledelete(){
+    let selected = this.selected
+    axios.post(`http://127.0.0.1:8000/api/deletemultiplesubcat`, selected)
+    .then(({ data }) => {
+        this.getsubcategory();
+        this.getsubcat();
+        currentObj.output = data;
+    }).catch((e) => {
+        this.errors = e.response.data.errors;
+    })
+   },
     addcategory(){
      let currentObj = this;  
      axios.post('http://127.0.0.1:8000/api/addsubcategory',this.form)
      .then((response) =>{
        currentObj.output = response.data;
        this.getsubcategory();
+       this.getsubcat();
        this.form.name='';
        this.form.sub_cat='';
        this.form.id='';
@@ -205,6 +246,15 @@ export default {
          this.errors = e.response.data.errors;
      })
    },
+   getsubcat(){
+        let currentObj = this;  
+        axios.get('http://127.0.0.1:8000/api/getsubcat')
+        .then((response) =>{
+        currentObj.prosubcat = response.data;
+        }).catch((e)=>{
+            this.errors = e.response.data.errors;
+        })
+    },
    active_deactive(id) {
         let currentObj = this;  
         axios.post('http://127.0.0.1:8000/api/active_deactive_subcategory/'+id)
@@ -228,6 +278,7 @@ export default {
      .then(({response}) =>{
        currentObj.subcategories = response.data;
        this.getsubcategory()
+       this.getsubcat()
      })
    },
    edit(id){

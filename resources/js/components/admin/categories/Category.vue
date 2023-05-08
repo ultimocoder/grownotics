@@ -102,7 +102,13 @@ input:checked + .slider:before {
                 <div class="card shadow-sm">
                     <div class="card-header">
                         <h3>Category List</h3>
+                        <!-- <div class="col-12"> -->
+                            <div class="col-4">
+                                <input type="text" @keyup="search(this.value)" class="form-control" placeholder="Search Category by Name" v-model="value">
+                            </div>
+                        <!-- </div> -->
                     </div>
+                    
                     <div class="card-body">
                         <div class="row">
                             <table class="table">
@@ -116,7 +122,25 @@ input:checked + .slider:before {
                                     <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody v-if="s_categories != ''">
+                                    <tr v-for="(s_category,index) in s_categories" :key="index">
+                                    <th scope="row"><input type="checkbox" v-model="selected" :value="s_category.id" number></th>
+                                    <th>{{index+1}}</th>
+                                    <td>{{s_category.name}}</td>
+                                    <td>{{s_category.slug}}</td>
+                                    <td><label class="switch">
+                                        <input type="checkbox" v-if="s_category.status == 0" @change="active_deactive([s_category.id, 1])">
+                                        <input type="checkbox" v-else="s_category.status == 1" @change="active_deactive([s_category.id, 0])" checked>
+                                        <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <a @click.prevent="edit(s_category.id)" type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit" title="Edit"></i></a> 
+                                        <a @click.prevent="deleteCategory(s_category.id)" class="btn btn-danger" href="#" ><i class="fa fa-trash" title="Delete"></i></a>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                <tbody v-else>
                                     <tr v-for="(category,index) in categories.data" :key="index">
                                     <th scope="row"><input type="checkbox" v-model="selected" :value="category.id" number></th>
                                     <th>{{index+1}}</th>
@@ -168,6 +192,9 @@ export default {
             categories:{
 
             },
+            s_categories:{
+
+            },
             selected: [],
             procat:{
 
@@ -177,6 +204,7 @@ export default {
     mounted:function(){
         this.getcategory() //method1 will execute at pageload
         this.getcat() //method1 will execute at pageload
+        this.search() //method1 will execute at pageload
     },
     computed: {
         selectAll: {
@@ -219,6 +247,19 @@ export default {
        this.form.name='';
        this.form.id='';
        this.form.name.reset();
+     }).catch((e)=>{
+         this.errors = e.response.data.errors;
+     })
+   },
+   search(value){
+     let currentObj = this;
+     axios.get('http://127.0.0.1:8000/api/searchcategory/'+value)
+     .then((response) =>{
+        if(value==''){
+            getcategory();
+        }
+        currentObj.s_categories = response.data;
+         
      }).catch((e)=>{
          this.errors = e.response.data.errors;
      })

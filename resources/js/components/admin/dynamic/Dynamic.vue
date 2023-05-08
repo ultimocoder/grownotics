@@ -89,6 +89,11 @@ input:checked + .slider:before {
                                         <button type="submit" class="btn btn-primary">Submit</button>                                
                                     </div>
                                 </div>
+                                <div class="col-2" v-if="selected != ''" style="margin-top:22px;">
+                                    <div class="form-group">
+                                        <button type="button" @click="multipledelete" class="btn btn-danger">Delete Multiple</button>                                
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         {{ output }}
@@ -110,7 +115,8 @@ input:checked + .slider:before {
                             <table class="table">
                                 <thead>
                                     <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col"><input type="checkbox" v-model="selectAll"></th>
+                                    <th scope="col">Sr No.</th>
                                     <th scope="col">Page Title</th>
                                     <th scope="col">Page Text</th>
                                     <th scope="col">Page Slug</th>
@@ -120,7 +126,8 @@ input:checked + .slider:before {
                                 </thead>
                                 <tbody>
                                     <tr v-for="(page,index) in pages.data" :key="index">
-                                    <th scope="row">{{index+1}}</th>
+                                    <th scope="row"><input type="checkbox" v-model="selected" :value="page.id" number></th>
+                                    <th>{{index+1}}</th>
                                     <td>{{page.name}}</td>
                                     <td>{{page.text}}</td>
                                     <td>{{page.slug}}</td>
@@ -185,11 +192,34 @@ export default {
                 type:Object,
                 default:null
 
+            },
+            selected: [],
+            propage: {
+
             }
         }
     },
     mounted:function(){
         this.getdynamic(); //method1 will execute at pageload
+        this.getpage(); //method1 will execute at pageload
+    },
+    computed: {
+        selectAll: {
+            get: function () {
+                return this.propage ? this.selected.length == this.propage.length : false;
+            },
+            set: function (value) {
+                var selected = [];
+
+                if (value) {
+                    this.propage.forEach(function (pro) {
+                        selected.push(pro.id);
+                    });
+                }
+
+                this.selected = selected;
+            }
+        }
     },
     methods:{
     async  getdynamic(page=1){
@@ -201,6 +231,26 @@ export default {
          this.errors = e.response.data.errors;
      })
    },
+   multipledelete(){
+    let selected = this.selected
+    axios.post(`http://127.0.0.1:8000/api/deletemultiplepage`, selected)
+    .then(({ data }) => {
+        this.getdynamic();
+        this.getpage();
+        currentObj.output = data;
+    }).catch((e) => {
+        this.errors = e.response.data.errors;
+    })
+   },
+   getpage(){
+        let currentObj = this;  
+        axios.get('http://127.0.0.1:8000/api/getpage')
+        .then((response) =>{
+        currentObj.propage = response.data;
+        }).catch((e)=>{
+            this.errors = e.response.data.errors;
+        })
+    },
     dynamic(){
     let existingObj = this;
     var text = CKEDITOR.instances.editor1.getData();
@@ -211,6 +261,7 @@ export default {
     axios.post('http://127.0.0.1:8000/api/addpage', data)
     .then((response) =>{
         this.getdynamic();
+        this.getpage();
         existingObj.output = response.data.message;
         this.form.id = '',
         this.form.name = '',
@@ -226,6 +277,7 @@ export default {
      .then((response) =>{
        currentObj.subcategories = response.data;
        this.getdynamic()
+       this.getpage()
      })
    },
    active_deactive(id) {

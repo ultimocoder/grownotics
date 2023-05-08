@@ -20,6 +20,16 @@ class DaynamicController extends Controller
         $page = Dynamic::paginate(10);
         return response()->json($page);
     }
+    public function getpage()
+    {
+        $page = Dynamic::select('id')->get();
+        return response()->json($page);
+    }
+    public function deletemultiplepage(Request $request)
+    {
+        $page = Dynamic::whereIn('id', $request->all())->delete();
+        return response()->json($page);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +38,7 @@ class DaynamicController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

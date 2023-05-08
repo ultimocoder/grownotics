@@ -32,9 +32,24 @@ class CategoryController extends Controller
         $cat = Category::select('id')->get();
         return response()->json($cat);
     }
+    public function getsubcat()
+    {
+        $cat = Subcategory::select('id')->get();
+        return response()->json($cat);
+    }
     public function deletemultiplecat(Request $request)
     {
         $cat = Category::whereIn('id', $request->all())->delete();
+        return response()->json($cat);
+    }
+    public function deletemultiplesubcat(Request $request)
+    {
+        $cat = Subcategory::whereIn('id', $request->all())->delete();
+        return response()->json($cat);
+    }
+    public function searchcategory($val)
+    {
+        $cat = Category::where('name', 'LIKE', '%'.$val.'%')->get();
         return response()->json($cat);
     }
     public function active_deactive_cat($id)
