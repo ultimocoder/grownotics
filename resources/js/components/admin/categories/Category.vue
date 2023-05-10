@@ -122,39 +122,41 @@ input:checked + .slider:before {
                                     <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody v-if="s_categories != ''">
+                                <tbody v-if="s_categories == '' || s_categories == []">
+                                    <tr v-for="(category,index) in categories.data" :key="index">
+                                    <th scope="row"><input type="checkbox" v-model="selected" :value="category.id" number></th>
+                                    <th>{{index+1}}</th>
+                                    <td>{{category.name}}</td>
+                                    <td>{{category.slug}}</td>
+                                    <td>
+                                        <label class="switch">
+                                            <input type="checkbox" v-if="category.status == 0" @change="active_deactive([category.id, 1])">
+                                            <input type="checkbox" v-else="category.status == 1" @change="active_deactive([category.id, 0])" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <a @click.prevent="edit(category.id)" type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit" title="Edit"></i></a> 
+                                        <a @click.prevent="deleteCategory(category.id)" class="btn btn-danger" href="#" ><i class="fa fa-trash" title="Delete"></i></a>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                <tbody v-else>
                                     <tr v-for="(s_category,index) in s_categories" :key="index">
                                     <th scope="row"><input type="checkbox" v-model="selected" :value="s_category.id" number></th>
                                     <th>{{index+1}}</th>
                                     <td>{{s_category.name}}</td>
                                     <td>{{s_category.slug}}</td>
-                                    <td><label class="switch">
-                                        <input type="checkbox" v-if="s_category.status == 0" @change="active_deactive([s_category.id, 1])">
-                                        <input type="checkbox" v-else="s_category.status == 1" @change="active_deactive([s_category.id, 0])" checked>
+                                    <td>
+                                        <label class="switch">
+                                            <input type="checkbox" v-if="s_category.status == 0" @change="active_deactive([s_category.id, 1])">
+                                            <input type="checkbox" v-else="s_category.status == 1" @change="active_deactive([s_category.id, 0])" checked>
                                         <span class="slider round"></span>
                                         </label>
                                     </td>
                                     <td>
                                         <a @click.prevent="edit(s_category.id)" type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit" title="Edit"></i></a> 
                                         <a @click.prevent="deleteCategory(s_category.id)" class="btn btn-danger" href="#" ><i class="fa fa-trash" title="Delete"></i></a>
-                                    </td>
-                                    </tr>
-                                </tbody>
-                                <tbody v-else>
-                                    <tr v-for="(category,index) in categories.data" :key="index">
-                                    <th scope="row"><input type="checkbox" v-model="selected" :value="category.id" number></th>
-                                    <th>{{index+1}}</th>
-                                    <td>{{category.name}}</td>
-                                    <td>{{category.slug}}</td>
-                                    <td><label class="switch">
-                                        <input type="checkbox" v-if="category.status == 0" @change="active_deactive([category.id, 1])">
-                                        <input type="checkbox" v-else="category.status == 1" @change="active_deactive([category.id, 0])" checked>
-                                        <span class="slider round"></span>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <a @click.prevent="edit(category.id)" type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit" title="Edit"></i></a> 
-                                        <a @click.prevent="deleteCategory(category.id)" class="btn btn-danger" href="#" ><i class="fa fa-trash" title="Delete"></i></a>
                                     </td>
                                     </tr>
                                 </tbody>
@@ -251,15 +253,17 @@ export default {
          this.errors = e.response.data.errors;
      })
    },
-   search(value){
+   search(){
+     let data = new FormData();
      let currentObj = this;
-     axios.get('http://127.0.0.1:8000/api/searchcategory/'+value)
+     data.append('val', this.value)
+     axios.post('http://127.0.0.1:8000/api/searchcategory', data)
      .then((response) =>{
-        if(value==''){
-            getcategory();
+        if(response.data==[]){
+            this.getcategory(1);
+        }else{
+            currentObj.s_categories = response.data;
         }
-        currentObj.s_categories = response.data;
-         
      }).catch((e)=>{
          this.errors = e.response.data.errors;
      })

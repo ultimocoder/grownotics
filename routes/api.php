@@ -51,7 +51,7 @@ Route::get('getcat',[CategoryController::class,'getcat']);
 Route::post('deletemultiplecat',[CategoryController::class,'deletemultiplecat']);
 Route::post('deletemultiplesubcat',[CategoryController::class,'deletemultiplesubcat']);
 Route::get('getsubcat',[CategoryController::class,'getsubcat']);
-Route::get('searchcategory/{val}',[CategoryController::class,'searchcategory']);
+Route::post('searchcategory',[CategoryController::class,'searchcategory']);
 // product api
 Route::post('addproduct',[ProductController::class,'store']);
 Route::get('getproduct',[ProductController::class,'index']);

@@ -47,9 +47,13 @@ class CategoryController extends Controller
         $cat = Subcategory::whereIn('id', $request->all())->delete();
         return response()->json($cat);
     }
-    public function searchcategory($val)
+    public function searchcategory(Request $request)
     {
-        $cat = Category::where('name', 'LIKE', '%'.$val.'%')->get();
+        if(!empty($request->val)){
+            $cat = Category::where('name', 'LIKE', '%'.$request->val.'%')->get();
+        }else{
+            $cat = [];
+        }
         return response()->json($cat);
     }
     public function active_deactive_cat($id)
