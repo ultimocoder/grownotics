@@ -310,6 +310,9 @@ input:checked+.slider:before {
                 <div class="card shadow-sm">
                     <div class="card-header">
                         <h3>Product List</h3>
+                        <div class="col-4">
+                            <input type="text" @keyup="search(this.value)" class="form-control" placeholder="Search Category by Name" v-model="value">
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -333,7 +336,7 @@ input:checked+.slider:before {
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody v-if="s_products == '' || s_products == []">
                                     <tr v-for="(product, index) in products.data" :key="index">
                                         <th scope="row"><input type="checkbox" v-model="selected" :value="product.id"
                                                 number></th>
@@ -363,11 +366,42 @@ input:checked+.slider:before {
                                                     class="fa fa-trash" title="Delete"></i></a>
                                         </td>
                                     </tr>
+                        <Bootstrap4Pagination align="center" :data="products" @pagination-change-page="getproduct" />
+
+                                </tbody>
+                                <tbody v-else>
+                                    <tr v-for="(s_product, index) in s_products.data" :key="index">
+                                        <th scope="row"><input type="checkbox" v-model="selected" :value="s_product.id" number></th>
+                                        <th>{{ index + 1 }}</th>
+                                        <td>{{ s_product.name }}</td>
+                                        <td>{{ s_product.cat_name }}</td>
+                                        <td>{{ s_product.sub_cat_name }}</td>
+                                        <td>{{ s_product.brand_name }}</td>
+                                        <td>{{ s_product.price }}</td>
+                                        <td>{{ s_product.dis_price }}</td>
+                                        <td>{{ s_product.product_des }}</td>
+                                        <td><img :src="'/media/' + s_product.feturer_image" alt="image" width="100"
+                                                height="100" /></td>
+                                        <td><label class="switch">
+                                                <input type="checkbox" v-if="s_product.status == 0"
+                                                    @change="active_deactive([s_product.id, 1])">
+                                                <input type="checkbox" v-else="s_product.status == 1"
+                                                    @change="active_deactive([s_product.id, 0])" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <a @click.prevent="edit(s_product.id)" type="button" class="btn btn-primary"
+                                                href="#" data-toggle="modal" data-target="#exampleModal"><i
+                                                    class="fa fa-edit" title="Edit"></i></a>
+                                            <a @click.prevent="deleteproduct(s_product.id)" class="btn btn-danger" href="#"><i
+                                                    class="fa fa-trash" title="Delete"></i></a>
+                                        </td>
+                                    </tr>
                                 </tbody>
 
                             </table>
                         </div>
-                        <Bootstrap4Pagination align="center" :data="products" @pagination-change-page="getproduct" />
                     </div>
                 </div>
             </div>
@@ -423,6 +457,9 @@ export default {
             getprod: {
 
             },
+            s_products: {
+
+            },
             selected: []
         }
     },
@@ -440,6 +477,7 @@ export default {
         this.getbrands(); //method1 will execute at pageload
         this.getMedia(); //method1 will execute at pageload
         this.getpro(); //method1 will execute at pageload
+        this.search(); //method1 will execute at pageload
     },
     computed: {
         selectAll: {
@@ -460,6 +498,21 @@ export default {
         }
     },
     methods: {
+        search(){
+            let data = new FormData();
+            let currentObj = this;
+            data.append('val', this.value)
+            axios.post('http://127.0.0.1:8000/api/searchproducts', data)
+            .then((response) =>{
+                if(response.data==[]){
+                    this.getproduct(1);
+                }else{
+                    currentObj.s_products = response.data;
+                }
+            }).catch((e)=>{
+                this.errors = e.response.data.errors;
+            })
+        },
         async getproduct(page = 1) {
             let currentObj = this;
             axios.get('http://127.0.0.1:8000/api/getproduct?page=' + page)

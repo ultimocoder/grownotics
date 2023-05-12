@@ -25,6 +25,15 @@ class DaynamicController extends Controller
         $page = Dynamic::select('id')->get();
         return response()->json($page);
     }
+    public function searchpages(Request $request)
+    {
+        if(!empty($request->val)){
+            $page = Dynamic::where('name', 'LIKE', '%'.$request->val.'%')->get();
+        }else{
+            $page = [];
+        }
+        return response()->json($page);
+    }
     public function deletemultiplepage(Request $request)
     {
         $page = Dynamic::whereIn('id', $request->all())->delete();
@@ -80,6 +89,12 @@ class DaynamicController extends Controller
         return response()->json([
             'message'=>'Page Status Updated Successfully!!'
         ]);
+    }
+    public function getpages($uri)
+    {
+        $data = str_replace(",","",$uri);
+        $getpagecontent = Dynamic::select('text')->where('slug', $data)->get();
+        return response()->json($getpagecontent);
     }
 
     /**

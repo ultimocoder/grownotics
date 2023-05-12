@@ -35,6 +35,7 @@ Route::get('editpage/{id}',[DaynamicController::class,'edit']);
 Route::post('active_deactive_dynamic/{id}',[DaynamicController::class,'active_deactive_dynamic']);
 Route::get('getpage',[DaynamicController::class,'getpage']);
 Route::post('deletemultiplepage',[DaynamicController::class,'deletemultiplepage']);
+Route::post('searchpages',[DaynamicController::class,'searchpages']);
 // Category Subcategory api
 Route::post('addcategory',[CategoryController::class,'store'])->name('category.add');
 Route::post('active_deactive_category/{id}',[CategoryController::class,'active_deactive_cat']);
@@ -52,6 +53,7 @@ Route::post('deletemultiplecat',[CategoryController::class,'deletemultiplecat'])
 Route::post('deletemultiplesubcat',[CategoryController::class,'deletemultiplesubcat']);
 Route::get('getsubcat',[CategoryController::class,'getsubcat']);
 Route::post('searchcategory',[CategoryController::class,'searchcategory']);
+Route::post('searchsubcat',[CategoryController::class,'searchsubcat']);
 // product api
 Route::post('addproduct',[ProductController::class,'store']);
 Route::get('getproduct',[ProductController::class,'index']);
@@ -61,6 +63,7 @@ Route::get('editproduct/{id}',[ProductController::class,'edit']);
 Route::get('product-return-sub-category/{id}',[ProductController::class,'get_sub_cat']);
 Route::get('getpro',[ProductController::class,'getpro']);
 Route::post('deletemultipleproduct',[ProductController::class,'deletemultipleproduct']);
+Route::post('searchproducts',[ProductController::class,'searchproducts']);
 // brand api
 Route::resource('brand',BrandController::class);
 Route::post('addbrand',[BrandController::class,'store'])->name('brand.add');
@@ -73,3 +76,6 @@ Route::get('editbrand/{id}',[BrandController::class,'edit']);
 Route::post('filestore',[FileUploaderController::class,'store'])->name('file.store');
 Route::get('getfile',[FileUploaderController::class,'index'])->name('file.get');
 Route::get('deletefile/{id}',[FileUploaderController::class,'delete'])->name('file.delete');
+
+//dynamic front end pages
+Route::get('getpages/{uri}',[DaynamicController::class,'getpages']);

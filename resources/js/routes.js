@@ -13,10 +13,16 @@ const AdminProduct = () => import('./components/admin/products/Product.vue')
 const ForgotPassword = () => import('./components/admin/auth/ForgotPassword.vue')
 const ResetPassword = () => import('./components/admin/auth/ResetPasswordForm.vue')
 const Dynamic = () => import('./components/admin/dynamic/Dynamic.vue')
+const Dynamicpages = () => import('./components/frontend/Dynamic.vue')
 
 const router = new createRouter({
     mode: "history",
     history: createWebHistory(),
+    watch:{
+        '$route' (to) {
+           if(to.currentRoute.meta.reload==false){window.location.reload()}
+      }
+    },
     meta: {
         reload: false,
     },
@@ -71,6 +77,11 @@ const router = new createRouter({
         name: 'Dynamic',
         path:'/admin/dynamic', 
         component:Dynamic
+    },
+    {
+        name: 'Dynamicpages',
+        path:'/pages/:id', 
+        component:Dynamicpages
     }
 
 ]

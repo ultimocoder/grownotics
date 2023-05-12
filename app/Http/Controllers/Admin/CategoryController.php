@@ -56,6 +56,15 @@ class CategoryController extends Controller
         }
         return response()->json($cat);
     }
+    public function searchsubcat(Request $request)
+    {
+        if(!empty($request->val)){
+            $cat = Subcategory::where('name', 'LIKE', '%'.$request->val.'%')->get();
+        }else{
+            $cat = [];
+        }
+        return response()->json($cat);
+    }
     public function active_deactive_cat($id)
     {
         $data = explode(',', $id);

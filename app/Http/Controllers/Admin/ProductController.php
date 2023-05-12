@@ -187,4 +187,13 @@ class ProductController extends Controller
             'message'=>'All Product Deleted Successfully!!'
         ]);
     }
+    public function searchproducts(Request $request)
+    {   
+        if(!empty($request->val)){
+            $page = Product::where('name', 'LIKE', '%'.$request->val.'%')->get();
+        }else{
+            $page = [];
+        }
+        return response()->json($page);
+    }
 }

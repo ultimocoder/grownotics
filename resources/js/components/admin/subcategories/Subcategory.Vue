@@ -110,6 +110,9 @@ input:checked + .slider:before {
                 <div class="card shadow-sm">
                     <div class="card-header">
                         <h3>Sub Category List</h3>
+                        <div class="col-4">
+                            <input type="text" @keyup="search(this.value)" class="form-control" placeholder="Search Category by Name" v-model="value">
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -125,7 +128,7 @@ input:checked + .slider:before {
                                     <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody v-if="s_subcat == '' || s_subcat == []">
                                     <tr v-for="(subcategory,index) in subcategories.data" :key="index">
                                     <th scope="row"><input type="checkbox" v-model="selected" :value="subcategory.id" number></th>
                                     <th>{{index+1}}</th>
@@ -143,13 +146,33 @@ input:checked + .slider:before {
                                         <a @click.prevent="deleteCategory(subcategory.id)" class="btn btn-danger" href="#" ><i class="fa fa-trash" title="Delete"></i></a>
                                     </td>
                                     </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <Bootstrap4Pagination align="center"
+                                    <Bootstrap4Pagination align="center"
         :data="subcategories"
         @pagination-change-page="getsubcategory"
     />
+                                </tbody>
+                                <tbody v-else>
+                                    <tr v-for="(s_sub,index) in s_subcat" :key="index">
+                                    <th scope="row"><input type="checkbox" v-model="selected" :value="s_sub.id" number></th>
+                                    <th>{{index+1}}</th>
+                                    <td>{{s_sub.name}}</td>
+                                    <td>{{s_sub.cat_name}}</td>
+                                    <td>{{s_sub.slug}}</td>
+                                    <td><label class="switch">
+                                        <input type="checkbox" v-if="s_sub.status == 0" @change="active_deactive([s_sub.id, 1])">
+                                        <input type="checkbox" v-else="s_sub.status == 1" @change="active_deactive([s_sub.id, 0])" checked>
+                                        <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <a @click.prevent="edit(s_sub.id)" type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit" title="Edit"></i></a> 
+                                        <a @click.prevent="deleteCategory(s_sub.id)" class="btn btn-danger" href="#" ><i class="fa fa-trash" title="Delete"></i></a>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -186,6 +209,9 @@ export default {
             prosubcat:{
 
             },
+            s_subcat:{
+
+            }
         }
     },
     computed: {
@@ -209,8 +235,24 @@ export default {
         this.getcategory(); //method1 will execute at pageload
         this.getsubcategory(); //method1 will execute at pageload
         this.getsubcat(); //method1 will execute at pageload
+        this.search(); //method1 will execute at pageload
     },
     methods:{
+    search(){
+        let data = new FormData();
+        let currentObj = this;
+        data.append('val', this.value)
+        axios.post('http://127.0.0.1:8000/api/searchsubcat', data)
+        .then((response) =>{
+            if(response.data==[]){
+                this.getsubcategory(1);
+            }else{
+                currentObj.s_subcat = response.data;
+            }
+        }).catch((e)=>{
+            this.errors = e.response.data.errors;
+        })
+    },
     multipledelete(){
     let selected = this.selected
     axios.post(`http://127.0.0.1:8000/api/deletemultiplesubcat`, selected)
@@ -263,9 +305,9 @@ export default {
         //     this.getproduct()
         // })
     },
-   getsubcategory(){
+    async getsubcategory(page = 1){
      let currentObj = this;  
-     axios.get('http://127.0.0.1:8000/api/getsubcategory')
+     axios.get('http://127.0.0.1:8000/api/getsubcategory/?page='+page)
      .then(({data}) =>{
        currentObj.subcategories = data;
      }).catch((e)=>{
