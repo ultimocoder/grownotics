@@ -14,6 +14,7 @@ const ForgotPassword = () => import('./components/admin/auth/ForgotPassword.vue'
 const ResetPassword = () => import('./components/admin/auth/ResetPasswordForm.vue')
 const Dynamic = () => import('./components/admin/dynamic/Dynamic.vue')
 const Dynamicpages = () => import('./components/frontend/Dynamic.vue')
+const Homepages = () => import('./components/frontend/Home.vue')
 
 const router = new createRouter({
     mode: "history",
@@ -82,6 +83,11 @@ const router = new createRouter({
         name: 'Dynamicpages',
         path:'/pages/:id', 
         component:Dynamicpages
+    },
+    {
+        name: 'Homepages',
+        path:'/', 
+        component:Homepages
     }
 
 ]

@@ -20,9 +20,7 @@
     </div>
     <AdminFooter></AdminFooter>
 </template>
-
 <script>
-import { Bootstrap4Pagination } from 'laravel-vue-pagination';
 import AdminHeader  from './include/Header.vue';
 import AdminFooter  from './include/Footer.vue';
 export default {
@@ -30,7 +28,6 @@ export default {
     components: {
         AdminHeader,
         AdminFooter,
-        Bootstrap4Pagination,
   },
     data(){
         return {

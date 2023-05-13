@@ -23609,6 +23609,9 @@ var Dynamic = function Dynamic() {
 var Dynamicpages = function Dynamicpages() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_frontend_Dynamic_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/frontend/Dynamic.vue */ "./resources/js/components/frontend/Dynamic.vue"));
 };
+var Homepages = function Homepages() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_frontend_Home_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/frontend/Home.vue */ "./resources/js/components/frontend/Home.vue"));
+};
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter({
   mode: "history",
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHistory)(),
@@ -23667,6 +23670,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter({
     name: 'Dynamicpages',
     path: '/pages/:id',
     component: Dynamicpages
+  }, {
+    name: 'Homepages',
+    path: '/',
+    component: Homepages
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -33316,7 +33323,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_auth_Register_vue":1,"resources_js_components_admin_Dashboard_vue":1,"resources_js_components_admin_categories_Category_vue":1,"resources_js_components_admin_subcategories_Subcategory_vue":1,"resources_js_components_admin_brand_Brand_vue":1,"resources_js_components_admin_products_Product_vue":1,"resources_js_components_admin_auth_ForgotPassword_vue":1,"resources_js_components_admin_auth_ResetPasswordForm_vue":1,"resources_js_components_admin_dynamic_Dynamic_vue":1,"resources_js_components_frontend_Dynamic_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_admin_auth_Login_vue":1,"resources_js_components_admin_auth_Register_vue":1,"resources_js_components_admin_Dashboard_vue":1,"resources_js_components_admin_categories_Category_vue":1,"resources_js_components_admin_subcategories_Subcategory_vue":1,"resources_js_components_admin_brand_Brand_vue":1,"resources_js_components_admin_products_Product_vue":1,"resources_js_components_admin_auth_ForgotPassword_vue":1,"resources_js_components_admin_auth_ResetPasswordForm_vue":1,"resources_js_components_admin_dynamic_Dynamic_vue":1,"resources_js_components_frontend_Dynamic_vue":1,"resources_js_components_frontend_Home_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
